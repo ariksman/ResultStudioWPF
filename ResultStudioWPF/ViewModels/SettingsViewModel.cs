@@ -106,9 +106,10 @@ namespace ResultStudioWPF.ViewModels
                 _dataSet = value;
 
                 var dataSetAnalyser = new AnalyseDataSet(_dataSet);
-                XVariance = dataSetAnalyser.CalculateDataVarianceX();
-                YVariance = dataSetAnalyser.CalculateDataVarianceY();
-                ZVariance = dataSetAnalyser.CalculateDataVarianceZ();
+
+                XVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.X);
+                YVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.Y);
+                ZVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.Z);
 
                 AppMessages.PlotDataSet.Send(_dataSet);
 

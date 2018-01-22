@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.Helpers
@@ -35,7 +36,22 @@ namespace ResultStudioWPF.Helpers
             }
         }
 
-        public double CalculateDataVarianceX()
+        public double CalculateDataVariance(Constants.MeasurementAxis axis)
+        {
+            switch (axis)
+            {
+                case Constants.MeasurementAxis.X:
+                    return _dataSetX.StandardDeviation();
+                case Constants.MeasurementAxis.Y:
+                    return _dataSetY.StandardDeviation();
+                case Constants.MeasurementAxis.Z:
+                    return _dataSetZ.StandardDeviation();
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(axis), axis, null);
+            }
+        }
+
+ /*       public double CalculateDataVarianceX()
         {
             return _dataSetX.StandardDeviation();
         }
@@ -46,6 +62,6 @@ namespace ResultStudioWPF.Helpers
         public double CalculateDataVarianceZ()
         {
             return _dataSetZ.StandardDeviation();
-        }
+        }*/
     }
 }

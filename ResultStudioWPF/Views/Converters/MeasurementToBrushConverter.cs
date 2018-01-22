@@ -34,13 +34,10 @@ namespace ResultStudioWPF.Views.Converters
             {
                 case Constants.MeasurementAxis.X:
                     return CheckValueTolerance(input, referenceX, toleranceX);
-                    break;
                 case Constants.MeasurementAxis.Y:
                     return CheckValueTolerance(input, referenceY, toleranceY);
-                    break;
                 case Constants.MeasurementAxis.Z:
                     return CheckValueTolerance(input, referenceZ, toleranceZ);
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

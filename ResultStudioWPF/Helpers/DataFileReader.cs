@@ -12,13 +12,11 @@ namespace ResultStudioWPF.Helpers
 {
     public class DataFileReader
     {
-        private bool _firstRun;
         private string _theFile;
 
         public DataFileReader()
         {
             CommentDelimiter = ";";
-            _firstRun = true;
             DataSet = new ObservableCollection<MeasurementPoint>();
 
             OpenFileDialog openFileDialog = new OpenFileDialog
