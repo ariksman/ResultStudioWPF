@@ -1,26 +1,17 @@
 ﻿using GalaSoft.MvvmLight;
 using ResultStudioWPF.Models;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GalaSoft.MvvmLight.Ioc;
 using ResultStudioWPF.Messages;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using ResultStudioWPF.Helpers;
-using DateTimeAxis = OxyPlot.Axes.DateTimeAxis;
 using LinearAxis = OxyPlot.Axes.LinearAxis;
 
 namespace ResultStudioWPF.ViewModels
 {
     public class ResultsViewModel : ViewModelBase
     {
-
-        
 
         private IEnumerable<MeasurementPoint> _dataSet;
 
@@ -185,7 +176,7 @@ namespace ResultStudioWPF.ViewModels
 
             LoadDataForPlots();
 
-            AppMessages.PlotRefresh.Send(_measurementsX);
+            AppMessages.PlotRefresh.Send(true);
         }
 
         private void CreateMeasurementDataForPlots()
@@ -227,7 +218,7 @@ namespace ResultStudioWPF.ViewModels
             set
             {
                 _plotModelX = value;
-                RaisePropertyChanged("PlotModelX");
+                RaisePropertyChanged();
             }
         }
 
@@ -238,7 +229,7 @@ namespace ResultStudioWPF.ViewModels
             set
             {
                 _plotModelY = value;
-                RaisePropertyChanged("PlotModelY");
+                RaisePropertyChanged();
             }
         }
 
@@ -249,7 +240,7 @@ namespace ResultStudioWPF.ViewModels
             set
             {
                 _plotModelZ = value;
-                RaisePropertyChanged("PlotModelZ");
+                RaisePropertyChanged();
             }
         }
 

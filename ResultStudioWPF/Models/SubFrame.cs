@@ -53,7 +53,7 @@ namespace ResultStudioWPF.Models
             set
             {
                 _value = value;
-                NotifyPropertyChanged("Value", (valid) => { AppMessages.EntityIsValid.Send(valid); });
+                NotifyPropertyChanged(AppMessages.EntityIsValid.Send);
             }
         }
     }

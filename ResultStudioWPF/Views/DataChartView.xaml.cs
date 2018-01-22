@@ -30,7 +30,7 @@ namespace ResultStudioWPF.Views
             AppMessages.PlotRefresh.Register(this, RefreshPlot);
         }
 
-        private void RefreshPlot(List<DataPoint> obj)
+        private void RefreshPlot(bool b)
         {
             this.XaxisPlot.InvalidatePlot();
             this.YaxisPlot.InvalidatePlot();

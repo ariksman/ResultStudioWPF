@@ -74,7 +74,8 @@ namespace ResultStudioWPF.Helpers
                             line = line.Trim();
                             if (line.Length == 0) continue;  // empty line
 
-                            string[] parts = line.Split('\t');
+
+                            string[] parts = ParseLineIntoMeasurementPointArray(line);
 
                             var measurementNumber = 0;
                             Int32.TryParse(parts[0], out measurementNumber);
@@ -112,6 +113,11 @@ namespace ResultStudioWPF.Helpers
                     }
                 }
             }
+        }
+
+        private string[] ParseLineIntoMeasurementPointArray(string line)
+        {
+            return line.Split('\t');
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
 namespace ResultStudioWPF.Models
@@ -12,12 +13,13 @@ namespace ResultStudioWPF.Models
         #region Property changed
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(string propertyName, Action<bool> message)
+        // making notifypropertychanged easier http://jesseliberty.com/2012/06/28/c-5making-inotifypropertychanged-easier/
+        protected void NotifyPropertyChanged(Action<bool> message, [CallerMemberName] string caller = "")
         {
             if (this.PropertyChanged != null)
             {
                 // property changed
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
                 // send app message (mvvm light toolkit)
                 if (message != null)
                     message(this.IsValid);
