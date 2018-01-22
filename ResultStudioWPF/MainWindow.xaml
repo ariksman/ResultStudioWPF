@@ -55,12 +55,15 @@
                 </StatusBarItem>
                 <Separator Grid.Column="1" />
                 <StatusBarItem Grid.Column="2">
-                    <TextBlock Text="c:\path\of\current\file.txt" />
+                    <TextBlock Text="{Binding FilePath}" />
                 </StatusBarItem>
                 <Separator Grid.Column="3" />
                 <StatusBarItem Grid.Column="4">
-                    <ProgressBar Value="50" Width="90" Height="16" />
-                </StatusBarItem>
+                <Grid>
+                    <ProgressBar Value="{Binding ProgressBarValue}" Width="90" Height="16" Maximum="60"  Name="ProgressBarStatus" IsIndeterminate="{Binding ProgressBarIsIndetermined}"/>
+                    <TextBlock Text="{Binding ElementName=ProgressBarStatus, Path=Value, StringFormat={}{0:0} items}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+            </StatusBarItem>
             </StatusBar>
            <!-- <TextBox AcceptsReturn="True" Name="txtEditor" SelectionChanged="txtEditor_SelectionChanged" />-->
     </Grid>

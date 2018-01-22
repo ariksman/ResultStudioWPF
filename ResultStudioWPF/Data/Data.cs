@@ -15,18 +15,20 @@ namespace ResultStudioWPF.Data
             _rnd = new Random();
         }
 
-        public ObservableCollection<MeasurementPoint> CreateSubframeDataset(double referenceX, double referenceY, double referenceZ, int subframeCount, double spread)
+        public ObservableCollection<MeasurementPoint> CreateSubframeDataset(double referenceX, double referenceY, double referenceZ, int subframeCount, double spread, IProgress<int> progress)
         {
+
+            progress.Report(1);
 
             var dataSetX = CreateRandomListOfNumber(subframeCount, referenceX, spread);
             var dataSetY = CreateRandomListOfNumber(subframeCount, referenceY, spread);
             var dataSetZ = CreateRandomListOfNumber(subframeCount, referenceZ, spread);
 
-            return AddMeasurementsToDataset(dataSetX, dataSetY, dataSetZ, subframeCount);
+            return AddMeasurementsToDataset(dataSetX, dataSetY, dataSetZ, subframeCount, progress);
 
         }
 
-        private ObservableCollection<MeasurementPoint> AddMeasurementsToDataset(IList<double> dataSetX, IList<double> dataSetY, IList<double> dataSetZ, int subframeCount)
+        private ObservableCollection<MeasurementPoint> AddMeasurementsToDataset(IList<double> dataSetX, IList<double> dataSetY, IList<double> dataSetZ, int subframeCount, IProgress<int> progress)
         {
             var dataset = new ObservableCollection<MeasurementPoint>();
 
@@ -61,6 +63,8 @@ namespace ResultStudioWPF.Data
                     Value = dataSetZ.ElementAtOrDefault(i - 1)
                 };
                 dataset.Add(newMeasurementZ);
+
+                progress.Report(i*3);
             }
 
             return dataset;

@@ -39,20 +39,51 @@ namespace ResultStudioWPF.ViewModels
                 // Commands
                 ImportDataFromFileCommand = new RelayCommand<RoutedEventArgs>(ImportDataFromFileExecute);
                 CreateRandomMeasurementDataClickCommand = new RelayCommand<RoutedEventArgs>(CreateRandomMeasurementDataClickExecute);
-                ÍmportMeasurementDataFromFileClickCommand = new RelayCommand<RoutedEventArgs>(ÍmportMeasurementDataFromFileClickÉxecute);
 
                 // Collections
                 SubframeDataSetCollectionView = CollectionViewSource.GetDefaultView(_dataSet);
+
+                //Setup
+                ProgressBarIsIndetermined = false;
             }
+        }
+
+        private async void CreateRandomMeasurementDataClickExecute(RoutedEventArgs obj)
+        {
+            var frameCount = 20;
+            FilePath = "Random data in use";
+            ProgressBarIsIndetermined = true;
+            var progress = new Progress<int>(status =>
+            {
+                ProgressBarValue = status;
+            });
+
+            await Task.Run(() =>
+            {
+                var dataCreator = new DataCreator();
+                DataSet = dataCreator.CreateSubframeDataset(_xAxisReference, _yAxisReference, _zAxisReference,
+                    frameCount, 100, progress);
+            });
+
+            ProgressBarIsIndetermined = false;
         }
 
         private async void ImportDataFromFileExecute(RoutedEventArgs obj)
         {
+            ProgressBarIsIndetermined = true;
+            var progress = new Progress<int>(status =>
+            {
+                ProgressBarValue = status;
+            });
+            
             await Task.Run(() =>
             {
-                var fileImporter = new DataFileReader();
+                var fileImporter = new DataFileReader(progress);
                 DataSet = fileImporter.DataSet;
+                FilePath = fileImporter.TheFile;
             });
+
+            ProgressBarIsIndetermined = false;
         }
 
         private void RefreshDataGridTolerance()
@@ -67,25 +98,9 @@ namespace ResultStudioWPF.ViewModels
 
         #region RelayCommands
         
-
         public RelayCommand<RoutedEventArgs> ImportDataFromFileCommand { private set; get; }
         public RelayCommand<RoutedEventArgs> CreateRandomMeasurementDataClickCommand { private set; get; }
-        public RelayCommand<RoutedEventArgs> ÍmportMeasurementDataFromFileClickCommand { private set; get; }
 
-
-
-        private void CreateRandomMeasurementDataClickExecute(RoutedEventArgs obj)
-        {
-            var frameCount = 20;
-            var dataCreator = new DataCreator();
-            DataSet = dataCreator.CreateSubframeDataset(_xAxisReference, _yAxisReference, _zAxisReference, frameCount, 100);
-
-        }
-
-        private void ÍmportMeasurementDataFromFileClickÉxecute(RoutedEventArgs obj)
-        {
-            throw new System.NotImplementedException();
-        }
         #endregion
 
         #region Input data validation methods
@@ -119,6 +134,53 @@ namespace ResultStudioWPF.ViewModels
         #endregion
 
         #region Public Properties
+        private bool _progressBarIsIndetermined;
+        public bool ProgressBarIsIndetermined
+        {
+            get { return _progressBarIsIndetermined; }
+
+            set
+            {
+                if (_progressBarIsIndetermined == value)
+                {
+                    return;
+                }
+                _progressBarIsIndetermined = value;
+                RaisePropertyChanged("ProgressBarIsIndetermined");
+            }
+        }
+
+        private int _progressBarValue;
+        public int ProgressBarValue
+        {
+            get { return _progressBarValue; }
+
+            set
+            {
+                if (_progressBarValue == value)
+                {
+                    return;
+                }
+                _progressBarValue = value;
+                RaisePropertyChanged("ProgressBarValue");
+            }
+        }
+
+        private string _filePath;
+        public string FilePath
+        {
+            get { return _filePath; }
+
+            set
+            {
+                if (_filePath == value)
+                {
+                    return;
+                }
+                _filePath = value;
+                RaisePropertyChanged("FilePath");
+            }
+        }
 
         private double _xAxisTolerance;
         public double XAxisTolerance

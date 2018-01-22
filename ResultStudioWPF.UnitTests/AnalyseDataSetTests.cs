@@ -33,7 +33,6 @@ namespace ResultStudioWPF.UnitTests
                     AxisName = Constants.MeasurementAxis.X,
                     Value = 5,
                 },
-
             };
             var datasetAnalyser = new AnalyseDataSet(dataSet);
 

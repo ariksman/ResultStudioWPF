@@ -13,10 +13,11 @@ namespace ResultStudioWPF.Helpers
     public class DataFileReader
     {
         private string _theFile;
+        private IProgress<int> _progress;
 
-        public DataFileReader()
+        public DataFileReader(IProgress<int> progress)
         {
-            CommentDelimiter = ";";
+            _progress = progress;
             DataSet = new ObservableCollection<MeasurementPoint>();
 
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -35,7 +36,6 @@ namespace ResultStudioWPF.Helpers
             }
         }
 
-        public string CommentDelimiter { get; set; }
         private ObservableCollection<MeasurementPoint> _dataSet;
         public ObservableCollection<MeasurementPoint> DataSet
         {
@@ -68,6 +68,7 @@ namespace ResultStudioWPF.Helpers
                     {
                         string line = "";
                         char[] charsToTrim = { ' ' };
+                        var progressCount = 1;
                         while ((line = sr.ReadLine()) != null)
                         {
                             line = line.Trim();
@@ -106,6 +107,7 @@ namespace ResultStudioWPF.Helpers
                             };
 
                             _dataSet.Add(newMeasurementPoint);
+                            _progress.Report(progressCount++);
                         }
                     }
                 }
