@@ -119,16 +119,18 @@ namespace ResultStudioWPF.ViewModels
                     return;
                 }
                 _dataSet = value;
-
-                var dataSetAnalyser = new AnalyseDataSet(_dataSet);
-
-                XVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.X);
-                YVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.Y);
-                ZVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.Z);
-
-                AppMessages.PlotDataSet.Send(_dataSet);
-
                 RaisePropertyChanged("DataSet");
+
+                if (_dataSet != null && _dataSet.Count > 0)
+                {
+                    var dataSetAnalyser = new AnalyseDataSet(_dataSet);
+
+                    XVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.X);
+                    YVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.Y);
+                    ZVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.Z);
+
+                    AppMessages.PlotDataSet.Send(_dataSet);
+                }
             }
         }
         #endregion
