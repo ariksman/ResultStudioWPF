@@ -1,37 +1,17 @@
-## Welcome to GitHub Pages
+## The program - ResultStudio
+Program follows the MVVM design principle and utilizes WPF for the user interface.
 
-You can use the [editor on GitHub](https://github.com/Ariksman/ResultStudioWPF/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Main purpouse is to create random measurement data of a subframe point with x,y,z measurements or optionally read this data from a file. Datasets of 20 subframes is used as default. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The variance of datapoint for x,y,z is calculated and data is visualised with the help of WPF datagrid and OxyPlot. For data analysing, user can set tolerances invidually for x,y,z measurements. If measurement value exceeds this limit, the cell containing invalid data is highlighted by red color.
 
-### Markdown
+## Frameworks
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Mvvm light
+- OxyPlot
+- NUnit
 
-```markdown
-Syntax highlighted code block
+### Authors
+Antti Riksman
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Ariksman/ResultStudioWPF/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+If debugging is the process of removing software bugs, then programming must be the process of putting them in.
