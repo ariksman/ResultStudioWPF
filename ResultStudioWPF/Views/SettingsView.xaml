@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="ResultStudioWPF.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ResultStudioWPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="300"
+             DataContext="{Binding  Source={StaticResource Locator}, Path=SettingsViewModel}">
+    <Grid>
+        <StackPanel Margin="10,0,10,10">
+            <GroupBox x:Name="DataImportGroupBox" Header="Select data source" Margin="10,10,10,0" Height="135" VerticalAlignment="Top">
+                <StackPanel Margin="10,10,10,10">
+                    <Button x:Name="button1" Content="Select file to import" Margin="0,10,0,0" Height="30.019" VerticalAlignment="Top"
+                            Command="{Binding ImportDataFromFileCommand}"/>
+                    <Button x:Name="button2" 
+                            Content="Generate random data" 
+                            Margin="0,10,0,0" 
+                            Height="30.019" 
+                            VerticalAlignment="Top"
+                            Command="{Binding CreateRandomMeasurementDataClickCommand}"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox x:Name="DataToleranceGroupBox" Header="Data tolerance" Margin="10,10,10,0" Height="160" VerticalAlignment="Top">
+                <StackPanel Margin="10">
+                    <DockPanel VerticalAlignment="Center" Height="40">
+                        <Label DockPanel.Dock="Left">X-axis tolerance:</Label>
+                        <TextBox Text="{Binding ElementName=xAxisToleranceSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                                 DockPanel.Dock="Right" 
+                                 TextAlignment="Right" Width="40" Height="20" />
+                        <Slider Maximum="150" TickPlacement="BottomRight" 
+                                Value="{Binding XAxisTolerance}" 
+                                IsSnapToTickEnabled="True" 
+                                Name="xAxisToleranceSlider"  
+                                />
+                    </DockPanel>
+
+                    <DockPanel VerticalAlignment="Center" Height="40">
+                        <Label DockPanel.Dock="Left">Y-axis tolerance:</Label>
+                        <TextBox Text="{Binding ElementName=yAxisToleranceSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                                 DockPanel.Dock="Right" 
+                                 TextAlignment="Right" Width="40" Height="20"/>
+                        <Slider Maximum="150" TickPlacement="BottomRight"  
+                                Value="{Binding YAxisTolerance}" 
+                                TickFrequency="1" 
+                                IsSnapToTickEnabled="True" 
+                                Name="yAxisToleranceSlider" />
+                    </DockPanel>
+
+                    <DockPanel VerticalAlignment="Center" Height="40">
+                        <Label DockPanel.Dock="Left">Z-axis tolerance:</Label>
+                        <TextBox Text="{Binding ElementName=zAxisToleranceSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                                 DockPanel.Dock="Right" 
+                                 TextAlignment="Right" Width="40" Height="20"/>
+                        <Slider Maximum="150" TickPlacement="BottomRight" 
+                                Value="{Binding ZAxisTolerance}" 
+                                TickFrequency="1" 
+                                IsSnapToTickEnabled="True" 
+                                Name="zAxisToleranceSlider"  />
+                    </DockPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox x:Name="DataReferenceGroupBox" Header="Data reference values" Margin="10,10,10,0" Height="160" VerticalAlignment="Top">
+                <StackPanel Margin="10">
+                    <DockPanel VerticalAlignment="Center" Height="40">
+                        <Label DockPanel.Dock="Left">X-axis reference:</Label>
+                        <TextBox Text="{Binding XAxisReference, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="50" Height="20" />
+                    </DockPanel>
+
+                    <DockPanel VerticalAlignment="Center" Height="40">
+                        <Label DockPanel.Dock="Left">Y-axis reference:</Label>
+                        <TextBox Text="{Binding YAxisReference, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="50" Height="20"/>
+                    </DockPanel>
+
+                    <DockPanel VerticalAlignment="Center" Height="40">
+                        <Label DockPanel.Dock="Left">Z-axis reference:</Label>
+                        <TextBox Text="{Binding ZAxisReference, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="50" Height="20"/>
+                    </DockPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox x:Name="DataResultsGroupBox" Header="Results of the current dataset" Margin="10,10,10,0" Height="Auto" VerticalAlignment="Top">
+                <StackPanel Margin="10,10,10,10">
+
+                    <DockPanel VerticalAlignment="Center" Height="40">
+                        <Label DockPanel.Dock="Left">Maximum x-axis variance:</Label>
+                        <TextBlock  DockPanel.Dock="Right"
+                                  TextAlignment="Right" 
+                                  Text="{Binding XVariance, StringFormat={}{0:#.00}}" Margin="0,7,0,10"
+                                  />
+                    </DockPanel>
+                    <DockPanel VerticalAlignment="Center" Height="40">
+                        <Label DockPanel.Dock="Left">Maximum y-axis variance:</Label>
+                        <TextBlock  DockPanel.Dock="Right"
+                                  TextAlignment="Right" 
+                                  Height="20" 
+                                  Text="{Binding YVariance, StringFormat={}{0:#.00}}" Margin="0,7,0,10"
+                                  />
+                    </DockPanel>
+                    <DockPanel VerticalAlignment="Center" Height="40">
+                        <Label DockPanel.Dock="Left">Maximum z-axis variance:</Label>
+                        <TextBlock  DockPanel.Dock="Right"
+                                  TextAlignment="Right" 
+                                  Height="20" 
+                                  Text="{Binding ZVariance, StringFormat={}{0:#.00}}" Margin="0,7,0,10"
+                                  />
+                    </DockPanel>
+
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

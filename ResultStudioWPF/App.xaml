@@ -1,0 +1,12 @@
+﻿<Application x:Class="ResultStudioWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ResultStudioWPF"
+             xmlns:viewModels="clr-namespace:ResultStudioWPF.ViewModels"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!--  For mvvm light viewModel access  -->
+        <viewModels:ViewModelLocator x:Key="Locator" />
+        
+    </Application.Resources>
+</Application>
