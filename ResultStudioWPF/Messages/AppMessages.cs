@@ -36,12 +36,12 @@ namespace ResultStudioWPF.Messages
 
         public static class PlotRefresh
         {
-            public static void Send(List<DataPoint> argument)
+            public static void Send(bool argument)
             {
                 Messenger.Default.Send(argument);
             }
 
-            public static void Register(object recipient, Action<List<DataPoint>> action)
+            public static void Register(object recipient, Action<bool> action)
             {
                 Messenger.Default.Register(recipient, action);
             }

@@ -52,6 +52,7 @@ namespace ResultStudioWPF.ViewModels
         {
             var frameCount = 20;
             FilePath = "Random data in use";
+
             ProgressBarIsIndetermined = true;
             var progress = new Progress<int>(status =>
             {
@@ -119,7 +120,7 @@ namespace ResultStudioWPF.ViewModels
                     return;
                 }
                 _dataSet = value;
-                RaisePropertyChanged("DataSet");
+                RaisePropertyChanged();
 
                 if (_dataSet != null && _dataSet.Count > 0)
                 {
@@ -148,7 +149,7 @@ namespace ResultStudioWPF.ViewModels
                     return;
                 }
                 _progressBarIsIndetermined = value;
-                RaisePropertyChanged("ProgressBarIsIndetermined");
+                RaisePropertyChanged();
             }
         }
 
@@ -164,7 +165,7 @@ namespace ResultStudioWPF.ViewModels
                     return;
                 }
                 _progressBarValue = value;
-                RaisePropertyChanged("ProgressBarValue");
+                RaisePropertyChanged();
             }
         }
 
@@ -180,7 +181,7 @@ namespace ResultStudioWPF.ViewModels
                     return;
                 }
                 _filePath = value;
-                RaisePropertyChanged("FilePath");
+                RaisePropertyChanged();
             }
         }
 
@@ -209,7 +210,7 @@ namespace ResultStudioWPF.ViewModels
                 //TODO: data validation
                 _xAxisTolerance = value;
                 RefreshDataGridTolerance();
-                RaisePropertyChanged("XAxisTolerance");
+                RaisePropertyChanged();
             }
         }
 
@@ -228,7 +229,7 @@ namespace ResultStudioWPF.ViewModels
                 //TODO: data validation
                 _yAxisTolerance = value;
                 RefreshDataGridTolerance();
-                RaisePropertyChanged("YAxisTolerance");
+                RaisePropertyChanged();
             }
         }
 
@@ -246,7 +247,7 @@ namespace ResultStudioWPF.ViewModels
                 //TODO: data validation
                 _zAxisTolerance = value;
                 RefreshDataGridTolerance();
-                RaisePropertyChanged("ZAxisTolerance");
+                RaisePropertyChanged();
             }
         }
 
@@ -263,7 +264,7 @@ namespace ResultStudioWPF.ViewModels
                 }
                 //TODO: data validation
                 _xAxisReference = value;
-                RaisePropertyChanged("_XAxisReference");
+                RaisePropertyChanged();
             }
         }
 
@@ -280,7 +281,7 @@ namespace ResultStudioWPF.ViewModels
                 }
                 //TODO: data validation
                 _yAxisReference = value;
-                RaisePropertyChanged("YAxisReference");
+                RaisePropertyChanged();
             }
         }
         private double _zAxisReference;
@@ -296,7 +297,7 @@ namespace ResultStudioWPF.ViewModels
                 }
                 //TODO: data validation
                 _zAxisReference = value;
-                RaisePropertyChanged("ZAxisReference");
+                RaisePropertyChanged();
             }
         }
 
@@ -313,7 +314,7 @@ namespace ResultStudioWPF.ViewModels
                 }
                 //TODO: data validation
                 _xVariance = value;
-                RaisePropertyChanged("XVariance");
+                RaisePropertyChanged();
             }
         }
 
@@ -330,7 +331,7 @@ namespace ResultStudioWPF.ViewModels
                 }
                 //TODO: data validation
                 _yVariance = value;
-                RaisePropertyChanged("YVariance");
+                RaisePropertyChanged();
             }
         }
 
@@ -347,7 +348,7 @@ namespace ResultStudioWPF.ViewModels
                 }
                 //TODO: data validation
                 _zVariance = value;
-                RaisePropertyChanged("ZVariance");
+                RaisePropertyChanged();
             }
         }
 
