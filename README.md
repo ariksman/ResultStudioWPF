@@ -7,9 +7,9 @@ The variance of datapoint for x,y,z is calculated and data is visualised with th
 
 ## Frameworks
 
-- Mvvm light
-- OxyPlot
-- NUnit
+- Mvvm light [http://www.mvvmlight.net]
+- OxyPlot [http://www.oxyplot.org]
+- NUnit [http://nunit.org]
 
 ### Authors
 Antti Riksman
