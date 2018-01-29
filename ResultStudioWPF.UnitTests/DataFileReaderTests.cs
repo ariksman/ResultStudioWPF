@@ -10,12 +10,13 @@ namespace ResultStudioWPF.UnitTests
     [TestFixture]
     public class DataFileReaderTests
     {
-        [Test]
+        // Only test public functionality of a class
+        /*[Test]
         public void ParseLineIntoMeasurementPointArray_WhenCalled_ReturnValidStringArrayContainingMeasurementPointData()
         {
             var testLine = "1\tX\t255";
 
 
-        }
+        }*/
     }
 }

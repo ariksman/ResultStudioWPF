@@ -18,6 +18,12 @@ namespace ResultStudioWPF.Models
             
         }
 
+        public void RefreshAllProperties()
+        {
+            foreach (var prop in this.GetType().GetProperties())
+                NotifyPropertyChanged(null, prop.Name);
+        }
+
         private int _measurementNumber;
         public int MeasurementNumber
         {
@@ -53,7 +59,7 @@ namespace ResultStudioWPF.Models
             set
             {
                 _value = value;
-                NotifyPropertyChanged(AppMessages.EntityIsValid.Send);
+                NotifyPropertyChanged(null);
             }
         }
     }

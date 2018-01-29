@@ -64,53 +64,58 @@ namespace ResultStudioWPF.Helpers
                 if (File.Exists(value))
                 {
                     _theFile = value;
-                    using (StreamReader sr = new StreamReader(_theFile))
+                    ReadFileIntoDataset();
+                }
+            }
+        }
+
+        private void ReadFileIntoDataset()
+        {
+            using (StreamReader sr = new StreamReader(_theFile))
+            {
+                string line = "";
+                char[] charsToTrim = { ' ' };
+                var progressCount = 1;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    line = line.Trim();
+                    if (line.Length == 0) continue;  // empty line
+
+
+                    string[] parts = ParseLineIntoMeasurementPointArray(line);
+
+                    var measurementNumber = 0;
+                    Int32.TryParse(parts[0], out measurementNumber);
+
+                    Constants.MeasurementAxis axis;
+                    switch (parts[1])
                     {
-                        string line = "";
-                        char[] charsToTrim = { ' ' };
-                        var progressCount = 1;
-                        while ((line = sr.ReadLine()) != null)
-                        {
-                            line = line.Trim();
-                            if (line.Length == 0) continue;  // empty line
-
-
-                            string[] parts = ParseLineIntoMeasurementPointArray(line);
-
-                            var measurementNumber = 0;
-                            Int32.TryParse(parts[0], out measurementNumber);
-
-                            Constants.MeasurementAxis axis;
-                            switch (parts[1])
-                            {
-                                case "X":
-                                    axis = Constants.MeasurementAxis.X;
-                                    break;
-                                case "Y":
-                                    axis = Constants.MeasurementAxis.Y;
-                                    break;
-                                case "Z":
-                                    axis = Constants.MeasurementAxis.Z;
-                                    break;
-                                default:
-                                    throw new ArgumentOutOfRangeException();
-                            }
-
-                            double measurement = 0;
-                            Double.TryParse(parts[2], out measurement);
-
-                            var newMeasurementPoint = new MeasurementPoint()
-                            {
-                                MeasurementNumber = measurementNumber,
-                                AxisName = axis,
-                                Value = measurement,
-
-                            };
-
-                            _dataSet.Add(newMeasurementPoint);
-                            _progress.Report(progressCount++);
-                        }
+                        case "X":
+                            axis = Constants.MeasurementAxis.X;
+                            break;
+                        case "Y":
+                            axis = Constants.MeasurementAxis.Y;
+                            break;
+                        case "Z":
+                            axis = Constants.MeasurementAxis.Z;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
+
+                    double measurement = 0;
+                    Double.TryParse(parts[2], out measurement);
+
+                    var newMeasurementPoint = new MeasurementPoint()
+                    {
+                        MeasurementNumber = measurementNumber,
+                        AxisName = axis,
+                        Value = measurement,
+
+                    };
+
+                    _dataSet.Add(newMeasurementPoint);
+                    _progress.Report(progressCount++);
                 }
             }
         }

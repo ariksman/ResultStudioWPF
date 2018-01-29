@@ -92,8 +92,10 @@ namespace ResultStudioWPF.ViewModels
             foreach (var measurementPoint in DataSet)
             {
                 //TODO: Change this into a real way to raiseproperty changed without actually changing the value
-                var temp = measurementPoint.Value;
-                measurementPoint.Value = temp;
+                //var temp = measurementPoint.Value;
+                //measurementPoint.Value = temp;
+
+                measurementPoint.RefreshAllProperties();
             }
         }
 
