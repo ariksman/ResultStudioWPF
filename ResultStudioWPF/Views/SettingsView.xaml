@@ -7,6 +7,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="300"
              DataContext="{Binding  Source={StaticResource Locator}, Path=SettingsViewModel}">
+    <UserControl.Resources>
+        <!-- Error Template to change the default behaviour-->
+        <ControlTemplate x:Key="ErrorTemplate">
+            <StackPanel>
+                <!-- Placeholder for the TextBox itself -->
+                <AdornedElementPlaceholder x:Name="textBox" />
+                <ItemsControl ItemsSource="{Binding}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Value must be a number" Foreground="Red" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ControlTemplate>
+        
+    </UserControl.Resources>
     <Grid>
         <StackPanel Margin="10,0,10,10">
             <GroupBox x:Name="DataImportGroupBox" Header="Select data source" Margin="10,10,10,0" Height="135" VerticalAlignment="Top">
@@ -65,17 +82,22 @@
                 <StackPanel Margin="10">
                     <DockPanel VerticalAlignment="Center" Height="40">
                         <Label DockPanel.Dock="Left">X-axis reference:</Label>
-                        <TextBox Text="{Binding XAxisReference, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="50" Height="20" />
+                        <TextBox Text="{Binding XAxisReference, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
+                                 DockPanel.Dock="Right" TextAlignment="Right" Width="50" Height="20" 
+                                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                            />
                     </DockPanel>
 
                     <DockPanel VerticalAlignment="Center" Height="40">
                         <Label DockPanel.Dock="Left">Y-axis reference:</Label>
-                        <TextBox Text="{Binding YAxisReference, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="50" Height="20"/>
+                        <TextBox Text="{Binding YAxisReference, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="50" Height="20"
+                                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
                     </DockPanel>
 
                     <DockPanel VerticalAlignment="Center" Height="40">
                         <Label DockPanel.Dock="Left">Z-axis reference:</Label>
-                        <TextBox Text="{Binding ZAxisReference, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="50" Height="20"/>
+                        <TextBox Text="{Binding ZAxisReference, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="50" Height="20"
+                                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
                     </DockPanel>
                 </StackPanel>
             </GroupBox>

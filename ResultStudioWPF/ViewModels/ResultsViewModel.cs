@@ -170,6 +170,10 @@ namespace ResultStudioWPF.ViewModels
             MeasurementsY.Clear();
             MeasurementsZ.Clear();
 
+            ReferenceX.Clear();
+            ReferenceY.Clear();
+            ReferenceZ.Clear();
+
             _dataSet = obj;
 
             CreateMeasurementDataForPlots();
