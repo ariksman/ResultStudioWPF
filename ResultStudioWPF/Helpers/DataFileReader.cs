@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using Microsoft.Win32;
 using ResultStudioWPF.Models;
 
@@ -84,32 +85,18 @@ namespace ResultStudioWPF.Helpers
 
                     string[] parts = ParseLineIntoMeasurementPointArray(line);
 
-                    var measurementNumber = 0;
+                    int measurementNumber;
                     Int32.TryParse(parts[0], out measurementNumber);
 
-                    Constants.MeasurementAxis axis;
-                    switch (parts[1])
-                    {
-                        case "X":
-                            axis = Constants.MeasurementAxis.X;
-                            break;
-                        case "Y":
-                            axis = Constants.MeasurementAxis.Y;
-                            break;
-                        case "Z":
-                            axis = Constants.MeasurementAxis.Z;
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
+                    Constants.MeasurementAxis axisValue = ParseAxisValue(parts[1]);
 
-                    double measurement = 0;
+                    double measurement;
                     Double.TryParse(parts[2], out measurement);
 
                     var newMeasurementPoint = new MeasurementPoint()
                     {
                         MeasurementNumber = measurementNumber,
-                        AxisName = axis,
+                        AxisName = axisValue,
                         Value = measurement,
 
                     };
@@ -117,6 +104,24 @@ namespace ResultStudioWPF.Helpers
                     _dataSet.Add(newMeasurementPoint);
                     _progress.Report(progressCount++);
                 }
+            }
+        }
+
+        private Constants.MeasurementAxis ParseAxisValue(string axisString)
+        {
+            try
+            {
+                Constants.MeasurementAxis axisValue = (Constants.MeasurementAxis)Enum.Parse(typeof(Constants.MeasurementAxis), axisString);
+                if (Enum.IsDefined(typeof(Constants.MeasurementAxis), axisValue))
+                {
+                    return axisValue;
+                }
+                return Constants.MeasurementAxis.Unknown;
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("'{0}' is not a member of the MeasurementAxis enumeration.", axisString);
+                return Constants.MeasurementAxis.Unknown;
             }
         }
 

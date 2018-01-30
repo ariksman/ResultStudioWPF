@@ -3,7 +3,7 @@
     public static class Constants
     {
 
-        public enum MeasurementAxis { X, Y, Z};
+        public enum MeasurementAxis { X, Y, Z, Unknown};
 
 
     }
