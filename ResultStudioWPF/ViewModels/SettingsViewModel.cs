@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -67,6 +68,8 @@ namespace ResultStudioWPF.ViewModels
             });
 
             ProgressBarIsIndetermined = false;
+
+            CheckHowManySubframesIsInvalid();
         }
 
         private async void ImportDataFromFileExecute(RoutedEventArgs obj)
@@ -85,6 +88,8 @@ namespace ResultStudioWPF.ViewModels
             });
 
             ProgressBarIsIndetermined = false;
+
+            CheckHowManySubframesIsInvalid();
         }
 
         private void RefreshDataGridTolerance()
@@ -98,10 +103,17 @@ namespace ResultStudioWPF.ViewModels
                 measurementPoint.RefreshAllProperties();
                 measurementPoint.CheckAllTolerances();
             }
+
+            CheckHowManySubframesIsInvalid();
+        }
+
+        private void CheckHowManySubframesIsInvalid()
+        {
+            ErrorCount = DataSet.Count(item => item.HasErrors);
         }
 
         #region RelayCommands
-        
+
         public RelayCommand<RoutedEventArgs> ImportDataFromFileCommand { private set; get; }
         public RelayCommand<RoutedEventArgs> CreateRandomMeasurementDataClickCommand { private set; get; }
 
@@ -352,6 +364,22 @@ namespace ResultStudioWPF.ViewModels
                 }
                 //TODO: data validation
                 _zVariance = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private int _errorCount;
+        public int ErrorCount
+        {
+            get { return _errorCount; }
+
+            set
+            {
+                if (_errorCount == value)
+                {
+                    return;
+                }
+                _errorCount = value;
                 RaisePropertyChanged();
             }
         }

@@ -37,6 +37,7 @@ namespace ResultStudioWPF.Models
                 }
             }
         }
+
         #endregion
 
         private int _measurementNumber;
