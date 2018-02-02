@@ -96,6 +96,7 @@ namespace ResultStudioWPF.ViewModels
                 //measurementPoint.Value = temp;
 
                 measurementPoint.RefreshAllProperties();
+                measurementPoint.CheckAllTolerances();
             }
         }
 
@@ -124,6 +125,7 @@ namespace ResultStudioWPF.ViewModels
                 _dataSet = value;
                 RaisePropertyChanged();
 
+                
                 if (_dataSet != null && _dataSet.Count > 0)
                 {
                     var dataSetAnalyser = new AnalyseDataSet(_dataSet);

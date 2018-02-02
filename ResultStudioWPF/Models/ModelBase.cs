@@ -7,7 +7,8 @@ using System.Runtime.Serialization;
 
 namespace ResultStudioWPF.Models
 {
-    // followed this guide:  
+    // Guide:  https://www.codeproject.com/Tips/876349/WPF-Validation-using-INotifyDataErrorInfo
+
     public class ModelBase : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         #region Property changed
