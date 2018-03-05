@@ -40,43 +40,7 @@ namespace ResultStudioWPF.Models
 
         #endregion
 
-        private int _measurementNumber;
-        public int MeasurementNumber
-        {
-            get { return _measurementNumber; }
-            set
-            {
-                _measurementNumber = value;
-            }
-        }
-
-        private Constants.MeasurementAxis _axisName;
-        public Constants.MeasurementAxis AxisName
-        {
-            get { return _axisName; }
-            set
-            {
-                if (_axisName == value)
-                {
-                    return;
-                }
-                _axisName = value;
-            }
-        }
-
-        private double _value;
-        public double Value
-        {
-            get { return _value; }
-            set
-            {
-                _value = value;
-                CheckValueTolerance(value);
-
-                NotifyPropertyChanged(null);
-            }
-        }
-
+        #region Private methods
         private void CheckValueTolerance(double value)
         {
             if (this.AxisName == Constants.MeasurementAxis.X)
@@ -144,5 +108,45 @@ namespace ResultStudioWPF.Models
                 }
             }
         }
+        #endregion
+
+        #region Public roperties
+        private int _measurementNumber;
+        public int MeasurementNumber
+        {
+            get { return _measurementNumber; }
+            set
+            {
+                _measurementNumber = value;
+            }
+        }
+
+        private Constants.MeasurementAxis _axisName;
+        public Constants.MeasurementAxis AxisName
+        {
+            get { return _axisName; }
+            set
+            {
+                if (_axisName == value)
+                {
+                    return;
+                }
+                _axisName = value;
+            }
+        }
+
+        private double _value;
+        public double Value
+        {
+            get { return _value; }
+            set
+            {
+                _value = value;
+                CheckValueTolerance(value);
+
+                NotifyPropertyChanged(null);
+            }
+        }
+        #endregion
     }
 }

@@ -30,6 +30,30 @@ namespace ResultStudioWPF.ViewModels
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
+/*                DataSet = new ObservableCollection<MeasurementPoint>()
+                {
+                    new MeasurementPoint()
+                    {
+                        MeasurementNumber = 1,
+                        AxisName = Constants.MeasurementAxis.X,
+                        Value = 1,
+                        IsValid = true
+                    },
+                    new MeasurementPoint()
+                    {
+                        MeasurementNumber = 2,
+                        AxisName = Constants.MeasurementAxis.Y,
+                        Value = 22,
+                        IsValid = true
+                    },
+                    new MeasurementPoint()
+                    {
+                        MeasurementNumber = 3,
+                        AxisName = Constants.MeasurementAxis.Z,
+                        Value = 33,
+                        IsValid = true
+                    }
+                };*/
             }
             else
             {
@@ -39,7 +63,8 @@ namespace ResultStudioWPF.ViewModels
 
                 // Commands
                 ImportDataFromFileCommand = new RelayCommand<RoutedEventArgs>(ImportDataFromFileExecute);
-                CreateRandomMeasurementDataClickCommand = new RelayCommand<RoutedEventArgs>(CreateRandomMeasurementDataClickExecute);
+                CreateRandomMeasurementDataClickCommand =
+                    new RelayCommand<RoutedEventArgs>(CreateRandomMeasurementDataClickExecute);
 
                 // Collections
                 SubframeDataSetCollectionView = CollectionViewSource.GetDefaultView(_dataSet);

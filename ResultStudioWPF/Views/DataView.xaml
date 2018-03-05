@@ -12,24 +12,12 @@
     <Grid>
         <Grid.Resources>
             
-            <converters:MeasurementToBrushConverter x:Key="MeasurementToBrushConverter" />
+            <converters:MeasurementToBrushConverter x:Key="MeasurementToBrushConverter" />  <!-- Not in use anymore, this is the converter approach for cell background -->
             <converters:IsOddConverter x:Key="IsOddConverter" />
-
-            <!-- Cell error style -->
-            <Style x:Key="CellErrorStyle" TargetType="{x:Type TextBlock}">
-                <Style.Triggers>
-                    <Trigger Property="Validation.HasError" Value="true">
-                        <Setter Property="ToolTip"
-                        Value="{Binding RelativeSource={RelativeSource Self},
-                                Path=(Validation.Errors)[0].ErrorContent}"/>
-                        <Setter Property="Background" Value="OrangeRed"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
 
             <!-- Tooltip error style -->
             <Style TargetType="{x:Type ToolTip}" x:Name="ErrorTooltipStyle">
-                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <!-- <Setter Property="OverridesDefaultStyle" Value="True" /> -->
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToolTip}" >
@@ -44,6 +32,20 @@
                 </Setter>
             </Style>
             
+            <!-- Cell error style -->
+            <Style x:Key="CellErrorStyle" TargetType="{x:Type TextBlock}">
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="true">
+                        <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={RelativeSource Self},
+                                Path=(Validation.Errors)[0].ErrorContent}"/>
+                        <Setter Property="Background" Value="OrangeRed"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            
+            
         </Grid.Resources>
         
         <DataGrid 
@@ -53,9 +55,8 @@
             AutoGenerateColumns="False"
             ItemsSource="{Binding DataSet}">
             <DataGrid.RowStyle>
-                <!-- DataErrorInfo validation template -->
+                <!-- Row background coloring template -->
                 <Style TargetType="{x:Type DataGridRow}">
-                    <!-- Row background coloring template -->
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding MeasurementNumber, Converter={StaticResource IsOddConverter}}" Value="True">
                             <Setter Property="Background" Value="LightGray"></Setter>
