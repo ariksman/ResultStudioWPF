@@ -110,7 +110,7 @@ namespace ResultStudioWPF.ViewModels
       await Task.Run(() =>
       {
         var fileImporter = new DataFileReader(progress);
-        DataSet = fileImporter.DataSet;
+        DataSet = new ObservableCollection<MeasurementPoint>(fileImporter.DataSet);
         FilePath = fileImporter.TheFile;
       });
 
@@ -165,7 +165,7 @@ namespace ResultStudioWPF.ViewModels
 
         if (_dataSet != null && _dataSet.Count > 0)
         {
-          var dataSetAnalyser = new AnalyseDataSet(_dataSet);
+          IAnalyseDataSet dataSetAnalyser = new AnalyseDataSet(_dataSet);
 
           XVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.X);
           YVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.Y);

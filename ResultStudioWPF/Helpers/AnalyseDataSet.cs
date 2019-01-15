@@ -4,8 +4,8 @@ using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.Helpers
 {
-    public class AnalyseDataSet
-    {
+    public class AnalyseDataSet : IAnalyseDataSet
+  {
         private IList<double> _dataSetX = new List<double>() ;
         private IList<double> _dataSetY = new List<double>();
         private IList<double> _dataSetZ = new List<double>();

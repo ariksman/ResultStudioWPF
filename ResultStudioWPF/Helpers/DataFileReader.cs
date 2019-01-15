@@ -2,24 +2,20 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 using Microsoft.Win32;
 using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.Helpers
 {
-    public class DataFileReader
-    {
+    public class DataFileReader : IDataFileReader
+  {
         private string _theFile;
-        private IProgress<int> _progress;
+        private readonly IProgress<int> _progress;
 
         public DataFileReader(IProgress<int> progress)
         {
             _progress = progress;
-            DataSet = new ObservableCollection<MeasurementPoint>();
+            DataSet = new List<MeasurementPoint>();
 
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -37,8 +33,8 @@ namespace ResultStudioWPF.Helpers
             }
         }
 
-        private ObservableCollection<MeasurementPoint> _dataSet;
-        public ObservableCollection<MeasurementPoint> DataSet
+        private IList<MeasurementPoint> _dataSet;
+        public IList<MeasurementPoint> DataSet
         {
             get { return _dataSet; }
             set

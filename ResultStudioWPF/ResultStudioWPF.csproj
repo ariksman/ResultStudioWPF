@@ -160,6 +160,8 @@
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\DataFileReader.cs" />
     <Compile Include="Helpers\Extend.cs" />
+    <Compile Include="Helpers\IAnalyseDataSet.cs" />
+    <Compile Include="Helpers\IDataFileReader.cs" />
     <Compile Include="Messages\AppMessages.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\SubFrame.cs" />
