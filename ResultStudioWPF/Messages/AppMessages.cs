@@ -6,7 +6,7 @@ using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.Messages
 {
-    public class AppMessages
+    public static class AppMessages
     {
         public static class RefreshDataGrid
         {
