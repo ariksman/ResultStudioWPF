@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Practices.ServiceLocation;
+using ResultStudioWPF.Helpers;
 
 namespace ResultStudioWPF.ViewModels
 {
@@ -30,7 +31,6 @@ namespace ResultStudioWPF.ViewModels
 
             SimpleIoc.Default.Register<ResultsViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
-            
         }
         #endregion
 

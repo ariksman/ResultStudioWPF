@@ -109,7 +109,7 @@ namespace ResultStudioWPF.ViewModels
 
       await Task.Run(() =>
       {
-        var fileImporter = new DataFileReader(progress);
+        IDataFileReader fileImporter = new DataFileReader(progress);
         DataSet = new ObservableCollection<MeasurementPoint>(fileImporter.DataSet);
         FilePath = fileImporter.TheFile;
       });
