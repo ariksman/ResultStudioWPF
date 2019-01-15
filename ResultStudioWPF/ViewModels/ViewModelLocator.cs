@@ -1,55 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Autofac;
+using Autofac.Extras.CommonServiceLocator;
+using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Practices.ServiceLocation;
-using ResultStudioWPF.Helpers;
 
 namespace ResultStudioWPF.ViewModels
 {
+  /// <summary>
+  /// This class contains static references to all the view models in the
+  /// application and provides an entry point for the bindings.
+  /// </summary>
+  public class ViewModelLocator
+  {
+    #region LifetimeManagers
+
+    #endregion
+
+    #region Constructor
+
     /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
+    /// Initializes a new instance of the ViewModelLocator class.
     /// </summary>
-    public class ViewModelLocator
+    static ViewModelLocator()
     {
-
-        #region LifetimeManagers
-        #endregion
-
-        #region Constructor
-        /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
-        public ViewModelLocator()
-        {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            SimpleIoc.Default.Register<ResultsViewModel>();
-            SimpleIoc.Default.Register<SettingsViewModel>();
-        }
-        #endregion
-
-        #region ViewModel properties
-        public ResultsViewModel ResultsViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<ResultsViewModel>();
-            }
-        }
-
-        public SettingsViewModel SettingsViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<SettingsViewModel>();
-            }
-        }
-        #endregion
+      if (!ServiceLocator.IsLocationProviderSet)
+      {
+        RegisterServices(registerFakes: true);
+      }
     }
+
+    #endregion
+
+    #region autofac registration
+
+    private static void RegisterServices(ContainerBuilder registrations = null, bool registerFakes = false)
+    {
+      var builder = new ContainerBuilder();
+
+      if (ViewModelBase.IsInDesignModeStatic || registerFakes)
+      {
+        builder.RegisterModule<AutofacModule>();
+
+      }
+      else
+      {
+        builder.RegisterModule<AutofacModule>();
+      }
+      var container = builder.Build();
+      registrations?.Update(container);
+
+      ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));
+    }
+
+    #endregion
+
+
+    #region ViewModel properties
+
+    public ResultsViewModel ResultsViewModel => ServiceLocator.Current.GetInstance<ResultsViewModel>();
+    public SettingsViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsViewModel>();
+
+    #endregion
+  }
 }
