@@ -8,8 +8,9 @@ namespace ResultStudioWPF.Helpers
     {
         public static double StandardDeviation(this IEnumerable<double> values)
         {
-            double avg = values.Average();
-            return Math.Sqrt(values.Average(v => Math.Pow(v - avg, 2)));
+          var localValues = values.ToList();
+          double avg = localValues.Average();
+            return Math.Sqrt(localValues.Average(v => Math.Pow(v - avg, 2)));
         }
     }
 }
