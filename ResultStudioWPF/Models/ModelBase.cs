@@ -15,7 +15,7 @@ namespace ResultStudioWPF.Models
     public event PropertyChangedEventHandler PropertyChanged;
 
     // making notifypropertychanged easier http://jesseliberty.com/2012/06/28/c-5making-inotifypropertychanged-easier/
-    protected void NotifyPropertyChanged(Action<bool> message, [CallerMemberName] string caller = "")
+    protected void NotifyPropertyChanged(Action<bool> message = null, [CallerMemberName] string caller = "")
     {
       if (PropertyChanged != null)
       {

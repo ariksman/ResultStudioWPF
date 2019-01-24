@@ -44,7 +44,7 @@ namespace ResultStudioWPF.Models
                 _value = value;
                 CheckValueTolerance(value);
 
-                NotifyPropertyChanged(null);
+                NotifyPropertyChanged();
             }
         }
     #endregion
