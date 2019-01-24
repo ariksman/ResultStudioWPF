@@ -72,68 +72,76 @@ namespace ResultStudioWPF.Models
     #region Private methods
     private void CheckValueTolerance(double value)
     {
-      if (AxisName == Constants.MeasurementAxis.X)
+      switch (AxisName)
       {
-        var xTolerance = new ViewModelLocator().SettingsViewModel.XAxisTolerance;
-        var xReference = new ViewModelLocator().SettingsViewModel.XAxisReference;
-
-        if (_value > xReference + xTolerance)
+        case Constants.MeasurementAxis.X:
         {
+          var xTolerance = new ViewModelLocator().SettingsViewModel.XAxisTolerance;
+          var xReference = new ViewModelLocator().SettingsViewModel.XAxisReference;
 
-          AddError("Value", "Given measurement value (" + _value + ") is higher than tolerance " + xTolerance + " allows");
-        }
-        else if (value < xReference - xTolerance)
-        {
-          AddError("Value",
+          if (_value > xReference + xTolerance)
+          {
+
+            AddError("Value", "Given measurement value (" + _value + ") is higher than tolerance " + xTolerance + " allows");
+          }
+          else if (value < xReference - xTolerance)
+          {
+            AddError("Value",
               "Given measurement value (" + _value + ") is lower than tolerance " + xTolerance +
               " allows");
-        }
-        else
-        {
-          RemoveError("Value");
-        }
-      }
-      if (AxisName == Constants.MeasurementAxis.Y)
-      {
-        var yTolerance = new ViewModelLocator().SettingsViewModel.YAxisTolerance;
-        var yReference = new ViewModelLocator().SettingsViewModel.YAxisReference;
+          }
+          else
+          {
+            RemoveError("Value");
+          }
 
-        if (_value > yReference + yTolerance)
-        {
-
-          AddError("Value", "Given measurement value (" + _value + ") is higher than tolerance " + yTolerance + " allows");
+          break;
         }
-        else if (value < yReference - yTolerance)
+        case Constants.MeasurementAxis.Y:
         {
-          AddError("Value",
+          var yTolerance = new ViewModelLocator().SettingsViewModel.YAxisTolerance;
+          var yReference = new ViewModelLocator().SettingsViewModel.YAxisReference;
+
+          if (_value > yReference + yTolerance)
+          {
+
+            AddError("Value", "Given measurement value (" + _value + ") is higher than tolerance " + yTolerance + " allows");
+          }
+          else if (value < yReference - yTolerance)
+          {
+            AddError("Value",
               "Given measurement value (" + _value + ") is lower than tolerance " + yTolerance +
               " allows");
-        }
-        else
-        {
-          RemoveError("Value");
-        }
-      }
+          }
+          else
+          {
+            RemoveError("Value");
+          }
 
-      if (AxisName == Constants.MeasurementAxis.Z)
-      {
-        var zTolerance = new ViewModelLocator().SettingsViewModel.ZAxisTolerance;
-        var zReference = new ViewModelLocator().SettingsViewModel.ZAxisReference;
-
-        if (_value > zReference + zTolerance)
-        {
-
-          AddError("Value", "Given measurement value (" + _value + ") is higher than tolerance " + zTolerance + " allows");
+          break;
         }
-        else if (value < zReference - zTolerance)
+        case Constants.MeasurementAxis.Z:
         {
-          AddError("Value",
+          var zTolerance = new ViewModelLocator().SettingsViewModel.ZAxisTolerance;
+          var zReference = new ViewModelLocator().SettingsViewModel.ZAxisReference;
+
+          if (_value > zReference + zTolerance)
+          {
+
+            AddError("Value", "Given measurement value (" + _value + ") is higher than tolerance " + zTolerance + " allows");
+          }
+          else if (value < zReference - zTolerance)
+          {
+            AddError("Value",
               "Given measurement value (" + _value + ") is lower than tolerance " + zTolerance +
               " allows");
-        }
-        else
-        {
-          RemoveError("Value");
+          }
+          else
+          {
+            RemoveError("Value");
+          }
+
+          break;
         }
       }
     }
