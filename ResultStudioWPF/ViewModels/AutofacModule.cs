@@ -11,13 +11,15 @@ namespace ResultStudioWPF.ViewModels
       builder.RegisterType<ResultsViewModel>().AsSelf().SingleInstance();
       builder.RegisterType<SettingsViewModel>().AsSelf().SingleInstance();
 
-      Type[] types =
-      {
-        typeof (AnalyseDataSet),
-        typeof (DataFileReader)
-      };
-      builder.RegisterTypes(types).AsImplementedInterfaces();
-    }
+      builder.RegisterType<AnalyseDataSet>().As<IAnalyseDataSet>();
+      builder.RegisterType<DataFileReader>().As<IDataFileReader>();
 
+      //Type[] types =
+      //{
+      //  typeof (AnalyseDataSet),
+      //  typeof (DataFileReader)
+      //};
+      //builder.RegisterTypes(types).AsImplementedInterfaces();
+    }
   }
 }

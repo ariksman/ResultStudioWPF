@@ -3,6 +3,7 @@ using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using ResultStudioWPF.Helpers;
 
 namespace ResultStudioWPF.ViewModels
 {
@@ -59,6 +60,9 @@ namespace ResultStudioWPF.ViewModels
 
     public ResultsViewModel ResultsViewModel => ServiceLocator.Current.GetInstance<ResultsViewModel>();
     public SettingsViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsViewModel>();
+
+    public IAnalyseDataSet DataSetAnalyzer => ServiceLocator.Current.GetInstance<IAnalyseDataSet>();
+    //public IDataFileReader DataFileReader => ServiceLocator.Current.GetInstance<IDataFileReader>();
 
     #endregion
   }

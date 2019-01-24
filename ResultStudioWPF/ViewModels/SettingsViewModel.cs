@@ -165,11 +165,12 @@ namespace ResultStudioWPF.ViewModels
 
         if (_dataSet != null && _dataSet.Count > 0)
         {
-          IAnalyseDataSet dataSetAnalyser = new AnalyseDataSet(_dataSet);
+          IAnalyseDataSet dataSetAnalyzer = new ViewModelLocator().DataSetAnalyzer;
+          dataSetAnalyzer.DataSet = _dataSet;
 
-          XVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.X);
-          YVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.Y);
-          ZVariance = dataSetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.Z);
+          XVariance = dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.X);
+          YVariance = dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.Y);
+          ZVariance = dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.Z);
 
           AppMessages.PlotDataSet.Send(_dataSet);
         }
