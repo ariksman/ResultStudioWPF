@@ -181,6 +181,17 @@ namespace ResultStudioWPF.ViewModels
 
     #region Public Properties
 
+    private MeasurementPoint _measurementPoint;
+    public MeasurementPoint MeasurementPoint  
+    {
+      get { return _measurementPoint; }
+      set
+      {
+        _measurementPoint = value;
+      }
+    }
+
+
     private bool _progressBarIsIndetermined;
 
     public bool ProgressBarIsIndetermined

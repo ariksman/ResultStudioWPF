@@ -53,6 +53,7 @@
             Margin="0,20,0,20"
             IsReadOnly="True"
             AutoGenerateColumns="False"
+            SelectedItem="{Binding MeasurementPoint}"
             ItemsSource="{Binding DataSet}">
             <DataGrid.RowStyle>
                 <!-- Row background coloring template -->
