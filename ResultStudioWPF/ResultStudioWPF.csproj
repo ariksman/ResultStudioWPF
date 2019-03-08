@@ -158,16 +158,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\Data.cs" />
-    <Compile Include="Helpers\AnalyseDataSet.cs" />
+    <Compile Include="Models\Services\DataCreator.cs" />
+    <Compile Include="ViewModels\Services\AnalyseDataSet.cs" />
     <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="Helpers\DataFileReader.cs" />
+    <Compile Include="ViewModels\Services\DataFileReader.cs" />
     <Compile Include="Helpers\Extend.cs" />
-    <Compile Include="Helpers\IAnalyseDataSet.cs" />
-    <Compile Include="Helpers\IDataFileReader.cs" />
-    <Compile Include="Messages\AppMessages.cs" />
+    <Compile Include="ViewModels\Services\IAnalyseDataSet.cs" />
+    <Compile Include="ViewModels\Services\IDataFileReader.cs" />
+    <Compile Include="ViewModels\Messages\AppMessages.cs" />
     <Compile Include="Models\ModelBase.cs" />
-    <Compile Include="Models\SubFrame.cs" />
+    <Compile Include="Models\MeasurementPoint.cs" />
     <Compile Include="ViewModels\AutofacModule.cs" />
     <Compile Include="ViewModels\ResultsViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -238,5 +238,6 @@
   <ItemGroup>
     <Resource Include="Images\red_round_error_warning_icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

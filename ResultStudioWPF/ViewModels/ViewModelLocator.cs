@@ -61,9 +61,6 @@ namespace ResultStudioWPF.ViewModels
     public ResultsViewModel ResultsViewModel => ServiceLocator.Current.GetInstance<ResultsViewModel>();
     public SettingsViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsViewModel>();
 
-    public IAnalyseDataSet DataSetAnalyzer => ServiceLocator.Current.GetInstance<IAnalyseDataSet>();
-    //public IDataFileReader DataFileReader => ServiceLocator.Current.GetInstance<IDataFileReader>();
-
     #endregion
   }
 }

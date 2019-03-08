@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Messaging;
-using OxyPlot;
 using ResultStudioWPF.Models;
 
-namespace ResultStudioWPF.Messages
+namespace ResultStudioWPF.ViewModels.Messages
 {
     public static class AppMessages
     {

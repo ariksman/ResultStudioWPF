@@ -1,11 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
 using ResultStudioWPF.Models;
 using System.Collections.Generic;
-using ResultStudioWPF.Messages;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using ResultStudioWPF.Helpers;
+using ResultStudioWPF.ViewModels.Messages;
 using LinearAxis = OxyPlot.Axes.LinearAxis;
 
 namespace ResultStudioWPF.ViewModels

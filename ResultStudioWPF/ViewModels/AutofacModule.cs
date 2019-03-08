@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using ResultStudioWPF.Helpers;
+using ResultStudioWPF.ViewModels.Services;
 
 namespace ResultStudioWPF.ViewModels
 {
@@ -8,11 +9,11 @@ namespace ResultStudioWPF.ViewModels
   {
     protected override void Load(ContainerBuilder builder)
     {
-      builder.RegisterType<ResultsViewModel>().AsSelf().SingleInstance();
-      builder.RegisterType<SettingsViewModel>().AsSelf().SingleInstance();
-
       builder.RegisterType<AnalyseDataSet>().As<IAnalyseDataSet>();
       builder.RegisterType<DataFileReader>().As<IDataFileReader>();
+
+      builder.RegisterType<ResultsViewModel>().AsSelf().SingleInstance();
+      builder.RegisterType<SettingsViewModel>().AsSelf().SingleInstance();
 
       //Type[] types =
       //{

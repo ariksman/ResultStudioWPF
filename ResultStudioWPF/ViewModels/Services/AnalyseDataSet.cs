@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using ResultStudioWPF.Helpers;
 using ResultStudioWPF.Models;
 
-namespace ResultStudioWPF.Helpers
+namespace ResultStudioWPF.ViewModels.Services
 {
   public class AnalyseDataSet : IAnalyseDataSet
   {

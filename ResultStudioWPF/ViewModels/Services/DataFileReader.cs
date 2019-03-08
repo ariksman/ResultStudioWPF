@@ -1,39 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using Microsoft.Win32;
+using ResultStudioWPF.Helpers;
 using ResultStudioWPF.Models;
 
-namespace ResultStudioWPF.Helpers
+namespace ResultStudioWPF.ViewModels.Services
 {
   public class DataFileReader : IDataFileReader
   {
     private string _theFile;
-    private readonly IProgress<int> _progress;
 
-    public DataFileReader(IProgress<int> progress)
+    public DataFileReader()
     {
-      _progress = progress;
       DataSet = new List<MeasurementPoint>();
-
-      OpenFileDialog openFileDialog = new OpenFileDialog
-      {
-        InitialDirectory = @"c:\temp\",
-        Filter = "Text|*.txt|All|*.*"
-      };
-
-      if (openFileDialog.ShowDialog() == true)
-      {
-        var sFilePath = openFileDialog.FileName;
-        if (sFilePath != null)
-        {
-          TheFile = openFileDialog.FileName;
-        }
-      }
     }
 
+    public IProgress<int> ReportProgress { get; set; }
+
     private IList<MeasurementPoint> _dataSet;
+
 
     public IList<MeasurementPoint> DataSet
     {
@@ -64,6 +50,20 @@ namespace ResultStudioWPF.Helpers
           ReadFileIntoDataset();
         }
       }
+    }
+
+    public void ReadFile()
+    {
+      OpenFileDialog openFileDialog = new OpenFileDialog
+      {
+        InitialDirectory = @"c:\temp\",
+        Filter = "Text|*.txt|All|*.*"
+      };
+
+      if (openFileDialog.ShowDialog() != true) return;
+
+      var sFilePath = openFileDialog.FileName;
+      TheFile = openFileDialog.FileName;
     }
 
     private void ReadFileIntoDataset()
@@ -97,7 +97,7 @@ namespace ResultStudioWPF.Helpers
           };
 
           _dataSet.Add(newMeasurementPoint);
-          _progress.Report(progressCount++);
+          ReportProgress?.Report(progressCount++);
         }
       }
     }

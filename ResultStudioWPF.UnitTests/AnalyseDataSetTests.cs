@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using ResultStudioWPF.Helpers;
 using ResultStudioWPF.Models;
+using ResultStudioWPF.ViewModels.Services;
 
 namespace ResultStudioWPF.UnitTests
 {

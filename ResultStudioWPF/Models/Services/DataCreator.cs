@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ResultStudioWPF.Models;
 
-namespace ResultStudioWPF.Data
+namespace ResultStudioWPF.Models.Services
 {
     public class DataCreator
     {

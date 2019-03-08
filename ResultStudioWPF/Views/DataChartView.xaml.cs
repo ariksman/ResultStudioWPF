@@ -13,8 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OxyPlot;
-using ResultStudioWPF.Messages;
 using ResultStudioWPF.Models;
+using ResultStudioWPF.ViewModels.Messages;
 
 namespace ResultStudioWPF.Views
 {

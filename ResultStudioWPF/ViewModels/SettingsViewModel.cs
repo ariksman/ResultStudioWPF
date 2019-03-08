@@ -9,10 +9,11 @@ using System.Windows;
 using System.Windows.Data;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using ResultStudioWPF.Data;
 using ResultStudioWPF.Helpers;
-using ResultStudioWPF.Messages;
 using ResultStudioWPF.Models;
+using ResultStudioWPF.Models.Services;
+using ResultStudioWPF.ViewModels.Messages;
+using ResultStudioWPF.ViewModels.Services;
 
 namespace ResultStudioWPF.ViewModels
 {
@@ -20,8 +21,14 @@ namespace ResultStudioWPF.ViewModels
   {
     public ICollectionView SubframeDataSetCollectionView { get; private set; }
 
-    public SettingsViewModel()
+    private IAnalyseDataSet _dataSetAnalyzer;
+    private IDataFileReader _fileReader;
+
+    public SettingsViewModel(IAnalyseDataSet dataSetAnalyzer, IDataFileReader fileReader)
     {
+      _dataSetAnalyzer = dataSetAnalyzer;
+      _fileReader = fileReader;
+
       _xAxisReference = 2000;
       _yAxisReference = -500;
       _zAxisReference = 378;
@@ -109,9 +116,10 @@ namespace ResultStudioWPF.ViewModels
 
       await Task.Run(() =>
       {
-        IDataFileReader fileImporter = new DataFileReader(progress);
-        DataSet = new ObservableCollection<MeasurementPoint>(fileImporter.DataSet);
-        FilePath = fileImporter.TheFile;
+        _fileReader.ReportProgress = progress;
+        _fileReader.ReadFile();
+        DataSet = new ObservableCollection<MeasurementPoint>(_fileReader.DataSet);
+        FilePath = _fileReader.TheFile;
       });
 
       ProgressBarIsIndetermined = false;
@@ -165,12 +173,11 @@ namespace ResultStudioWPF.ViewModels
 
         if (_dataSet != null && _dataSet.Count > 0)
         {
-          IAnalyseDataSet dataSetAnalyzer = new ViewModelLocator().DataSetAnalyzer;
-          dataSetAnalyzer.DataSet = _dataSet;
+          _dataSetAnalyzer.DataSet = _dataSet;
 
-          XVariance = dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.X);
-          YVariance = dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.Y);
-          ZVariance = dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.Z);
+          XVariance = _dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.X);
+          YVariance = _dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.Y);
+          ZVariance = _dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.Z);
 
           AppMessages.PlotDataSet.Send(_dataSet);
         }
