@@ -5,16 +5,15 @@ using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.ViewModels.Services
 {
-  public class AnalyseDataSet : IAnalyseDataSet
+  public class AnalyzeDataSet : IAnalyseDataSet
   {
     private IList<double> _dataSetX = new List<double>();
     private IList<double> _dataSetY = new List<double>();
     private IList<double> _dataSetZ = new List<double>();
 
-    public AnalyseDataSet()
+    public AnalyzeDataSet()
     {
     }
-
 
     private IEnumerable<MeasurementPoint> _dataSet;
 
@@ -62,18 +61,5 @@ namespace ResultStudioWPF.ViewModels.Services
           throw new ArgumentOutOfRangeException(nameof(axis), axis, null);
       }
     }
-
-    /*       public double CalculateDataVarianceX()
-           {
-               return _dataSetX.StandardDeviation();
-           }
-           public double CalculateDataVarianceY()
-           {
-               return _dataSetY.StandardDeviation();
-           }
-           public double CalculateDataVarianceZ()
-           {
-               return _dataSetZ.StandardDeviation();
-           }*/
   }
 }

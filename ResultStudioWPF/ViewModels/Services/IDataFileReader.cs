@@ -10,6 +10,5 @@ namespace ResultStudioWPF.ViewModels.Services
 
     IList<MeasurementPoint> DataSet { get; set; }
     string TheFile { get; set; }
-    IProgress<int> ReportProgress { get; set; }
   }
 }

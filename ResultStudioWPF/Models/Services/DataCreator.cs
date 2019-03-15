@@ -5,8 +5,8 @@ using System.Linq;
 
 namespace ResultStudioWPF.Models.Services
 {
-    public class DataCreator
-    {
+    public class DataCreator : IDataCreator
+  {
         private readonly Random _rnd;
 
         public DataCreator()

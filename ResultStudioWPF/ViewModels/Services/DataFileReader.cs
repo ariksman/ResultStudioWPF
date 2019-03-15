@@ -10,16 +10,14 @@ namespace ResultStudioWPF.ViewModels.Services
   public class DataFileReader : IDataFileReader
   {
     private string _theFile;
-
-    public DataFileReader()
-    {
-      DataSet = new List<MeasurementPoint>();
-    }
-
-    public IProgress<int> ReportProgress { get; set; }
-
+    private readonly IProgress<int> _reportProgress;
     private IList<MeasurementPoint> _dataSet;
 
+    public DataFileReader(IProgress<int> progress)
+    {
+      DataSet = new List<MeasurementPoint>();
+      _reportProgress = progress;
+    }
 
     public IList<MeasurementPoint> DataSet
     {
@@ -97,7 +95,7 @@ namespace ResultStudioWPF.ViewModels.Services
           };
 
           _dataSet.Add(newMeasurementPoint);
-          ReportProgress?.Report(progressCount++);
+          _reportProgress?.Report(progressCount++);
         }
       }
     }

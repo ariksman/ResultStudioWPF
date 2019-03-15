@@ -7,78 +7,77 @@ using ResultStudioWPF.ViewModels.Services;
 
 namespace ResultStudioWPF.UnitTests
 {
-    [TestFixture]
-    public class AnalyseDataSetTests
+  [TestFixture]
+  public class AnalyseDataSetTests
+  {
+    [Test]
+    public void CalculateDataVariance_WhenCalled_ReturnVarianceOfDataSetArgument()
     {
-        [Test]
-        public void CalculateDataVariance_WhenCalled_ReturnVarianceOfDataSetArgument()
+      // Arrange
+      var dataSet = new List<MeasurementPoint>()
+      {
+        new MeasurementPoint()
         {
-            // Arrange
-            var dataSet = new List<MeasurementPoint>()
-            {
-                new MeasurementPoint()
-                {
-                    MeasurementNumber = 1,
-                    AxisName = Constants.MeasurementAxis.X,
-                    Value = 5,
-                },
-                new MeasurementPoint()
-                {
-                    MeasurementNumber = 2,
-                    AxisName = Constants.MeasurementAxis.X,
-                    Value = 5,
-                },
-                new MeasurementPoint()
-                {
-                    MeasurementNumber = 3,
-                    AxisName = Constants.MeasurementAxis.X,
-                    Value = 5,
-                },
-            };
-            var datasetAnalyser = new AnalyseDataSet(dataSet);
-
-
-            // Act
-            var result = datasetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.X);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(0));
-            Assert.That(result, Is.Not.Null);
-        }
-
-        [Test]
-        public void CalculateDataVariance_WhenCalled_ReturnVarianceOfDataContainingDuplicateMeasurements()
+          MeasurementNumber = 1,
+          AxisName = Constants.MeasurementAxis.X,
+          Value = 5,
+        },
+        new MeasurementPoint()
         {
-            // Arrange
-            var dataSet = new List<MeasurementPoint>()
-            {
-                new MeasurementPoint()
-                {
-                    MeasurementNumber = 1,
-                    AxisName = Constants.MeasurementAxis.X,
-                    Value = 5,
-                },
-                new MeasurementPoint()
-                {
-                    MeasurementNumber = 2,
-                    AxisName = Constants.MeasurementAxis.X,
-                    Value = 5,
-                },
-                new MeasurementPoint()
-                {
-                    MeasurementNumber = 2,
-                    AxisName = Constants.MeasurementAxis.X,
-                    Value = 5,
-                },
-            };
-            var datasetAnalyser = new AnalyseDataSet(dataSet);
+          MeasurementNumber = 2,
+          AxisName = Constants.MeasurementAxis.X,
+          Value = 5,
+        },
+        new MeasurementPoint()
+        {
+          MeasurementNumber = 3,
+          AxisName = Constants.MeasurementAxis.X,
+          Value = 5,
+        },
+      };
+      var dataAnalyser = new AnalyzeDataSet { DataSet = dataSet };
 
-            // Act
-            var result = datasetAnalyser.CalculateDataVariance(Constants.MeasurementAxis.X);
+      // Act
+      var result = dataAnalyser.CalculateDataVariance(Constants.MeasurementAxis.X);
 
-            // Assert
-            Assert.That(result, Is.EqualTo(0));
-            Assert.That(result, Is.Not.Null);
-        }
+      // Assert
+      Assert.That(result, Is.EqualTo(0));
+      Assert.That(result, Is.Not.Null);
     }
+
+    [Test]
+    public void CalculateDataVariance_WhenCalled_ReturnVarianceOfDataContainingDuplicateMeasurements()
+    {
+      // Arrange
+      var dataSet = new List<MeasurementPoint>()
+      {
+        new MeasurementPoint()
+        {
+          MeasurementNumber = 1,
+          AxisName = Constants.MeasurementAxis.X,
+          Value = 5,
+        },
+        new MeasurementPoint()
+        {
+          MeasurementNumber = 2,
+          AxisName = Constants.MeasurementAxis.X,
+          Value = 5,
+        },
+        new MeasurementPoint()
+        {
+          MeasurementNumber = 2,
+          AxisName = Constants.MeasurementAxis.X,
+          Value = 5,
+        },
+      };
+      var dataAnalyzer = new AnalyzeDataSet {DataSet = dataSet};
+
+      // Act
+      var result = dataAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.X);
+
+      // Assert
+      Assert.That(result, Is.EqualTo(0));
+      Assert.That(result, Is.Not.Null);
+    }
+  }
 }

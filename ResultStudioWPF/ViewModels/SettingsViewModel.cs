@@ -22,12 +22,17 @@ namespace ResultStudioWPF.ViewModels
     public ICollectionView SubframeDataSetCollectionView { get; private set; }
 
     private IAnalyseDataSet _dataSetAnalyzer;
-    private IDataFileReader _fileReader;
+    readonly Func<IProgress<int>, IDataFileReader> _fileReaderFactory;
+    readonly Func<IDataCreator> _dataCreatorFactory;
 
-    public SettingsViewModel(IAnalyseDataSet dataSetAnalyzer, IDataFileReader fileReader)
+    public SettingsViewModel(
+      IAnalyseDataSet dataSetAnalyzer, 
+      Func<IProgress<int>, IDataFileReader> fileReader,
+      Func<IDataCreator> dataCreator)
     {
       _dataSetAnalyzer = dataSetAnalyzer;
-      _fileReader = fileReader;
+      _fileReaderFactory = fileReader;
+      _dataCreatorFactory = dataCreator;
 
       _xAxisReference = 2000;
       _yAxisReference = -500;
@@ -99,7 +104,7 @@ namespace ResultStudioWPF.ViewModels
 
       await Task.Run(() =>
       {
-        var dataCreator = new DataCreator();
+        IDataCreator dataCreator = _dataCreatorFactory();
         DataSet = dataCreator.CreateSubframeDataset(_xAxisReference, _yAxisReference, _zAxisReference,
           frameCount, 100, progress);
       });
@@ -116,10 +121,10 @@ namespace ResultStudioWPF.ViewModels
 
       await Task.Run(() =>
       {
-        _fileReader.ReportProgress = progress;
-        _fileReader.ReadFile();
-        DataSet = new ObservableCollection<MeasurementPoint>(_fileReader.DataSet);
-        FilePath = _fileReader.TheFile;
+        IDataFileReader reader = _fileReaderFactory(progress);
+        reader.ReadFile();
+        DataSet = new ObservableCollection<MeasurementPoint>(reader.DataSet);
+        FilePath = reader.TheFile;
       });
 
       ProgressBarIsIndetermined = false;

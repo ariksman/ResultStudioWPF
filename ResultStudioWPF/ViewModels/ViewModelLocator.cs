@@ -2,8 +2,7 @@
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
-using ResultStudioWPF.Helpers;
+using ResultStudioWPF.Infrastructure.AutofacModules;
 
 namespace ResultStudioWPF.ViewModels
 {
@@ -40,12 +39,12 @@ namespace ResultStudioWPF.ViewModels
 
       if (ViewModelBase.IsInDesignModeStatic || registerFakes)
       {
-        builder.RegisterModule<AutofacModule>();
+        builder.RegisterModule<ViewModelServicesModule>();
 
       }
       else
       {
-        builder.RegisterModule<AutofacModule>();
+        builder.RegisterModule<ViewModelServicesModule>();
       }
       var container = builder.Build();
       registrations?.Update(container);
