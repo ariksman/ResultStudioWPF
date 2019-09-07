@@ -12,11 +12,6 @@ namespace ResultStudioWPF.ViewModels
   /// </summary>
   public class ViewModelLocator
   {
-    #region LifetimeManagers
-
-    #endregion
-
-    #region Constructor
 
     /// <summary>
     /// Initializes a new instance of the ViewModelLocator class.
@@ -29,11 +24,9 @@ namespace ResultStudioWPF.ViewModels
       }
     }
 
-    #endregion
-
     #region autofac registration
 
-    private static void RegisterServices(ContainerBuilder registrations = null, bool registerFakes = false)
+    private static void RegisterServices(bool registerFakes = false)
     {
       var builder = new ContainerBuilder();
 
@@ -47,7 +40,6 @@ namespace ResultStudioWPF.ViewModels
         builder.RegisterModule<ViewModelServicesModule>();
       }
       var container = builder.Build();
-      registrations?.Update(container);
 
       ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));
     }
