@@ -1,9 +1,11 @@
-﻿using ResultStudioWPF.Helpers;
+﻿using ResultStudioWPF.Application;
+using ResultStudioWPF.Application.Helpers;
+using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.ViewModels;
 
 namespace ResultStudioWPF.Models
 {
-    public class MeasurementPoint : ModelBase
+    public class MeasurementPoint : ModelBase, IMeasurementPoint
     {
         public MeasurementPoint()
         {

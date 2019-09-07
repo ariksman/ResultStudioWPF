@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ResultStudioWPF.Helpers;
+using ResultStudioWPF.Application;
+using ResultStudioWPF.Application.Helpers;
+using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.ViewModels.Services
@@ -15,9 +17,9 @@ namespace ResultStudioWPF.ViewModels.Services
     {
     }
 
-    private IEnumerable<MeasurementPoint> _dataSet;
+    private IEnumerable<IMeasurementPoint> _dataSet;
 
-    public IEnumerable<MeasurementPoint> DataSet
+    public IEnumerable<IMeasurementPoint> DataSet
     {
       set
       {

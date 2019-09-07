@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.ViewModels.Services

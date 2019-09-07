@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Win32;
-using ResultStudioWPF.Helpers;
+using ResultStudioWPF.Application.Helpers;
+using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.ViewModels.Services

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ResultStudioWPF.Application.Helpers;
 
 namespace ResultStudioWPF.Models.Services
 {
@@ -35,7 +36,7 @@ namespace ResultStudioWPF.Models.Services
             {
                 var newMeasurementX = new MeasurementPoint()
                 {
-                    AxisName = Helpers.Constants.MeasurementAxis.X
+                    AxisName = Constants.MeasurementAxis.X
                                 ,
                     MeasurementNumber = i
                                 ,
@@ -45,7 +46,7 @@ namespace ResultStudioWPF.Models.Services
 
                 var newMeasurementY = new MeasurementPoint()
                 {
-                    AxisName = Helpers.Constants.MeasurementAxis.Y
+                    AxisName = Constants.MeasurementAxis.Y
                                     ,
                     MeasurementNumber = i
                                     ,
@@ -55,7 +56,7 @@ namespace ResultStudioWPF.Models.Services
 
                 var newMeasurementZ = new MeasurementPoint()
                 {
-                    AxisName = Helpers.Constants.MeasurementAxis.Z
+                    AxisName = Constants.MeasurementAxis.Z
                                     ,
                     MeasurementNumber = i
                                     ,

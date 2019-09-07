@@ -1,4 +1,4 @@
-﻿namespace ResultStudioWPF.Helpers
+﻿namespace ResultStudioWPF.Application.Helpers
 {
     public static class Constants
     {

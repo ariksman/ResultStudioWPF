@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ResultStudioWPF.Helpers
+namespace ResultStudioWPF.Application.Helpers
 {
     public static class Extend
     {
