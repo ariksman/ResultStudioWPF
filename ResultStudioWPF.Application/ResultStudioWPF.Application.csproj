@@ -39,7 +39,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\Extend.cs" />
     <Compile Include="Interfaces\IAnalyseDataSet.cs" />
     <Compile Include="Interfaces\IMeasurementPoint.cs" />
   </ItemGroup>
@@ -49,5 +48,6 @@
       <Name>ResultStudioWPF.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

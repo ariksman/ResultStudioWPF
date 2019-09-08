@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ResultStudioWPF.Application.Helpers;
 using ResultStudioWPF.Domain;
-using ResultStudioWPF.Domain.DomainModels.Enumerations;
+using ResultStudioWPF.Domain.DomainModel.Enumerations;
 
 namespace ResultStudioWPF.Models.Services
 {

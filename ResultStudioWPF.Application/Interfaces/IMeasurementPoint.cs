@@ -1,6 +1,5 @@
 ﻿
-using ResultStudioWPF.Domain;
-using ResultStudioWPF.Domain.DomainModels.Enumerations;
+using ResultStudioWPF.Domain.DomainModel.Enumerations;
 
 namespace ResultStudioWPF.Application.Interfaces
 {

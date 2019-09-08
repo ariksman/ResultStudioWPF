@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Win32;
-using ResultStudioWPF.Application.Helpers;
-using ResultStudioWPF.Application.Interfaces;
-using ResultStudioWPF.Domain;
-using ResultStudioWPF.Domain.DomainModels.Enumerations;
+using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using MeasurementPoint = ResultStudioWPF.Models.MeasurementPoint;
 
 namespace ResultStudioWPF.ViewModels.Services
