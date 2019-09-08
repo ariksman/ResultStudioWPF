@@ -4,7 +4,9 @@ using System.IO;
 using Microsoft.Win32;
 using ResultStudioWPF.Application.Helpers;
 using ResultStudioWPF.Application.Interfaces;
-using ResultStudioWPF.Models;
+using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.DomainModels.Enumerations;
+using MeasurementPoint = ResultStudioWPF.Models.MeasurementPoint;
 
 namespace ResultStudioWPF.ViewModels.Services
 {
@@ -83,7 +85,7 @@ namespace ResultStudioWPF.ViewModels.Services
           int measurementNumber;
           Int32.TryParse(parts[0], out measurementNumber);
 
-          Constants.MeasurementAxis axisValue = ParseAxisValue(parts[1]);
+          MeasurementAxisType axisValue = ParseAxisValue(parts[1]);
 
           double measurement;
           Double.TryParse(parts[2], out measurement);
@@ -101,24 +103,9 @@ namespace ResultStudioWPF.ViewModels.Services
       }
     }
 
-    private Constants.MeasurementAxis ParseAxisValue(string axisString)
+    private MeasurementAxisType ParseAxisValue(string axisString)
     {
-      try
-      {
-        Constants.MeasurementAxis axisValue =
-          (Constants.MeasurementAxis) Enum.Parse(typeof(Constants.MeasurementAxis), axisString);
-        if (Enum.IsDefined(typeof(Constants.MeasurementAxis), axisValue))
-        {
-          return axisValue;
-        }
-
-        return Constants.MeasurementAxis.Unknown;
-      }
-      catch (ArgumentException)
-      {
-        Console.WriteLine("'{0}' is not a member of the MeasurementAxis enumeration.", axisString);
-        return Constants.MeasurementAxis.Unknown;
-      }
+      return MeasurementAxisType.GetType(axisString);
     }
 
     private string[] ParseLineIntoMeasurementPointArray(string line)

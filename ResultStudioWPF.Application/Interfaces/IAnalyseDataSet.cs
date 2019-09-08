@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ResultStudioWPF.Application.Helpers;
+using ResultStudioWPF.Domain.DomainModels.Enumerations;
 
 namespace ResultStudioWPF.Application.Interfaces
 {
@@ -7,6 +8,6 @@ namespace ResultStudioWPF.Application.Interfaces
   {
     IEnumerable<IMeasurementPoint> DataSet { set; }
 
-    double CalculateDataVariance(Constants.MeasurementAxis axis);
+    double CalculateDataVariance(MeasurementAxisType axis);
   }
 }

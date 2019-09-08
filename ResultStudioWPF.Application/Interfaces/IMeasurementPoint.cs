@@ -1,10 +1,12 @@
-﻿using ResultStudioWPF.Application.Helpers;
+﻿
+using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.DomainModels.Enumerations;
 
 namespace ResultStudioWPF.Application.Interfaces
 {
   public interface IMeasurementPoint  
   {
-    Constants.MeasurementAxis AxisName { get; set; }
+    MeasurementAxisType AxisName { get; set; }
     double Value { get; set; }
   }
 }

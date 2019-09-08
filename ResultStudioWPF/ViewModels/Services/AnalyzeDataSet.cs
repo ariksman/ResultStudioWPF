@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using CommonServiceLocator;
 using ResultStudioWPF.Application;
 using ResultStudioWPF.Application.Helpers;
 using ResultStudioWPF.Application.Interfaces;
+using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.DomainModels.Enumerations;
 using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.ViewModels.Services
@@ -32,36 +35,33 @@ namespace ResultStudioWPF.ViewModels.Services
     {
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.AxisName == Constants.MeasurementAxis.X)
+        if (measurementPoint.AxisName == MeasurementAxisType.X)
         {
           _dataSetX.Add(measurementPoint.Value);
         }
 
-        if (measurementPoint.AxisName == Constants.MeasurementAxis.Y)
+        if (measurementPoint.AxisName == MeasurementAxisType.Y)
         {
           _dataSetY.Add(measurementPoint.Value);
         }
 
-        if (measurementPoint.AxisName == Constants.MeasurementAxis.Z)
+        if (measurementPoint.AxisName == MeasurementAxisType.Z)
         {
           _dataSetZ.Add(measurementPoint.Value);
         }
       }
     }
 
-    public double CalculateDataVariance(Constants.MeasurementAxis axis)
+    public double CalculateDataVariance(MeasurementAxisType axis)
     {
-      switch (axis)
-      {
-        case Constants.MeasurementAxis.X:
-          return _dataSetX.StandardDeviation();
-        case Constants.MeasurementAxis.Y:
-          return _dataSetY.StandardDeviation();
-        case Constants.MeasurementAxis.Z:
-          return _dataSetZ.StandardDeviation();
-        default:
-          throw new ArgumentOutOfRangeException(nameof(axis), axis, null);
-      }
+      if (axis == MeasurementAxisType.X)
+        return axis.CalculateStandardDeviation(_dataSetX);
+      if (axis == MeasurementAxisType.Y)
+        return axis.CalculateStandardDeviation(_dataSetY);
+      if (axis == MeasurementAxisType.Z)
+        return axis.CalculateStandardDeviation(_dataSetZ);
+
+      throw new ArgumentOutOfRangeException(nameof(axis), axis, null);
     }
   }
 }

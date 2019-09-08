@@ -1,57 +1,61 @@
 ﻿using ResultStudioWPF.Application;
 using ResultStudioWPF.Application.Helpers;
 using ResultStudioWPF.Application.Interfaces;
+using ResultStudioWPF.Domain.DomainModels.Enumerations;
 using ResultStudioWPF.ViewModels;
 
 namespace ResultStudioWPF.Models
 {
-    public class MeasurementPoint : ModelBase, IMeasurementPoint
+  public class MeasurementPoint : ModelBase, IMeasurementPoint
+  {
+    public MeasurementPoint()
     {
-        public MeasurementPoint()
-        {
-            
-        }
+    }
 
     #region Public roperties
+
     private int _measurementNumber;
-        public int MeasurementNumber
+
+    public int MeasurementNumber
+    {
+      get { return _measurementNumber; }
+      set { _measurementNumber = value; }
+    }
+
+    private MeasurementAxisType _axisName;
+
+    public MeasurementAxisType AxisName
+    {
+      get { return _axisName; }
+      set
+      {
+        if (_axisName == value)
         {
-            get { return _measurementNumber; }
-            set
-            {
-                _measurementNumber = value;
-            }
+          return;
         }
 
-        private Constants.MeasurementAxis _axisName;
-        public Constants.MeasurementAxis AxisName
-        {
-            get { return _axisName; }
-            set
-            {
-                if (_axisName == value)
-                {
-                    return;
-                }
-                _axisName = value;
-            }
-        }
+        _axisName = value;
+      }
+    }
 
-        private double _value;
-        public double Value
-        {
-            get { return _value; }
-            set
-            {
-                _value = value;
-                CheckValueTolerance(value);
+    private double _value;
 
-                NotifyPropertyChanged();
-            }
-        }
+    public double Value
+    {
+      get { return _value; }
+      set
+      {
+        _value = value;
+        CheckValueTolerance(value);
+
+        NotifyPropertyChanged();
+      }
+    }
+
     #endregion
 
     #region Public methods
+
     public void RefreshAllProperties()
     {
       foreach (var prop in GetType().GetProperties())
@@ -72,81 +76,82 @@ namespace ResultStudioWPF.Models
     #endregion
 
     #region Private methods
+
     private void CheckValueTolerance(double value)
     {
-      switch (AxisName)
+      if (AxisName == MeasurementAxisType.X)
       {
-        case Constants.MeasurementAxis.X:
+        var xTolerance = new ViewModelLocator().SettingsViewModel.XAxisTolerance;
+        var xReference = new ViewModelLocator().SettingsViewModel.XAxisReference;
+
+        if (_value > xReference + xTolerance)
         {
-          var xTolerance = new ViewModelLocator().SettingsViewModel.XAxisTolerance;
-          var xReference = new ViewModelLocator().SettingsViewModel.XAxisReference;
-
-          if (_value > xReference + xTolerance)
-          {
-
-            AddError("Value", "Given measurement value (" + _value + ") is higher than tolerance " + xTolerance + " allows");
-          }
-          else if (value < xReference - xTolerance)
-          {
-            AddError("Value",
-              "Given measurement value (" + _value + ") is lower than tolerance " + xTolerance +
-              " allows");
-          }
-          else
-          {
-            RemoveError("Value");
-          }
-
-          break;
+          AddError("Value",
+            "Given measurement value (" + _value + ") is higher than tolerance " + xTolerance + " allows");
         }
-        case Constants.MeasurementAxis.Y:
+        else if (value < xReference - xTolerance)
         {
-          var yTolerance = new ViewModelLocator().SettingsViewModel.YAxisTolerance;
-          var yReference = new ViewModelLocator().SettingsViewModel.YAxisReference;
-
-          if (_value > yReference + yTolerance)
-          {
-
-            AddError("Value", "Given measurement value (" + _value + ") is higher than tolerance " + yTolerance + " allows");
-          }
-          else if (value < yReference - yTolerance)
-          {
-            AddError("Value",
-              "Given measurement value (" + _value + ") is lower than tolerance " + yTolerance +
-              " allows");
-          }
-          else
-          {
-            RemoveError("Value");
-          }
-
-          break;
+          AddError("Value",
+            "Given measurement value (" + _value + ") is lower than tolerance " + xTolerance +
+            " allows");
         }
-        case Constants.MeasurementAxis.Z:
+        else
         {
-          var zTolerance = new ViewModelLocator().SettingsViewModel.ZAxisTolerance;
-          var zReference = new ViewModelLocator().SettingsViewModel.ZAxisReference;
-
-          if (_value > zReference + zTolerance)
-          {
-
-            AddError("Value", "Given measurement value (" + _value + ") is higher than tolerance " + zTolerance + " allows");
-          }
-          else if (value < zReference - zTolerance)
-          {
-            AddError("Value",
-              "Given measurement value (" + _value + ") is lower than tolerance " + zTolerance +
-              " allows");
-          }
-          else
-          {
-            RemoveError("Value");
-          }
-
-          break;
+          RemoveError("Value");
         }
+
+        return;
+      }
+
+      if (AxisName == MeasurementAxisType.Y)
+      {
+        var yTolerance = new ViewModelLocator().SettingsViewModel.YAxisTolerance;
+        var yReference = new ViewModelLocator().SettingsViewModel.YAxisReference;
+
+        if (_value > yReference + yTolerance)
+        {
+          AddError("Value",
+            "Given measurement value (" + _value + ") is higher than tolerance " + yTolerance + " allows");
+        }
+        else if (value < yReference - yTolerance)
+        {
+          AddError("Value",
+            "Given measurement value (" + _value + ") is lower than tolerance " + yTolerance +
+            " allows");
+        }
+        else
+        {
+          RemoveError("Value");
+        }
+
+        return;
+      }
+
+      if (AxisName == MeasurementAxisType.Z)
+      {
+        var zTolerance = new ViewModelLocator().SettingsViewModel.ZAxisTolerance;
+        var zReference = new ViewModelLocator().SettingsViewModel.ZAxisReference;
+
+        if (_value > zReference + zTolerance)
+        {
+          AddError("Value",
+            "Given measurement value (" + _value + ") is higher than tolerance " + zTolerance + " allows");
+        }
+        else if (value < zReference - zTolerance)
+        {
+          AddError("Value",
+            "Given measurement value (" + _value + ") is lower than tolerance " + zTolerance +
+            " allows");
+        }
+        else
+        {
+          RemoveError("Value");
+        }
+
+        return;
       }
     }
+
     #endregion
   }
 }

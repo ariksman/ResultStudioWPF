@@ -1,12 +1,14 @@
 ﻿using GalaSoft.MvvmLight;
-using ResultStudioWPF.Models;
 using System.Collections.Generic;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using ResultStudioWPF.Application.Helpers;
+using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.DomainModels.Enumerations;
 using ResultStudioWPF.ViewModels.Messages;
 using LinearAxis = OxyPlot.Axes.LinearAxis;
+using MeasurementPoint = ResultStudioWPF.Models.MeasurementPoint;
 
 namespace ResultStudioWPF.ViewModels
 {
@@ -326,7 +328,7 @@ namespace ResultStudioWPF.ViewModels
     {
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.AxisName == Constants.MeasurementAxis.X)
+        if (measurementPoint.AxisName == MeasurementAxisType.X)
         {
           _measurementsX.Add(new DataPoint(measurementPoint.MeasurementNumber, measurementPoint.Value));
           _referenceX.Add(new DataPoint(measurementPoint.MeasurementNumber,
@@ -336,7 +338,7 @@ namespace ResultStudioWPF.ViewModels
 
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.AxisName == Constants.MeasurementAxis.Y)
+        if (measurementPoint.AxisName == MeasurementAxisType.Y)
         {
           _measurementsY.Add(new DataPoint(measurementPoint.MeasurementNumber, measurementPoint.Value));
           _referenceY.Add(new DataPoint(measurementPoint.MeasurementNumber,
@@ -346,7 +348,7 @@ namespace ResultStudioWPF.ViewModels
 
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.AxisName == Constants.MeasurementAxis.Z)
+        if (measurementPoint.AxisName == MeasurementAxisType.Z)
         {
           _measurementsZ.Add(new DataPoint(measurementPoint.MeasurementNumber, measurementPoint.Value));
           _referenceZ.Add(new DataPoint(measurementPoint.MeasurementNumber,

@@ -7,14 +7,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using ResultStudioWPF.Application.Helpers;
 using ResultStudioWPF.Application.Interfaces;
-using ResultStudioWPF.Models;
+using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.DomainModels.Enumerations;
 using ResultStudioWPF.Models.Services;
 using ResultStudioWPF.ViewModels.Messages;
 using ResultStudioWPF.ViewModels.Services;
+using MeasurementPoint = ResultStudioWPF.Models.MeasurementPoint;
 
 namespace ResultStudioWPF.ViewModels
 {
@@ -184,9 +187,9 @@ namespace ResultStudioWPF.ViewModels
         {
           _dataSetAnalyzer.DataSet = _dataSet;
 
-          XVariance = _dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.X);
-          YVariance = _dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.Y);
-          ZVariance = _dataSetAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.Z);
+          XVariance = _dataSetAnalyzer.CalculateDataVariance(MeasurementAxisType.X);
+          YVariance = _dataSetAnalyzer.CalculateDataVariance(MeasurementAxisType.Y);
+          ZVariance = _dataSetAnalyzer.CalculateDataVariance(MeasurementAxisType.Z);
 
           AppMessages.PlotDataSet.Send(_dataSet);
         }

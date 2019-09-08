@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using ResultStudioWPF.Helpers;
+using ResultStudioWPF.Domain.DomainModels.Enumerations;
 using ResultStudioWPF.Models;
 using ResultStudioWPF.ViewModels.Services;
 
@@ -19,26 +19,26 @@ namespace ResultStudioWPF.UnitTests
         new MeasurementPoint()
         {
           MeasurementNumber = 1,
-          AxisName = Constants.MeasurementAxis.X,
+          AxisName = MeasurementAxisType.X,
           Value = 5,
         },
         new MeasurementPoint()
         {
           MeasurementNumber = 2,
-          AxisName = Constants.MeasurementAxis.X,
+          AxisName = MeasurementAxisType.X,
           Value = 5,
         },
         new MeasurementPoint()
         {
           MeasurementNumber = 3,
-          AxisName = Constants.MeasurementAxis.X,
+          AxisName = MeasurementAxisType.X,
           Value = 5,
         },
       };
       var dataAnalyser = new AnalyzeDataSet { DataSet = dataSet };
 
       // Act
-      var result = dataAnalyser.CalculateDataVariance(Constants.MeasurementAxis.X);
+      var result = dataAnalyser.CalculateDataVariance(MeasurementAxisType.X);
 
       // Assert
       Assert.That(result, Is.EqualTo(0));
@@ -54,26 +54,26 @@ namespace ResultStudioWPF.UnitTests
         new MeasurementPoint()
         {
           MeasurementNumber = 1,
-          AxisName = Constants.MeasurementAxis.X,
+          AxisName = MeasurementAxisType.X,
           Value = 5,
         },
         new MeasurementPoint()
         {
           MeasurementNumber = 2,
-          AxisName = Constants.MeasurementAxis.X,
+          AxisName = MeasurementAxisType.X,
           Value = 5,
         },
         new MeasurementPoint()
         {
           MeasurementNumber = 2,
-          AxisName = Constants.MeasurementAxis.X,
+          AxisName = MeasurementAxisType.X,
           Value = 5,
         },
       };
       var dataAnalyzer = new AnalyzeDataSet {DataSet = dataSet};
 
       // Act
-      var result = dataAnalyzer.CalculateDataVariance(Constants.MeasurementAxis.X);
+      var result = dataAnalyzer.CalculateDataVariance(MeasurementAxisType.X);
 
       // Assert
       Assert.That(result, Is.EqualTo(0));

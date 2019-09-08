@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ResultStudioWPF.Application.Helpers;
+using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.DomainModels.Enumerations;
 
 namespace ResultStudioWPF.Models.Services
 {
@@ -36,7 +38,7 @@ namespace ResultStudioWPF.Models.Services
             {
                 var newMeasurementX = new MeasurementPoint()
                 {
-                    AxisName = Constants.MeasurementAxis.X
+                    AxisName = MeasurementAxisType.X
                                 ,
                     MeasurementNumber = i
                                 ,
@@ -46,7 +48,7 @@ namespace ResultStudioWPF.Models.Services
 
                 var newMeasurementY = new MeasurementPoint()
                 {
-                    AxisName = Constants.MeasurementAxis.Y
+                    AxisName = MeasurementAxisType.Y
                                     ,
                     MeasurementNumber = i
                                     ,
@@ -56,7 +58,7 @@ namespace ResultStudioWPF.Models.Services
 
                 var newMeasurementZ = new MeasurementPoint()
                 {
-                    AxisName = Constants.MeasurementAxis.Z
+                    AxisName = MeasurementAxisType.Z
                                     ,
                     MeasurementNumber = i
                                     ,
