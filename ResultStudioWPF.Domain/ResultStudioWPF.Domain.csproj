@@ -39,19 +39,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSet.cs" />
+    <Compile Include="DomainModel\Entities\DataSet.cs" />
     <Compile Include="DDD\AggregateRoot.cs" />
     <Compile Include="DDD\Entity.cs" />
     <Compile Include="DDD\IDomainEvent.cs" />
     <Compile Include="DDD\Specification.cs" />
     <Compile Include="DDD\ValueObject.cs" />
     <Compile Include="Enumeration.cs" />
-    <Compile Include="DomainModels\Enumerations\MeasurementAxisType.cs" />
-    <Compile Include="MeasurementPoint.cs" />
+    <Compile Include="DomainModel\Enumerations\MeasurementAxisType.cs" />
+    <Compile Include="DomainModel\Entities\MeasurementPoint.cs" />
+    <Compile Include="DomainModel\ValueObjects\Reference.cs" />
+    <Compile Include="DomainModel\ValueObjects\Tolerance.cs" />
+    <Compile Include="Services\ValueValidatorService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DomainModels\Entities\" />
-    <Folder Include="DomainModels\ValueObjects\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
