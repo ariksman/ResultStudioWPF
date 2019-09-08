@@ -7,8 +7,6 @@
     <Application.Resources>
         <!--  For mvvm light viewModel access  -->
         <viewModels:ViewModelLocator x:Key="Locator" />
-
         <BitmapImage x:Key="ErrorIcon" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="/ResultStudioWPF;component/Images/red_round_error_warning_icon.png" />
-        
     </Application.Resources>
 </Application>
