@@ -24,15 +24,9 @@ namespace ResultStudioWPF.Domain
       _displayName = displayName;
     }
 
-    public int Value
-    {
-      get { return _value; }
-    }
+    public int Value => _value;
 
-    public string DisplayName
-    {
-      get { return _displayName; }
-    }
+    public string DisplayName => _displayName;
 
     public override string ToString()
     {
@@ -50,9 +44,7 @@ namespace ResultStudioWPF.Domain
 
     public override bool Equals(object obj)
     {
-      var otherValue = obj as Enumeration;
-
-      if (otherValue == null)
+      if (!(obj is Enumeration otherValue))
       {
         return false;
       }
@@ -92,7 +84,7 @@ namespace ResultStudioWPF.Domain
 
       if (matchingItem == null)
       {
-        var message = string.Format("'{0}' is not a valid {1} in {2}", value, description, typeof(T));
+        var message = $"'{value}' is not a valid {description} in {typeof(T)}";
         throw new ApplicationException(message);
       }
 
