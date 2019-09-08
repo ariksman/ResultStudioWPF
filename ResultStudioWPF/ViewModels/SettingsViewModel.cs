@@ -10,10 +10,9 @@ using System.Windows.Data;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using ResultStudioWPF.Application.Helpers;
 using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Domain;
-using ResultStudioWPF.Domain.DomainModels.Enumerations;
+using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Models.Services;
 using ResultStudioWPF.ViewModels.Messages;
 using ResultStudioWPF.ViewModels.Services;
@@ -45,30 +44,6 @@ namespace ResultStudioWPF.ViewModels
       if (IsInDesignMode)
       {
         // Code runs in Blend --> create design time data.
-/*                DataSet = new ObservableCollection<MeasurementPoint>()
-                {
-                    new MeasurementPoint()
-                    {
-                        MeasurementNumber = 1,
-                        AxisName = Constants.MeasurementAxis.X,
-                        Value = 1,
-                        IsValid = true
-                    },
-                    new MeasurementPoint()
-                    {
-                        MeasurementNumber = 2,
-                        AxisName = Constants.MeasurementAxis.Y,
-                        Value = 22,
-                        IsValid = true
-                    },
-                    new MeasurementPoint()
-                    {
-                        MeasurementNumber = 3,
-                        AxisName = Constants.MeasurementAxis.Z,
-                        Value = 33,
-                        IsValid = true
-                    }
-                };*/
       }
       else
       {
@@ -148,8 +123,6 @@ namespace ResultStudioWPF.ViewModels
       foreach (var measurementPoint in DataSet)
       {
         //TODO: Change this into a real way to raiseproperty changed without actually changing the value
-        //var temp = measurementPoint.Value;
-        //measurementPoint.Value = temp;
 
         measurementPoint.RefreshAllProperties();
         measurementPoint.CheckAllTolerances();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using ResultStudioWPF.Domain.DomainModels.Enumerations;
+using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Models;
 using ResultStudioWPF.ViewModels.Services;
 
