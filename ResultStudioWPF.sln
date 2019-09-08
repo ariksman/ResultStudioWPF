@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResultStudioWPF.UnitTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResultStudioWPF.Application", "ResultStudioWPF.Application\ResultStudioWPF.Application.csproj", "{CAC52128-EB53-40CC-985B-D2854D71F339}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResultStudioWPF.Domain", "ResultStudioWPF.Domain\ResultStudioWPF.Domain.csproj", "{EF2C09E7-03C7-4D6D-8EE0-1AA72BFF0C31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CAC52128-EB53-40CC-985B-D2854D71F339}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAC52128-EB53-40CC-985B-D2854D71F339}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAC52128-EB53-40CC-985B-D2854D71F339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2C09E7-03C7-4D6D-8EE0-1AA72BFF0C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2C09E7-03C7-4D6D-8EE0-1AA72BFF0C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2C09E7-03C7-4D6D-8EE0-1AA72BFF0C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2C09E7-03C7-4D6D-8EE0-1AA72BFF0C31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

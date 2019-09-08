@@ -57,6 +57,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ResultStudioWPF.Application\ResultStudioWPF.Application.csproj">
+      <Project>{cac52128-eb53-40cc-985b-d2854d71f339}</Project>
+      <Name>ResultStudioWPF.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ResultStudioWPF.Domain\ResultStudioWPF.Domain.csproj">
+      <Project>{ef2c09e7-03c7-4d6d-8ee0-1aa72bff0c31}</Project>
+      <Name>ResultStudioWPF.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ResultStudioWPF\ResultStudioWPF.csproj">
       <Project>{66293BF6-254B-4FD4-AE3F-99ED209EC857}</Project>
       <Name>ResultStudioWPF</Name>

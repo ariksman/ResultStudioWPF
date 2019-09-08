@@ -218,6 +218,10 @@
       <Project>{cac52128-eb53-40cc-985b-d2854d71f339}</Project>
       <Name>ResultStudioWPF.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ResultStudioWPF.Domain\ResultStudioWPF.Domain.csproj">
+      <Project>{ef2c09e7-03c7-4d6d-8ee0-1aa72bff0c31}</Project>
+      <Name>ResultStudioWPF.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
