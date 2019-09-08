@@ -1,7 +1,6 @@
-﻿using ResultStudioWPF.Application;
-using ResultStudioWPF.Application.Helpers;
-using ResultStudioWPF.Application.Interfaces;
-using ResultStudioWPF.Domain.DomainModels.Enumerations;
+﻿using ResultStudioWPF.Application.Interfaces;
+using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.ViewModels;
 
 namespace ResultStudioWPF.Models
@@ -35,6 +34,18 @@ namespace ResultStudioWPF.Models
         }
 
         _axisName = value;
+      }
+    }
+
+    private Tolerance _tolerance;
+
+    public Tolerance Tolerance
+    {
+      get => _tolerance;
+      set
+      {
+        _tolerance = value;
+        NotifyPropertyChanged();
       }
     }
 
