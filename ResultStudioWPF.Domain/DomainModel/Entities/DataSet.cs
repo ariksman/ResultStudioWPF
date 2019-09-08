@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using ResultStudioWPF.Domain.DDD;
 
-namespace ResultStudioWPF.Domain
+namespace ResultStudioWPF.Domain.DomainModel.Entities
 {
   public class DataSet : AggregateRoot
   {
