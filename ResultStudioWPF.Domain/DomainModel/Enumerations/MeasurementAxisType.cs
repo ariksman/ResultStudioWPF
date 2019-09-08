@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ResultStudioWPF.Domain.DomainModels.Enumerations
+namespace ResultStudioWPF.Domain.DomainModel.Enumerations
 {
   public abstract class MeasurementAxisType : Enumeration
   {
@@ -45,7 +45,7 @@ namespace ResultStudioWPF.Domain.DomainModels.Enumerations
     }
 
     public abstract double CalculateStandardDeviation(IEnumerable<double> data);
-
+    public abstract bool IsValid(Tolerance tolerance, Reference reference);
 
     private class XAxisType : MeasurementAxisType
     {
@@ -53,6 +53,14 @@ namespace ResultStudioWPF.Domain.DomainModels.Enumerations
       public override double CalculateStandardDeviation(IEnumerable<double> data)
       {
         return StandardDeviation(data);
+      }
+
+      public override bool IsValid(Tolerance tolerance, Reference reference)
+      {
+        if (Value > (reference.X + tolerance.X)) return false;
+        if (Value < (reference.X - tolerance.X)) return false;
+
+        return true;
       }
     }
 
@@ -63,6 +71,14 @@ namespace ResultStudioWPF.Domain.DomainModels.Enumerations
       {
         return StandardDeviation(data);
       }
+
+      public override bool IsValid(Tolerance tolerance, Reference reference)
+      {
+        if (Value > (reference.Y + tolerance.Y)) return false;
+        if (Value < (reference.Y - tolerance.Y)) return false;
+
+        return true;
+      }
     }
 
     private class ZAxisType : MeasurementAxisType
@@ -72,11 +88,24 @@ namespace ResultStudioWPF.Domain.DomainModels.Enumerations
       {
         return StandardDeviation(data);
       }
+
+      public override bool IsValid(Tolerance tolerance, Reference reference)
+      {
+        if (Value > (reference.Z + tolerance.Z)) return false;
+        if (Value < (reference.Z - tolerance.Z)) return false;
+
+        return true;
+      }
     }
 
     private class UnknownTypeType : MeasurementAxisType
     {
       public override double CalculateStandardDeviation(IEnumerable<double> data)
+      {
+        throw new NotImplementedException();
+      }
+
+      public override bool IsValid(Tolerance tolerance, Reference reference)
       {
         throw new NotImplementedException();
       }
