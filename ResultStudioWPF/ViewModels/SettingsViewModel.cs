@@ -69,31 +69,49 @@ namespace ResultStudioWPF.ViewModels
       }
       else
       {
-        // Code runs "for real"
-
-        // Messages
-
-        // Commands
-        ImportDataFromFileCommand = new RelayCommand<RoutedEventArgs>(ImportDataFromFileExecute);
-        CreateRandomMeasurementDataClickCommand =
-          new RelayCommand<RoutedEventArgs>(CreateRandomMeasurementDataClickExecute);
-
-        // Collections
         SubframeDataSetCollectionView = CollectionViewSource.GetDefaultView(_dataSet);
-
-        //Setup
         ProgressBarIsIndetermined = false;
       }
     }
 
     #region RelayCommands
 
-    public RelayCommand<RoutedEventArgs> ImportDataFromFileCommand { private set; get; }
-    public RelayCommand<RoutedEventArgs> CreateRandomMeasurementDataClickCommand { private set; get; }
+    #region import data relay command
+
+    private RelayCommand<RoutedEventArgs> _importDataFromFileCommand;
+    public RelayCommand<RoutedEventArgs> ImportDataFromFileCommand =>
+      _importDataFromFileCommand
+      ?? (_importDataFromFileCommand = new RelayCommand<RoutedEventArgs>(
+        ImportDataFromFileExecute
+      ));
+
+    private async void ImportDataFromFileExecute(RoutedEventArgs obj)
+    {
+      ProgressBarIsIndetermined = true;
+      var progress = new Progress<int>(status => { ProgressBarValue = status; });
+
+      await Task.Run(() =>
+      {
+        IDataFileReader reader = _fileReaderFactory(progress);
+        reader.ReadFile();
+        DataSet = new ObservableCollection<MeasurementPoint>(reader.DataSet);
+        FilePath = reader.TheFile;
+      });
+
+      ProgressBarIsIndetermined = false;
+      CheckHowManySubframesIsInvalid();
+    }
 
     #endregion
 
-    #region relaycommand execute methods
+    #region create random data relay command
+
+    private RelayCommand<RoutedEventArgs> _createRandomMeasurementDataClickCommand;
+    public RelayCommand<RoutedEventArgs> CreateRandomMeasurementDataClickCommand =>
+      _createRandomMeasurementDataClickCommand
+      ?? (_createRandomMeasurementDataClickCommand = new RelayCommand<RoutedEventArgs>(
+        CreateRandomMeasurementDataClickExecute
+      ));
 
     private async void CreateRandomMeasurementDataClickExecute(RoutedEventArgs obj)
     {
@@ -114,26 +132,11 @@ namespace ResultStudioWPF.ViewModels
 
       CheckHowManySubframesIsInvalid();
     }
-
-    private async void ImportDataFromFileExecute(RoutedEventArgs obj)
-    {
-      ProgressBarIsIndetermined = true;
-      var progress = new Progress<int>(status => { ProgressBarValue = status; });
-
-      await Task.Run(() =>
-      {
-        IDataFileReader reader = _fileReaderFactory(progress);
-        reader.ReadFile();
-        DataSet = new ObservableCollection<MeasurementPoint>(reader.DataSet);
-        FilePath = reader.TheFile;
-      });
-
-      ProgressBarIsIndetermined = false;
-
-      CheckHowManySubframesIsInvalid();
-    }
+    #endregion
 
     #endregion
+
+
 
     #region private methods
 
