@@ -2,7 +2,7 @@
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
-using ResultStudioWPF.Infrastructure.AutofacModules;
+using ResultStudioWPF.Infrastructure;
 
 namespace ResultStudioWPF.ViewModels
 {

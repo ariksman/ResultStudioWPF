@@ -135,7 +135,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Infrastructure\AutofacModules\ViewModelServicesModule.cs" />
+    <Compile Include="Infrastructure\ViewModelServicesModule.cs" />
     <Compile Include="Models\MeasurementPoint.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\Services\DataCreator.cs" />
@@ -219,6 +219,7 @@
       <Name>ResultStudioWPF.Application</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
