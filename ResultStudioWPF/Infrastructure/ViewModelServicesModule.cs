@@ -3,6 +3,7 @@ using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Models.Services;
 using ResultStudioWPF.ViewModels;
 using ResultStudioWPF.ViewModels.Services;
+using Module = Autofac.Module;
 
 namespace ResultStudioWPF.Infrastructure
 {
