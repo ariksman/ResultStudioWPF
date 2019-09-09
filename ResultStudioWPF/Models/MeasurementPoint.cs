@@ -5,9 +5,9 @@ using ResultStudioWPF.ViewModels;
 
 namespace ResultStudioWPF.Models
 {
-  public class MeasurementPoint : ModelBase, IMeasurementPoint
+  public class MeasurementPointViewModel : ModelBase, IMeasurementPoint
   {
-    public MeasurementPoint()
+    public MeasurementPointViewModel()
     {
     }
 

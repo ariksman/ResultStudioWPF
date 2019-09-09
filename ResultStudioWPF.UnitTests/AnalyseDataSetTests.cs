@@ -14,21 +14,21 @@ namespace ResultStudioWPF.UnitTests
     public void CalculateDataVariance_WhenCalled_ReturnVarianceOfDataSetArgument()
     {
       // Arrange
-      var dataSet = new List<MeasurementPoint>()
+      var dataSet = new List<MeasurementPointViewModel>()
       {
-        new MeasurementPoint()
+        new MeasurementPointViewModel()
         {
           MeasurementNumber = 1,
           AxisName = MeasurementAxisType.X,
           Value = 5,
         },
-        new MeasurementPoint()
+        new MeasurementPointViewModel()
         {
           MeasurementNumber = 2,
           AxisName = MeasurementAxisType.X,
           Value = 5,
         },
-        new MeasurementPoint()
+        new MeasurementPointViewModel()
         {
           MeasurementNumber = 3,
           AxisName = MeasurementAxisType.X,
@@ -49,21 +49,21 @@ namespace ResultStudioWPF.UnitTests
     public void CalculateDataVariance_WhenCalled_ReturnVarianceOfDataContainingDuplicateMeasurements()
     {
       // Arrange
-      var dataSet = new List<MeasurementPoint>()
+      var dataSet = new List<MeasurementPointViewModel>()
       {
-        new MeasurementPoint()
+        new MeasurementPointViewModel()
         {
           MeasurementNumber = 1,
           AxisName = MeasurementAxisType.X,
           Value = 5,
         },
-        new MeasurementPoint()
+        new MeasurementPointViewModel()
         {
           MeasurementNumber = 2,
           AxisName = MeasurementAxisType.X,
           Value = 5,
         },
-        new MeasurementPoint()
+        new MeasurementPointViewModel()
         {
           MeasurementNumber = 2,
           AxisName = MeasurementAxisType.X,

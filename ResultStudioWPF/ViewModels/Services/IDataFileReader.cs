@@ -7,7 +7,7 @@ namespace ResultStudioWPF.ViewModels.Services
   {
     void ReadFile();
 
-    IList<MeasurementPoint> DataSet { get; set; }
+    IList<MeasurementPointViewModel> DataSet { get; set; }
     string TheFile { get; set; }
   }
 }

@@ -16,7 +16,7 @@ namespace ResultStudioWPF.Models.Services
             _rnd = new Random();
         }
 
-        public ObservableCollection<MeasurementPoint> CreateSubframeDataset(double referenceX, double referenceY, double referenceZ, int subframeCount, double spread, IProgress<int> progress)
+        public ObservableCollection<MeasurementPointViewModel> CreateSubframeDataset(double referenceX, double referenceY, double referenceZ, int subframeCount, double spread, IProgress<int> progress)
         {
 
             progress.Report(1);
@@ -29,13 +29,13 @@ namespace ResultStudioWPF.Models.Services
 
         }
 
-        private ObservableCollection<MeasurementPoint> AddMeasurementsToDataset(IList<double> dataSetX, IList<double> dataSetY, IList<double> dataSetZ, int subframeCount, IProgress<int> progress)
+        private ObservableCollection<MeasurementPointViewModel> AddMeasurementsToDataset(IList<double> dataSetX, IList<double> dataSetY, IList<double> dataSetZ, int subframeCount, IProgress<int> progress)
         {
-            var dataset = new ObservableCollection<MeasurementPoint>();
+            var dataset = new ObservableCollection<MeasurementPointViewModel>();
 
             for (int i = 1; i < subframeCount+1; i++)
             {
-                var newMeasurementX = new MeasurementPoint()
+                var newMeasurementX = new MeasurementPointViewModel()
                 {
                     AxisName = MeasurementAxisType.X
                                 ,
@@ -45,7 +45,7 @@ namespace ResultStudioWPF.Models.Services
                 };
                 dataset.Add(newMeasurementX);
 
-                var newMeasurementY = new MeasurementPoint()
+                var newMeasurementY = new MeasurementPointViewModel()
                 {
                     AxisName = MeasurementAxisType.Y
                                     ,
@@ -55,7 +55,7 @@ namespace ResultStudioWPF.Models.Services
                 };
                 dataset.Add(newMeasurementY);
 
-                var newMeasurementZ = new MeasurementPoint()
+                var newMeasurementZ = new MeasurementPointViewModel()
                 {
                     AxisName = MeasurementAxisType.Z
                                     ,

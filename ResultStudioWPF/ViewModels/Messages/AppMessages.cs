@@ -22,12 +22,12 @@ namespace ResultStudioWPF.ViewModels.Messages
 
         public static class PlotDataSet
         {
-            public static void Send(IEnumerable<MeasurementPoint> argument)
+            public static void Send(IEnumerable<MeasurementPointViewModel> argument)
             {
                 Messenger.Default.Send(argument);
             }
 
-            public static void Register(object recipient, Action<IEnumerable<MeasurementPoint>> action)
+            public static void Register(object recipient, Action<IEnumerable<MeasurementPointViewModel>> action)
             {
                 Messenger.Default.Register(recipient, action);
             }

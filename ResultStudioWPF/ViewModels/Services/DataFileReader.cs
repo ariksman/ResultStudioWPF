@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Win32;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
-using MeasurementPoint = ResultStudioWPF.Models.MeasurementPoint;
+using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.ViewModels.Services
 {
@@ -11,15 +11,15 @@ namespace ResultStudioWPF.ViewModels.Services
   {
     private string _theFile;
     private readonly IProgress<int> _reportProgress;
-    private IList<MeasurementPoint> _dataSet;
+    private IList<MeasurementPointViewModel> _dataSet;
 
     public DataFileReader(IProgress<int> progress)
     {
-      DataSet = new List<MeasurementPoint>();
+      DataSet = new List<MeasurementPointViewModel>();
       _reportProgress = progress;
     }
 
-    public IList<MeasurementPoint> DataSet
+    public IList<MeasurementPointViewModel> DataSet
     {
       get { return _dataSet; }
       set
@@ -87,7 +87,7 @@ namespace ResultStudioWPF.ViewModels.Services
           double measurement;
           Double.TryParse(parts[2], out measurement);
 
-          var newMeasurementPoint = new MeasurementPoint()
+          var newMeasurementPoint = new MeasurementPointViewModel()
           {
             MeasurementNumber = measurementNumber,
             AxisName = axisValue,
