@@ -33,11 +33,11 @@ namespace ResultStudioWPF.ViewModels
       if (ViewModelBase.IsInDesignModeStatic || registerFakes)
       {
         builder.RegisterModule<ViewModelServicesModule>();
-
       }
       else
       {
         builder.RegisterModule<ViewModelServicesModule>();
+        builder.RegisterModule<HandlerAutoFacModule>();
       }
       var container = builder.Build();
 

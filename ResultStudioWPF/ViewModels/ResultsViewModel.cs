@@ -4,15 +4,15 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
+using ResultStudioWPF.Models;
 using ResultStudioWPF.ViewModels.Messages;
 using LinearAxis = OxyPlot.Axes.LinearAxis;
-using MeasurementPoint = ResultStudioWPF.Models.MeasurementPoint;
 
 namespace ResultStudioWPF.ViewModels
 {
   public class ResultsViewModel : ViewModelBase
   {
-    private IEnumerable<MeasurementPoint> _dataSet;
+    private IEnumerable<MeasurementPointViewModel> _dataSet;
 
     public ResultsViewModel()
     {
@@ -303,7 +303,7 @@ namespace ResultStudioWPF.ViewModels
       PlotModelZ.Series.Add(lineSerieZ);
     }
 
-    private void DrawPlotsForDataSet(IEnumerable<MeasurementPoint> obj)
+    private void DrawPlotsForDataSet(IEnumerable<MeasurementPointViewModel> obj)
     {
       MeasurementsX.Clear();
       MeasurementsY.Clear();

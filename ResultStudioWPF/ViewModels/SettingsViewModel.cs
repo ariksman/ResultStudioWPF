@@ -13,10 +13,10 @@ using GalaSoft.MvvmLight.CommandWpf;
 using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Domain;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
+using ResultStudioWPF.Models;
 using ResultStudioWPF.Models.Services;
 using ResultStudioWPF.ViewModels.Messages;
 using ResultStudioWPF.ViewModels.Services;
-using MeasurementPoint = ResultStudioWPF.Models.MeasurementPoint;
 
 namespace ResultStudioWPF.ViewModels
 {
@@ -72,7 +72,7 @@ namespace ResultStudioWPF.ViewModels
       {
         IDataFileReader reader = _fileReaderFactory(progress);
         reader.ReadFile();
-        DataSet = new ObservableCollection<MeasurementPoint>(reader.DataSet);
+        DataSet = new ObservableCollection<MeasurementPointViewModel>(reader.DataSet);
         FilePath = reader.TheFile;
       });
 
@@ -140,9 +140,9 @@ namespace ResultStudioWPF.ViewModels
 
     #region Public collections
 
-    private ObservableCollection<MeasurementPoint> _dataSet;
+    private ObservableCollection<MeasurementPointViewModel> _dataSet;
 
-    public ObservableCollection<MeasurementPoint> DataSet
+    public ObservableCollection<MeasurementPointViewModel> DataSet
     {
       get { return _dataSet; }
       set
@@ -173,8 +173,8 @@ namespace ResultStudioWPF.ViewModels
 
     #region Public Properties
 
-    private MeasurementPoint _measurementPoint;
-    public MeasurementPoint MeasurementPoint  
+    private MeasurementPointViewModel _measurementPoint;
+    public MeasurementPointViewModel MeasurementPoint  
     {
       get { return _measurementPoint; }
       set
