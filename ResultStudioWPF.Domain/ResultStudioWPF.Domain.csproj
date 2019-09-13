@@ -40,21 +40,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CQS\DataSet\GetRandomDataSetQuery.cs" />
+    <Compile Include="UseCases\DataSet\GetDataSetFromFile.cs" />
+    <Compile Include="UseCases\DataSet\GetRandomDataSetQuery.cs" />
     <Compile Include="DomainModel\Entities\DataSet.cs" />
     <Compile Include="DDD\AggregateRoot.cs" />
     <Compile Include="DDD\Entity.cs" />
     <Compile Include="DDD\IDomainEvent.cs" />
     <Compile Include="DDD\Specification.cs" />
     <Compile Include="DDD\ValueObject.cs" />
+    <Compile Include="DomainModel\ValueObjects\FilePath.cs" />
+    <Compile Include="Interfaces\IDataFileReader.cs" />
     <Compile Include="Interfaces\IMeasurementPoint.cs" />
     <Compile Include="DomainModel\Enumerations\MeasurementAxisType.cs" />
     <Compile Include="DomainModel\Entities\MeasurementPoint.cs" />
     <Compile Include="DomainModel\ValueObjects\Reference.cs" />
     <Compile Include="DomainModel\ValueObjects\Tolerance.cs" />
-    <Compile Include="Services\DataCreator.cs" />
+    <Compile Include="PureServices\DataCreator.cs" />
     <Compile Include="Interfaces\IDataCreator.cs" />
-    <Compile Include="Services\ValueValidatorService.cs" />
+    <Compile Include="ImpureServices\DataFileReader.cs" />
+    <Compile Include="PureServices\ValueValidatorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CSharpFunctionalExtensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">

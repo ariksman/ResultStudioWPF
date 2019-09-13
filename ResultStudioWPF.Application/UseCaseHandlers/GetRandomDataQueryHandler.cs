@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using ResultStudioWPF.Common.CQS;
-using ResultStudioWPF.Domain.CQS.DataSet;
 using ResultStudioWPF.Domain.Interfaces;
+using ResultStudioWPF.Domain.UseCases.DataSet;
 
-namespace ResultStudioWPF.Application.CQS
+namespace ResultStudioWPF.Application.UseCaseHandlers
 {
   public class GetRandomDataQueryHandler : IQueryHandler<GetRandomDataSetQuery, Result<ObservableCollection<IMeasurementPoint>>>
   {
@@ -14,7 +14,7 @@ namespace ResultStudioWPF.Application.CQS
 
     public GetRandomDataQueryHandler(IDataCreator dataCreator)
     {
-      _dataCreator = dataCreator;
+      _dataCreator = dataCreator ?? throw new ArgumentException(nameof(dataCreator));
     }
 
     public Result<ObservableCollection<IMeasurementPoint>> Handle(GetRandomDataSetQuery query)

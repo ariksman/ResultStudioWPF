@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight.Threading;
 using ResultStudioWPF.Mappers;
+using ResultStudioWPF.Views.Windows;
 
 namespace ResultStudioWPF
 {

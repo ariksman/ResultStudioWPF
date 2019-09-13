@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using CommonServiceLocator;
-using ResultStudioWPF.Application;
 using ResultStudioWPF.Application.Interfaces;
-using ResultStudioWPF.Domain;
-using ResultStudioWPF.Domain.DomainModel;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Domain.Interfaces;
-using ResultStudioWPF.Models;
 
 namespace ResultStudioWPF.ViewModels.Services
 {

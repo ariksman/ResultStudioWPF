@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ResultStudioWPF.Domain.DomainModel;
 using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Domain.DomainModel.ValueObjects;
 using ResultStudioWPF.Domain.Interfaces;
 
-namespace ResultStudioWPF.Domain.Services
+namespace ResultStudioWPF.Domain.PureServices
 {
   public class DataCreator : IDataCreator
   {

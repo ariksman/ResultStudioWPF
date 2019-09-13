@@ -1,7 +1,8 @@
 ﻿using Autofac;
 using ResultStudioWPF.Application.Interfaces;
+using ResultStudioWPF.Domain.ImpureServices;
 using ResultStudioWPF.Domain.Interfaces;
-using ResultStudioWPF.Domain.Services;
+using ResultStudioWPF.Domain.PureServices;
 using ResultStudioWPF.ViewModels;
 using ResultStudioWPF.ViewModels.Services;
 using Module = Autofac.Module;
@@ -12,6 +13,7 @@ namespace ResultStudioWPF.Infrastructure
   {
     protected override void Load(ContainerBuilder builder)
     {
+      builder.RegisterType<FileDialogProvider>().As<IFileDialogProvider>();
       builder.RegisterType<DataFileReader>().As<IDataFileReader>();
       builder.RegisterType<AnalyzeDataSet>().As<IAnalyseDataSet>();
       builder.RegisterType<DataCreator>().As<IDataCreator>();

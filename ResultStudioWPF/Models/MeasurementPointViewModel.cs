@@ -1,7 +1,4 @@
-﻿using ResultStudioWPF.Application.Interfaces;
-using ResultStudioWPF.Domain;
-using ResultStudioWPF.Domain.DomainModel;
-using ResultStudioWPF.Domain.DomainModel.Enumerations;
+﻿using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Domain.DomainModel.ValueObjects;
 using ResultStudioWPF.Domain.Interfaces;
 using ResultStudioWPF.ViewModels;

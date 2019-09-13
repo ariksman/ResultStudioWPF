@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ResultStudioWPF.Domain.DDD;
+using ValueObject = ResultStudioWPF.Domain.DDD.ValueObject;
 
 namespace ResultStudioWPF.Domain.DomainModel.ValueObjects
 {
