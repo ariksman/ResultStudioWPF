@@ -42,7 +42,7 @@ namespace ResultStudioWPF.ViewModels
       IMapper mapper,
       ICommandDispatcher commandDispatcher,
       IQueryDispatcher queryDispatcher,
-      IAnalyseDataSet dataSetAnalyzer, 
+      IAnalyseDataSet dataSetAnalyzer,
       Func<IProgress<int>, IDataFileReader> fileReader,
       Func<IDataCreator> dataCreator)
     {
@@ -73,6 +73,7 @@ namespace ResultStudioWPF.ViewModels
     #region import data relay command
 
     private RelayCommand<RoutedEventArgs> _importDataFromFileCommand;
+
     public RelayCommand<RoutedEventArgs> ImportDataFromFileCommand =>
       _importDataFromFileCommand
       ?? (_importDataFromFileCommand = new RelayCommand<RoutedEventArgs>(
@@ -101,6 +102,7 @@ namespace ResultStudioWPF.ViewModels
     #region create random data relay command
 
     private RelayCommand<RoutedEventArgs> _createRandomMeasurementDataClickCommand;
+
     public RelayCommand<RoutedEventArgs> CreateRandomMeasurementDataClickCommand =>
       _createRandomMeasurementDataClickCommand
       ?? (_createRandomMeasurementDataClickCommand = new RelayCommand<RoutedEventArgs>(
@@ -117,32 +119,27 @@ namespace ResultStudioWPF.ViewModels
 
       await Task.Run(() =>
       {
-
         var query = new GetRandomDataSetQuery(
-          _xAxisReference, 
-          _yAxisReference, 
-          _zAxisReference, 
+          _xAxisReference,
+          _yAxisReference,
+          _zAxisReference,
           frameCount,
           100,
           progress);
 
         _queryDispatcher.Dispatch<GetRandomDataSetQuery, Result<ObservableCollection<IMeasurementPoint>>>(query)
           .Tap(
-            (result) =>
-            {
-              DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result);
-            });
+            result => { DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result); });
       });
 
       ProgressBarIsIndetermined = false;
 
       CheckHowManySubframesIsInvalid();
     }
-    #endregion
 
     #endregion
 
-
+    #endregion
 
     #region private methods
 
@@ -202,13 +199,11 @@ namespace ResultStudioWPF.ViewModels
     #region Public Properties
 
     private MeasurementPointViewModel _measurementPoint;
-    public MeasurementPointViewModel MeasurementPoint  
+
+    public MeasurementPointViewModel MeasurementPoint
     {
       get { return _measurementPoint; }
-      set
-      {
-        _measurementPoint = value;
-      }
+      set { _measurementPoint = value; }
     }
 
 
