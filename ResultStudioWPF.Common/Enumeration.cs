@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ResultStudioWPF.Domain
+namespace ResultStudioWPF.Common
 {
   /// <summary> An enumeration.
   ///           https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/enumeration-classes-over-enum-types

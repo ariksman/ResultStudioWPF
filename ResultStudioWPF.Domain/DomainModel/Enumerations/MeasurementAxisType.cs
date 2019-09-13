@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ResultStudioWPF.Common;
 using ResultStudioWPF.Domain.DomainModel.ValueObjects;
 
 namespace ResultStudioWPF.Domain.DomainModel.Enumerations

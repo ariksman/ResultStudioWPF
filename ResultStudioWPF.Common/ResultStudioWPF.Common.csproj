@@ -48,6 +48,7 @@
     <Compile Include="CQS\IQueryDispatcher.cs" />
     <Compile Include="CQS\IQueryHandler.cs" />
     <Compile Include="CQS\QueryDispatcher.cs" />
+    <Compile Include="Enumeration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
