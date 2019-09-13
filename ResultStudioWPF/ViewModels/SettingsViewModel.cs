@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -16,11 +17,10 @@ using ResultStudioWPF.Application.CQS;
 using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Common.CQS;
 using ResultStudioWPF.Domain;
-using ResultStudioWPF.Domain.CQS.DataSet;
 using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Domain.Interfaces;
-using ResultStudioWPF.Domain.Services;
+using ResultStudioWPF.Domain.UseCases.DataSet;
 using ResultStudioWPF.Models;
 using ResultStudioWPF.ViewModels.Messages;
 using ResultStudioWPF.ViewModels.Services;
@@ -87,10 +87,13 @@ namespace ResultStudioWPF.ViewModels
 
       await Task.Run(() =>
       {
-        IDataFileReader reader = _fileReaderFactory(progress);
-        reader.ReadFile();
-        DataSet = new ObservableCollection<MeasurementPointViewModel>(reader.DataSet);
-        FilePath = reader.TheFile;
+        var query = new GetDataSetFromFile(progress);
+        _queryDispatcher.Dispatch<GetDataSetFromFile, Result<List<MeasurementPoint>>>(query)
+          .Tap(result => { DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result); });
+
+        //reader.ReadFile();
+        //DataSet = new ObservableCollection<MeasurementPointViewModel>(reader.DataSet);
+        //FilePath = reader.TheFile;
       });
 
       ProgressBarIsIndetermined = false;
