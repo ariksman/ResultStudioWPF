@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
@@ -34,10 +35,11 @@ namespace ResultStudioWPF.ViewModels
     private static void RegisterServices()
     {
       var builder = new ContainerBuilder();
+      var assemblies = GetAllProgramAssemblies().ToList();
 
-      builder.RegisterModule<HandlerAutoFacModule>();
+      builder.RegisterModule(new HandlerAutoFacModule(assemblies));
       builder.RegisterModule<ViewModelServicesModule>();
-      builder.RegisterModule(new AutoMapperModule(GetAllProgramAssemblies()));
+      builder.RegisterModule(new AutoMapperModule(assemblies));
 
       var container = builder.Build();
 

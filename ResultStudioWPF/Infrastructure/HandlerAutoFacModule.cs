@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Autofac;
 using ResultStudioWPF.Application.CQS;
 using ResultStudioWPF.Common.CQS;
@@ -8,22 +10,33 @@ namespace ResultStudioWPF.Infrastructure
 {
   public class HandlerAutoFacModule : Module
   {
+
+    private readonly IEnumerable<Assembly> _assembliesToScan;
+
+    public HandlerAutoFacModule(IEnumerable<Assembly> assembliesToScan)
+    {
+      _assembliesToScan = assembliesToScan;
+    }
+
+    public HandlerAutoFacModule(params Assembly[] assembliesToScan) : this((IEnumerable<Assembly>)assembliesToScan) { }
+
+
     protected override void Load(ContainerBuilder builder)
     {
-      Assembly applicationLayerAssembly = Assembly.Load("ResultStudioWPF.Application");
+      var assembliesToScan = _assembliesToScan as Assembly[] ?? _assembliesToScan.ToArray();
 
-      builder.RegisterAssemblyTypes(applicationLayerAssembly)
-        .AsClosedTypesOf(typeof(ICommandHandler<,>));
-      builder.RegisterAssemblyTypes(applicationLayerAssembly)
-        .AsClosedTypesOf(typeof(IQueryHandler<,>));
+      var allAssemblies = assembliesToScan
+        .Where(a => !a.IsDynamic)
+        .Distinct()
+        .ToArray();
 
-      Assembly viewLayerAssembly = Assembly.Load("ResultStudioWPF");
-
-      builder.RegisterAssemblyTypes(viewLayerAssembly)
-        .AsClosedTypesOf(typeof(ICommandHandler<,>));
-      builder.RegisterAssemblyTypes(viewLayerAssembly)
-        .AsClosedTypesOf(typeof(IQueryHandler<,>));
-
+      foreach (var assembly in allAssemblies)
+      {
+        builder.RegisterAssemblyTypes(assembly)
+          .AsClosedTypesOf(typeof(ICommandHandler<,>));
+        builder.RegisterAssemblyTypes(assembly)
+          .AsClosedTypesOf(typeof(IQueryHandler<,>));
+      }
 
       builder.RegisterType<QueryDispatcher>().As<IQueryDispatcher>();
       builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>();
