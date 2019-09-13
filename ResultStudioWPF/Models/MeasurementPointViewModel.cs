@@ -1,5 +1,6 @@
 ﻿using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.DomainModel;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.ViewModels;
 
@@ -13,17 +14,17 @@ namespace ResultStudioWPF.Models
 
     #region Public roperties
 
-    private int _measurementNumber;
+    private int _indexNumber;
 
-    public int MeasurementNumber
+    public int Index
     {
-      get { return _measurementNumber; }
-      set { _measurementNumber = value; }
+      get { return _indexNumber; }
+      set { _indexNumber = value; }
     }
 
     private MeasurementAxisType _axisName;
 
-    public MeasurementAxisType AxisName
+    public MeasurementAxisType Axis
     {
       get { return _axisName; }
       set
@@ -90,7 +91,7 @@ namespace ResultStudioWPF.Models
 
     private void CheckValueTolerance(double value)
     {
-      if (AxisName == MeasurementAxisType.X)
+      if (Axis == MeasurementAxisType.X)
       {
         var xTolerance = new ViewModelLocator().SettingsViewModel.XAxisTolerance;
         var xReference = new ViewModelLocator().SettingsViewModel.XAxisReference;
@@ -114,7 +115,7 @@ namespace ResultStudioWPF.Models
         return;
       }
 
-      if (AxisName == MeasurementAxisType.Y)
+      if (Axis == MeasurementAxisType.Y)
       {
         var yTolerance = new ViewModelLocator().SettingsViewModel.YAxisTolerance;
         var yReference = new ViewModelLocator().SettingsViewModel.YAxisReference;
@@ -138,7 +139,7 @@ namespace ResultStudioWPF.Models
         return;
       }
 
-      if (AxisName == MeasurementAxisType.Z)
+      if (Axis == MeasurementAxisType.Z)
       {
         var zTolerance = new ViewModelLocator().SettingsViewModel.ZAxisTolerance;
         var zReference = new ViewModelLocator().SettingsViewModel.ZAxisReference;

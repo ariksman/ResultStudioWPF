@@ -89,8 +89,8 @@ namespace ResultStudioWPF.ViewModels.Services
 
           var newMeasurementPoint = new MeasurementPointViewModel()
           {
-            MeasurementNumber = measurementNumber,
-            AxisName = axisValue,
+            Index = measurementNumber,
+            Axis = axisValue,
             Value = measurement,
           };
 

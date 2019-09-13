@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using ResultStudioWPF.Application.Interfaces;
-using ResultStudioWPF.Models.Services;
+using ResultStudioWPF.Domain.Interfaces;
+using ResultStudioWPF.Domain.Services;
 using ResultStudioWPF.ViewModels;
 using ResultStudioWPF.ViewModels.Services;
 using Module = Autofac.Module;

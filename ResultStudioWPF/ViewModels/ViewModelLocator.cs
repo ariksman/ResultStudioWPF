@@ -1,4 +1,9 @@
-﻿using Autofac;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
@@ -12,45 +17,64 @@ namespace ResultStudioWPF.ViewModels
   /// </summary>
   public class ViewModelLocator
   {
-
     /// <summary>
-    /// Initializes a new instance of the ViewModelLocator class.
+    /// Initializes a new instance of the ViewModelLocator class and register all classes for DI-container.
+    /// Additionally, registers all profiles for Auto mapper.
     /// </summary>
     static ViewModelLocator()
     {
       if (!ServiceLocator.IsLocationProviderSet)
       {
-        RegisterServices(registerFakes: true);
+        RegisterServices();
       }
     }
 
     #region autofac registration
 
-    private static void RegisterServices(bool registerFakes = false)
+    private static void RegisterServices()
     {
       var builder = new ContainerBuilder();
 
-      if (ViewModelBase.IsInDesignModeStatic || registerFakes)
-      {
-        builder.RegisterModule<ViewModelServicesModule>();
-      }
-      else
-      {
-        builder.RegisterModule<ViewModelServicesModule>();
-        builder.RegisterModule<HandlerAutoFacModule>();
-      }
+      builder.RegisterModule<HandlerAutoFacModule>();
+      builder.RegisterModule<ViewModelServicesModule>();
+      builder.RegisterModule(new AutoMapperModule(GetAllProgramAssemblies()));
+
       var container = builder.Build();
 
       ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));
     }
 
-    #endregion
+    private static IEnumerable<Assembly> GetAllProgramAssemblies()
+    {
+      return new List<Assembly>()
+      {
+        Assembly.Load("ResultStudioWPF.Application"),
+        Assembly.Load("ResultStudioWPF.Domain"),
+        Assembly.Load("ResultStudioWPF"),
+      };
+    }
 
+    #endregion
 
     #region ViewModel properties
 
     public ResultsViewModel ResultsViewModel => ServiceLocator.Current.GetInstance<ResultsViewModel>();
-    public SettingsViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsViewModel>();
+
+    public SettingsViewModel SettingsViewModel
+    {
+      get
+      {
+        try
+        {
+          return ServiceLocator.Current.GetInstance<SettingsViewModel>();
+        }
+        catch (Exception e)
+        {
+          Debugger.Break();
+          throw;
+        }
+      }
+    }
 
     #endregion
   }

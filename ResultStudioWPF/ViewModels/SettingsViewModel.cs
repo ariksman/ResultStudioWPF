@@ -7,14 +7,18 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using AutoMapper;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using ResultStudioWPF.Application.CQS;
 using ResultStudioWPF.Application.Interfaces;
+using ResultStudioWPF.Common.CQS;
 using ResultStudioWPF.Domain;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
+using ResultStudioWPF.Domain.Interfaces;
+using ResultStudioWPF.Domain.Services;
 using ResultStudioWPF.Models;
-using ResultStudioWPF.Models.Services;
 using ResultStudioWPF.ViewModels.Messages;
 using ResultStudioWPF.ViewModels.Services;
 
@@ -24,15 +28,24 @@ namespace ResultStudioWPF.ViewModels
   {
     public ICollectionView SubframeDataSetCollectionView { get; private set; }
 
+    private readonly IMapper _mapper;
+    private readonly ICommandDispatcher _commandDispatcher;
+    private readonly IQueryDispatcher _queryDispatcher;
     private IAnalyseDataSet _dataSetAnalyzer;
     readonly Func<IProgress<int>, IDataFileReader> _fileReaderFactory;
     readonly Func<IDataCreator> _dataCreatorFactory;
 
     public SettingsViewModel(
+      IMapper mapper,
+      ICommandDispatcher commandDispatcher,
+      IQueryDispatcher queryDispatcher,
       IAnalyseDataSet dataSetAnalyzer, 
       Func<IProgress<int>, IDataFileReader> fileReader,
       Func<IDataCreator> dataCreator)
     {
+      _mapper = mapper;
+      _commandDispatcher = commandDispatcher;
+      _queryDispatcher = queryDispatcher;
       _dataSetAnalyzer = dataSetAnalyzer;
       _fileReaderFactory = fileReader;
       _dataCreatorFactory = dataCreator;
@@ -101,9 +114,13 @@ namespace ResultStudioWPF.ViewModels
 
       await Task.Run(() =>
       {
+        Reference reference = new Reference(_xAxisReference, _yAxisReference, _zAxisReference);
+
         IDataCreator dataCreator = _dataCreatorFactory();
-        DataSet = dataCreator.CreateSubframeDataset(_xAxisReference, _yAxisReference, _zAxisReference,
+        var data = dataCreator.CreateSubframeDataset(reference,
           frameCount, 100, progress);
+
+        DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(data);
       });
 
       ProgressBarIsIndetermined = false;

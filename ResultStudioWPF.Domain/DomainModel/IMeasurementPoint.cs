@@ -1,11 +1,12 @@
 ﻿
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 
-namespace ResultStudioWPF.Application.Interfaces
+namespace ResultStudioWPF.Domain.DomainModel
 {
   public interface IMeasurementPoint  
   {
-    MeasurementAxisType AxisName { get; set; }
+    int Index { get; set; }
+    MeasurementAxisType Axis { get; set; }
     double Value { get; set; }
   }
 }

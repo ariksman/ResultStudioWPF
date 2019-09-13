@@ -4,6 +4,7 @@ using CommonServiceLocator;
 using ResultStudioWPF.Application;
 using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.DomainModel;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Models;
 
@@ -34,17 +35,17 @@ namespace ResultStudioWPF.ViewModels.Services
     {
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.AxisName == MeasurementAxisType.X)
+        if (measurementPoint.Axis == MeasurementAxisType.X)
         {
           _dataSetX.Add(measurementPoint.Value);
         }
 
-        if (measurementPoint.AxisName == MeasurementAxisType.Y)
+        if (measurementPoint.Axis == MeasurementAxisType.Y)
         {
           _dataSetY.Add(measurementPoint.Value);
         }
 
-        if (measurementPoint.AxisName == MeasurementAxisType.Z)
+        if (measurementPoint.Axis == MeasurementAxisType.Z)
         {
           _dataSetZ.Add(measurementPoint.Value);
         }

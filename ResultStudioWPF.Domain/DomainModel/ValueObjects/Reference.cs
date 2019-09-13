@@ -9,6 +9,12 @@ namespace ResultStudioWPF.Domain
     public double Y { get; set; }
     public double Z { get; set; }
 
+    public Reference(double x, double y, double z)
+    {
+      X = x;
+      Y = y;
+      Z = z;
+    }
 
     protected override IEnumerable<object> GetEqualityComponents()
     {

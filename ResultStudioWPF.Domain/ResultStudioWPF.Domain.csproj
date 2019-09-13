@@ -40,23 +40,35 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CQS\DataSet\GetRandomDataSetQuery.cs" />
     <Compile Include="DomainModel\Entities\DataSet.cs" />
     <Compile Include="DDD\AggregateRoot.cs" />
     <Compile Include="DDD\Entity.cs" />
     <Compile Include="DDD\IDomainEvent.cs" />
     <Compile Include="DDD\Specification.cs" />
     <Compile Include="DDD\ValueObject.cs" />
+    <Compile Include="DomainModel\IMeasurementPoint.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="DomainModel\Enumerations\MeasurementAxisType.cs" />
     <Compile Include="DomainModel\Entities\MeasurementPoint.cs" />
     <Compile Include="DomainModel\ValueObjects\Reference.cs" />
     <Compile Include="DomainModel\ValueObjects\Tolerance.cs" />
+    <Compile Include="Services\DataCreator.cs" />
+    <Compile Include="Interfaces\IDataCreator.cs" />
     <Compile Include="Services\ValueValidatorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CSharpFunctionalExtensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CSharpFunctionalExtensions.2.0.0\lib\net461\CSharpFunctionalExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ResultStudioWPF.Common\ResultStudioWPF.Common.csproj">
+      <Project>{01b32de4-7245-423a-834f-95686a0aa609}</Project>
+      <Name>ResultStudioWPF.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

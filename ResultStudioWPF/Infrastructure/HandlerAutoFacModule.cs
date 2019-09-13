@@ -17,7 +17,7 @@ namespace ResultStudioWPF.Infrastructure
       builder.RegisterAssemblyTypes(applicationLayerAssembly)
         .AsClosedTypesOf(typeof(IQueryHandler<,>));
 
-      Assembly viewLayerAssembly = Assembly.Load("ResultStudioWPF.View");
+      Assembly viewLayerAssembly = Assembly.Load("ResultStudioWPF");
 
       builder.RegisterAssemblyTypes(viewLayerAssembly)
         .AsClosedTypesOf(typeof(ICommandHandler<,>));

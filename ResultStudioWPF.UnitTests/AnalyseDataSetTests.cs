@@ -18,20 +18,20 @@ namespace ResultStudioWPF.UnitTests
       {
         new MeasurementPointViewModel()
         {
-          MeasurementNumber = 1,
-          AxisName = MeasurementAxisType.X,
+          Index = 1,
+          Axis = MeasurementAxisType.X,
           Value = 5,
         },
         new MeasurementPointViewModel()
         {
-          MeasurementNumber = 2,
-          AxisName = MeasurementAxisType.X,
+          Index = 2,
+          Axis = MeasurementAxisType.X,
           Value = 5,
         },
         new MeasurementPointViewModel()
         {
-          MeasurementNumber = 3,
-          AxisName = MeasurementAxisType.X,
+          Index = 3,
+          Axis = MeasurementAxisType.X,
           Value = 5,
         },
       };
@@ -53,20 +53,20 @@ namespace ResultStudioWPF.UnitTests
       {
         new MeasurementPointViewModel()
         {
-          MeasurementNumber = 1,
-          AxisName = MeasurementAxisType.X,
+          Index = 1,
+          Axis = MeasurementAxisType.X,
           Value = 5,
         },
         new MeasurementPointViewModel()
         {
-          MeasurementNumber = 2,
-          AxisName = MeasurementAxisType.X,
+          Index = 2,
+          Axis = MeasurementAxisType.X,
           Value = 5,
         },
         new MeasurementPointViewModel()
         {
-          MeasurementNumber = 2,
-          AxisName = MeasurementAxisType.X,
+          Index = 2,
+          Axis = MeasurementAxisType.X,
           Value = 5,
         },
       };

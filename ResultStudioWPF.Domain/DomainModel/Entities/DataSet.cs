@@ -13,7 +13,7 @@ namespace ResultStudioWPF.Domain.DomainModel.Entities
     public double CalculateDataVariance(MeasurementAxisType axis)
     {
       var data = MeasurementPoints
-        .Where(m => m.MeasurementAxisType.Value == axis.Value)
+        .Where(m => m.Axis.Value == axis.Value)
         .Select(m => m.Value)
         .ToList();
 

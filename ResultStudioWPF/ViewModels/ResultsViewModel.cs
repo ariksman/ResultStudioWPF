@@ -326,30 +326,30 @@ namespace ResultStudioWPF.ViewModels
     {
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.AxisName == MeasurementAxisType.X)
+        if (measurementPoint.Axis == MeasurementAxisType.X)
         {
-          _measurementsX.Add(new DataPoint(measurementPoint.MeasurementNumber, measurementPoint.Value));
-          _referenceX.Add(new DataPoint(measurementPoint.MeasurementNumber,
+          _measurementsX.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
+          _referenceX.Add(new DataPoint(measurementPoint.Index,
             (new ViewModelLocator()).SettingsViewModel.XAxisReference));
         }
       }
 
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.AxisName == MeasurementAxisType.Y)
+        if (measurementPoint.Axis == MeasurementAxisType.Y)
         {
-          _measurementsY.Add(new DataPoint(measurementPoint.MeasurementNumber, measurementPoint.Value));
-          _referenceY.Add(new DataPoint(measurementPoint.MeasurementNumber,
+          _measurementsY.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
+          _referenceY.Add(new DataPoint(measurementPoint.Index,
             (new ViewModelLocator()).SettingsViewModel.YAxisReference));
         }
       }
 
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.AxisName == MeasurementAxisType.Z)
+        if (measurementPoint.Axis == MeasurementAxisType.Z)
         {
-          _measurementsZ.Add(new DataPoint(measurementPoint.MeasurementNumber, measurementPoint.Value));
-          _referenceZ.Add(new DataPoint(measurementPoint.MeasurementNumber,
+          _measurementsZ.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
+          _referenceZ.Add(new DataPoint(measurementPoint.Index,
             (new ViewModelLocator()).SettingsViewModel.ZAxisReference));
         }
       }

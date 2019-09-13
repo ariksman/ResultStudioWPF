@@ -66,11 +66,11 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding MeasurementNumber, ValidatesOnNotifyDataErrors=True}"
+                <DataGridTextColumn Binding="{Binding Index, ValidatesOnNotifyDataErrors=True}"
                                     Width="2*"
                                     Header="Measurement"
                                     />
-                <DataGridTextColumn Binding="{Binding AxisName}"
+                <DataGridTextColumn Binding="{Binding Axis}"
                                     Header="Axis"
                                     Width="*"/>
                 <DataGridTextColumn Binding="{Binding Value, StringFormat={}{0:#.000}, ValidatesOnNotifyDataErrors=True}"
