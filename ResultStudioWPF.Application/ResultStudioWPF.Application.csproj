@@ -40,8 +40,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CQS\GetRandomDataQueryHandler.cs" />
-    <Compile Include="Interfaces\IAnalyseDataSet.cs" />
+    <Compile Include="UseCaseHandlers\GetDataSetFromFileHandler.cs" />
+    <Compile Include="UseCaseHandlers\GetRandomDataQueryHandler.cs" />
+    <Compile Include="Interfaces\IAnalyzeDataSet.cs" />
+    <Compile Include="Interfaces\IFileDialogProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ResultStudioWPF.Common\ResultStudioWPF.Common.csproj">
