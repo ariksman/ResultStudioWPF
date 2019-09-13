@@ -47,7 +47,7 @@
     <Compile Include="DDD\IDomainEvent.cs" />
     <Compile Include="DDD\Specification.cs" />
     <Compile Include="DDD\ValueObject.cs" />
-    <Compile Include="DomainModel\IMeasurementPoint.cs" />
+    <Compile Include="Interfaces\IMeasurementPoint.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="DomainModel\Enumerations\MeasurementAxisType.cs" />
     <Compile Include="DomainModel\Entities\MeasurementPoint.cs" />
