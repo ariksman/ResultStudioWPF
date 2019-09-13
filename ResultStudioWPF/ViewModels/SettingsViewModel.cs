@@ -112,6 +112,7 @@ namespace ResultStudioWPF.ViewModels
     private async void CreateRandomMeasurementDataClickExecute(RoutedEventArgs obj)
     {
       var frameCount = 20;
+      var spread = 100;
       FilePath = "Random data in use";
 
       ProgressBarIsIndetermined = true;
@@ -124,7 +125,7 @@ namespace ResultStudioWPF.ViewModels
           _yAxisReference,
           _zAxisReference,
           frameCount,
-          100,
+          spread,
           progress);
 
         _queryDispatcher.Dispatch<GetRandomDataSetQuery, Result<ObservableCollection<IMeasurementPoint>>>(query)
