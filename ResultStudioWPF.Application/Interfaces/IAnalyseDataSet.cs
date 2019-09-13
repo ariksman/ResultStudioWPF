@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ResultStudioWPF.Domain.DomainModel;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
+using ResultStudioWPF.Domain.Interfaces;
 
 namespace ResultStudioWPF.Application.Interfaces
 {

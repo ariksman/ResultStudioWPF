@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Common.CQS;
 using ResultStudioWPF.Domain.CQS.DataSet;
-using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.Interfaces;
-using ResultStudioWPF.Domain.Services;
 
 namespace ResultStudioWPF.Application.CQS
 {
-  public class GetRandomDataQueryHandler : IQueryHandler<GetRandomDataSetQuery, Result<DataSet>>
+  public class GetRandomDataQueryHandler : IQueryHandler<GetRandomDataSetQuery, Result<ObservableCollection<IMeasurementPoint>>>
   {
     private readonly IDataCreator _dataCreator;
 
@@ -22,12 +17,26 @@ namespace ResultStudioWPF.Application.CQS
       _dataCreator = dataCreator;
     }
 
-    public Result<DataSet> Handle(GetRandomDataSetQuery query)
+    public Result<ObservableCollection<IMeasurementPoint>> Handle(GetRandomDataSetQuery query)
     {
-      throw new NotImplementedException();
+      try
+      {
+        IDataCreator dataCreator = _dataCreator;
+        var data = dataCreator.CreateSubframeDataset(
+          query.Reference,
+          query.FrameCount,
+          100,
+          query.Progress);
+
+        return Result.Ok(data);
+      }
+      catch (Exception e)
+      {
+        return Result.Fail<ObservableCollection<IMeasurementPoint>>(e.Message);
+      }
     }
 
-    public Task<Result<DataSet>> HandleAsync(GetRandomDataSetQuery query)
+    public Task<Result<ObservableCollection<IMeasurementPoint>>> HandleAsync(GetRandomDataSetQuery query)
     {
       throw new NotImplementedException();
     }

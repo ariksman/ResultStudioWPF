@@ -2,6 +2,7 @@
 using ResultStudioWPF.Domain;
 using ResultStudioWPF.Domain.DomainModel;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
+using ResultStudioWPF.Domain.Interfaces;
 using ResultStudioWPF.ViewModels;
 
 namespace ResultStudioWPF.Models

@@ -1,7 +1,7 @@
 ﻿
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 
-namespace ResultStudioWPF.Domain.DomainModel
+namespace ResultStudioWPF.Domain.Interfaces
 {
   public interface IMeasurementPoint  
   {

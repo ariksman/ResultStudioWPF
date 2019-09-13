@@ -9,12 +9,15 @@ using System.Windows;
 using System.Windows.Data;
 using AutoMapper;
 using CommonServiceLocator;
+using CSharpFunctionalExtensions;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using ResultStudioWPF.Application.CQS;
 using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Common.CQS;
 using ResultStudioWPF.Domain;
+using ResultStudioWPF.Domain.CQS.DataSet;
+using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Domain.Interfaces;
 using ResultStudioWPF.Domain.Services;
@@ -114,13 +117,21 @@ namespace ResultStudioWPF.ViewModels
 
       await Task.Run(() =>
       {
-        Reference reference = new Reference(_xAxisReference, _yAxisReference, _zAxisReference);
 
-        IDataCreator dataCreator = _dataCreatorFactory();
-        var data = dataCreator.CreateSubframeDataset(reference,
-          frameCount, 100, progress);
+        var query = new GetRandomDataSetQuery(
+          _xAxisReference, 
+          _yAxisReference, 
+          _zAxisReference, 
+          frameCount,
+          100,
+          progress);
 
-        DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(data);
+        _queryDispatcher.Dispatch<GetRandomDataSetQuery, Result<ObservableCollection<IMeasurementPoint>>>(query)
+          .Tap(
+            (result) =>
+            {
+              DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result);
+            });
       });
 
       ProgressBarIsIndetermined = false;

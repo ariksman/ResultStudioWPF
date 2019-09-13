@@ -3,6 +3,7 @@ using AutoMapper;
 using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Domain.DomainModel;
 using ResultStudioWPF.Domain.DomainModel.Entities;
+using ResultStudioWPF.Domain.Interfaces;
 
 namespace ResultStudioWPF.Mappers
 {
