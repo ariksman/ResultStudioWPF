@@ -1,5 +1,6 @@
 ﻿using System;
 using ResultStudioWPF.Common.CQS;
+using ResultStudioWPF.Domain.DomainModel.ValueObjects;
 
 namespace ResultStudioWPF.Domain.CQS.DataSet
 {

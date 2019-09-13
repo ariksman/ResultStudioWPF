@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ResultStudioWPF.Domain.DDD;
 
-namespace ResultStudioWPF.Domain
+namespace ResultStudioWPF.Domain.DomainModel.ValueObjects
 {
   public class Tolerance : ValueObject
   {

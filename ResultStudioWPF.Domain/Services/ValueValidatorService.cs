@@ -1,4 +1,5 @@
 ﻿using ResultStudioWPF.Domain.DomainModel.Enumerations;
+using ResultStudioWPF.Domain.DomainModel.ValueObjects;
 
 namespace ResultStudioWPF.Domain.Services
 {

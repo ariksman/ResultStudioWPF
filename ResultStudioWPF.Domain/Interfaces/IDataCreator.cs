@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using ResultStudioWPF.Domain.DomainModel;
+using ResultStudioWPF.Domain.DomainModel.ValueObjects;
 
 namespace ResultStudioWPF.Domain.Interfaces
 {
