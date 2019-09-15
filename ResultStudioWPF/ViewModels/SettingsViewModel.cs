@@ -111,7 +111,6 @@ namespace ResultStudioWPF.ViewModels
     {
       var frameCount = 20;
       var spread = 100;
-      FilePath = "Random data in use";
 
       ProgressBarIsIndetermined = true;
       var progress = new Progress<int>(status => { ProgressBarValue = status; });
@@ -126,9 +125,16 @@ namespace ResultStudioWPF.ViewModels
           spread,
           progress);
 
-        _queryDispatcher.Dispatch<GetRandomDataSetQuery, Result<ObservableCollection<IMeasurementPoint>>>(query)
-          .Tap(
-            result => { DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result); });
+        _queryDispatcher.Dispatch<GetRandomDataSetQuery, Result<DataSet>>(query)
+          .OnSuccessTry(
+            result =>
+            {
+              FilePath = result.Name;
+              XVariance = result.CalculateVariance(MeasurementAxisType.X);
+              YVariance = result.CalculateVariance(MeasurementAxisType.Y);
+              ZVariance = result.CalculateVariance(MeasurementAxisType.Z);
+              DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result.MeasurementPoints); 
+            });
       });
 
       ProgressBarIsIndetermined = false;
@@ -168,13 +174,10 @@ namespace ResultStudioWPF.ViewModels
 
     public ObservableCollection<MeasurementPointViewModel> DataSet
     {
-      get { return _dataSet; }
+      get => _dataSet;
       set
       {
-        if (_dataSet == value)
-        {
-          return;
-        }
+        if (_dataSet == value) return;
 
         _dataSet = value;
         RaisePropertyChanged();

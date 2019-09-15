@@ -9,7 +9,7 @@ namespace ResultStudioWPF.UnitTests
   public class DataSetTests
   {
     [Test]
-    public void CalculateDataVariance_WhenCalled_ReturnVarianceOfDataSetArgument()
+    public void CalculateDataVariance_WhenCalled_ReturnVariance()
     {
       // Arrange
       var measurementSet = new List<MeasurementPoint>()
@@ -29,7 +29,7 @@ namespace ResultStudioWPF.UnitTests
     }
 
     [Test]
-    public void CalculateDataVariance_WhenCalled_ReturnVarianceOfDataContainingDuplicateMeasurements()
+    public void CalculateDataVariance_WhenCalledWithDuplicateMeasurements_ReturnVariance()
     {
       // Arrange
       var measurementSet = new List<MeasurementPoint>()

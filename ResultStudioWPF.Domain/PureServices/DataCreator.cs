@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
@@ -18,7 +17,7 @@ namespace ResultStudioWPF.Domain.PureServices
       _rnd = new Random();
     }
 
-    public ObservableCollection<IMeasurementPoint> CreateSubframeDataset(Reference reference, int subframeCount,
+    public List<MeasurementPoint> CreateSubframeDataset(Reference reference, int subframeCount,
       double spread, IProgress<int> progress)
     {
       progress.Report(1);
@@ -30,10 +29,10 @@ namespace ResultStudioWPF.Domain.PureServices
       return AddMeasurementsToDataset(dataSetX, dataSetY, dataSetZ, subframeCount, progress);
     }
 
-    private ObservableCollection<IMeasurementPoint> AddMeasurementsToDataset(IList<double> dataSetX,
+    private List<MeasurementPoint> AddMeasurementsToDataset(IList<double> dataSetX,
       IList<double> dataSetY, IList<double> dataSetZ, int subframeCount, IProgress<int> progress)
     {
-      var dataSet = new ObservableCollection<IMeasurementPoint>();
+      var dataSet = new List<MeasurementPoint>();
 
       for (int i = 1; i < subframeCount + 1; i++)
       {

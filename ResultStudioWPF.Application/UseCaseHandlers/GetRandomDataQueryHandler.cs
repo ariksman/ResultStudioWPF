@@ -3,12 +3,13 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using ResultStudioWPF.Common.CQS;
+using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.Interfaces;
 using ResultStudioWPF.Domain.UseCases.DataSet;
 
 namespace ResultStudioWPF.Application.UseCaseHandlers
 {
-  public class GetRandomDataQueryHandler : IQueryHandler<GetRandomDataSetQuery, Result<ObservableCollection<IMeasurementPoint>>>
+  public class GetRandomDataQueryHandler : IQueryHandler<GetRandomDataSetQuery, Result<DataSet>>
   {
     private readonly IDataCreator _dataCreator;
 
@@ -17,7 +18,7 @@ namespace ResultStudioWPF.Application.UseCaseHandlers
       _dataCreator = dataCreator ?? throw new ArgumentException(nameof(dataCreator));
     }
 
-    public Result<ObservableCollection<IMeasurementPoint>> Handle(GetRandomDataSetQuery query)
+    public Result<DataSet> Handle(GetRandomDataSetQuery query)
     {
       try
       {
@@ -28,15 +29,17 @@ namespace ResultStudioWPF.Application.UseCaseHandlers
           100,
           query.Progress);
 
-        return Result.Ok(data);
+        var dataSet = DataSet.Create("Random data in use", data);
+
+        return dataSet;
       }
       catch (Exception e)
       {
-        return Result.Fail<ObservableCollection<IMeasurementPoint>>(e.Message);
+        return Result.Fail<DataSet>(e.Message);
       }
     }
 
-    public Task<Result<ObservableCollection<IMeasurementPoint>>> HandleAsync(GetRandomDataSetQuery query)
+    public Task<Result<DataSet>> HandleAsync(GetRandomDataSetQuery query)
     {
       throw new NotImplementedException();
     }
