@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using CSharpFunctionalExtensions;
 using ResultStudioWPF.Domain.DomainModel.Entities;
 
 namespace ResultStudioWPF.Domain.Interfaces
 {
   public interface IDataFileReader
   {
-    List<MeasurementPoint> ReadFileIntoDataSet();
+    Result<DataSet> ReadFileIntoDataSet();
   }
 }

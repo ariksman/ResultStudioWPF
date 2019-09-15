@@ -40,9 +40,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IMessageDialogService.cs" />
     <Compile Include="UseCaseHandlers\GetDataSetFromFileHandler.cs" />
     <Compile Include="UseCaseHandlers\GetRandomDataQueryHandler.cs" />
-    <Compile Include="Interfaces\IAnalyzeDataSet.cs" />
     <Compile Include="Interfaces\IFileDialogProvider.cs" />
   </ItemGroup>
   <ItemGroup>

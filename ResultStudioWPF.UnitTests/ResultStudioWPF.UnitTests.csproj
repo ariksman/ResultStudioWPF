@@ -51,7 +51,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalyseDataSetTests.cs" />
+    <Compile Include="DataSetTests.cs" />
     <Compile Include="DataFileReaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

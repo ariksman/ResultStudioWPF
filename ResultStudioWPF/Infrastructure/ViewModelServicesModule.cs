@@ -15,7 +15,7 @@ namespace ResultStudioWPF.Infrastructure
     {
       builder.RegisterType<FileDialogProvider>().As<IFileDialogProvider>();
       builder.RegisterType<DataFileReader>().As<IDataFileReader>();
-      builder.RegisterType<AnalyzeDataSet>().As<IAnalyseDataSet>();
+      builder.RegisterType<OokiiMessageDialogService>().As<IMessageDialogService>();
       builder.RegisterType<DataCreator>().As<IDataCreator>();
 
       builder.RegisterType<SettingsViewModel>().AsSelf().SingleInstance();

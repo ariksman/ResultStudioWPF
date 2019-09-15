@@ -1,29 +1,23 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using AutoMapper;
-using CommonServiceLocator;
 using CSharpFunctionalExtensions;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using ResultStudioWPF.Application.CQS;
 using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Common.CQS;
-using ResultStudioWPF.Domain;
 using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Domain.Interfaces;
 using ResultStudioWPF.Domain.UseCases.DataSet;
 using ResultStudioWPF.Models;
 using ResultStudioWPF.ViewModels.Messages;
-using ResultStudioWPF.ViewModels.Services;
 
 namespace ResultStudioWPF.ViewModels
 {
@@ -31,27 +25,21 @@ namespace ResultStudioWPF.ViewModels
   {
     public ICollectionView SubframeDataSetCollectionView { get; private set; }
 
+    private readonly IMessageDialogService _messageDialogService;
     private readonly IMapper _mapper;
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
-    private IAnalyseDataSet _dataSetAnalyzer;
-    readonly Func<IProgress<int>, IDataFileReader> _fileReaderFactory;
-    readonly Func<IDataCreator> _dataCreatorFactory;
 
     public SettingsViewModel(
+      IMessageDialogService messageDialogService,
       IMapper mapper,
       ICommandDispatcher commandDispatcher,
-      IQueryDispatcher queryDispatcher,
-      IAnalyseDataSet dataSetAnalyzer,
-      Func<IProgress<int>, IDataFileReader> fileReader,
-      Func<IDataCreator> dataCreator)
+      IQueryDispatcher queryDispatcher)
     {
+      _messageDialogService = messageDialogService;
       _mapper = mapper;
       _commandDispatcher = commandDispatcher;
       _queryDispatcher = queryDispatcher;
-      _dataSetAnalyzer = dataSetAnalyzer;
-      _fileReaderFactory = fileReader;
-      _dataCreatorFactory = dataCreator;
 
       _xAxisReference = 2000;
       _yAxisReference = -500;
@@ -88,12 +76,19 @@ namespace ResultStudioWPF.ViewModels
       await Task.Run(() =>
       {
         var query = new GetDataSetFromFile(progress);
-        _queryDispatcher.Dispatch<GetDataSetFromFile, Result<List<MeasurementPoint>>>(query)
-          .Tap(result => { DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result); });
-
-        //reader.ReadFile();
-        //DataSet = new ObservableCollection<MeasurementPointViewModel>(reader.DataSet);
-        //FilePath = reader.TheFile;
+        _queryDispatcher.Dispatch<GetDataSetFromFile, Result<DataSet>>(query)
+          .OnSuccessTry(result =>
+          {
+            FilePath = result.Name;
+            XVariance = result.CalculateVariance(MeasurementAxisType.X);
+            YVariance = result.CalculateVariance(MeasurementAxisType.Y);
+            ZVariance = result.CalculateVariance(MeasurementAxisType.Z);
+            DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result.MeasurementPoints);
+          })
+          .OnFailure((result) =>
+          {
+            _messageDialogService.ShowErrorMessage("SettingsViewModel", "Failed to load file", result);
+          });
       });
 
       ProgressBarIsIndetermined = false;
@@ -187,12 +182,6 @@ namespace ResultStudioWPF.ViewModels
 
         if (_dataSet != null && _dataSet.Count > 0)
         {
-          _dataSetAnalyzer.DataSet = _dataSet;
-
-          XVariance = _dataSetAnalyzer.CalculateDataVariance(MeasurementAxisType.X);
-          YVariance = _dataSetAnalyzer.CalculateDataVariance(MeasurementAxisType.Y);
-          ZVariance = _dataSetAnalyzer.CalculateDataVariance(MeasurementAxisType.Z);
-
           AppMessages.PlotDataSet.Send(_dataSet);
         }
       }

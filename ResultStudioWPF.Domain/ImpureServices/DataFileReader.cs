@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using CSharpFunctionalExtensions;
 using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Domain.DomainModel.ValueObjects;
@@ -19,11 +20,11 @@ namespace ResultStudioWPF.Domain.ImpureServices
       _reportProgress = progress;
     }
 
-    public List<MeasurementPoint> ReadFileIntoDataSet()
+    public Result<DataSet> ReadFileIntoDataSet()
     {
       using (var sr = new StreamReader(_path.Value))
       {
-        var dataSet = new List<MeasurementPoint>();
+        var measurementPoints = new List<MeasurementPoint>();
 
         string line = "";
         char[] charsToTrim = {' '};
@@ -41,9 +42,11 @@ namespace ResultStudioWPF.Domain.ImpureServices
 
           var newMeasurementPoint = new MeasurementPoint(measurementNumber, measurement, axisValue);
 
-          dataSet.Add(newMeasurementPoint);
+          measurementPoints.Add(newMeasurementPoint);
           _reportProgress?.Report(progressCount++);
         }
+
+        var dataSet = DataSet.Create(_path.Value, measurementPoints);
 
         return dataSet;
       }

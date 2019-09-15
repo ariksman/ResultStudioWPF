@@ -157,8 +157,8 @@
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="ViewModels\Messages\AppMessages.cs" />
     <Compile Include="ViewModels\ResultsViewModel.cs" />
-    <Compile Include="ViewModels\Services\AnalyzeDataSet.cs" />
     <Compile Include="ViewModels\Services\FileDialogProvider.cs" />
+    <Compile Include="ViewModels\Services\OokiiMessageDialogService.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Converters\MeasurementToBrushConverter.cs" />

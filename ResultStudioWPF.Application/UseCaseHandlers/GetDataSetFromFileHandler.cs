@@ -12,7 +12,7 @@ using ResultStudioWPF.Domain.UseCases.DataSet;
 
 namespace ResultStudioWPF.Application.UseCaseHandlers
 {
-  public class GetDataSetFromFileHandler : IQueryHandler<GetDataSetFromFile, Result<List<MeasurementPoint>>>
+  public class GetDataSetFromFileHandler : IQueryHandler<GetDataSetFromFile, Result<DataSet>>
   {
     private readonly Func<FilePath, IDataFileReader> _dataFileReaderFunc;
     private readonly IFileDialogProvider _fileDialogProvider;
@@ -23,21 +23,21 @@ namespace ResultStudioWPF.Application.UseCaseHandlers
       _fileDialogProvider = fileDialogProvider ?? throw new ArgumentException(nameof(fileDialogProvider));
     }
 
-    public Result<List<MeasurementPoint>> Handle(GetDataSetFromFile query)
+    public Result<DataSet> Handle(GetDataSetFromFile query)
     {
       var filter = "Text|*.txt|All|*.*";
       var files = _fileDialogProvider.GetFilePaths(filter);
       var file = FilePath.Create(files.FirstOrDefault());
 
-      if (file.IsFailure) return Result.Fail<List<MeasurementPoint>>("Error while getting the file path");
+      if (file.IsFailure) return Result.Fail<DataSet>("Error while getting the file path");
 
       var reader = _dataFileReaderFunc(file.Value);
       var data = reader.ReadFileIntoDataSet();
 
-      return Result.Ok(data);
+      return data;
     }
 
-    public Task<Result<List<MeasurementPoint>>> HandleAsync(GetDataSetFromFile query)
+    public Task<Result<DataSet>> HandleAsync(GetDataSetFromFile query)
     {
       throw new NotImplementedException();
     }
