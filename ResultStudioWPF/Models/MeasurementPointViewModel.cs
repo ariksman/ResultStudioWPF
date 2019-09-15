@@ -17,7 +17,7 @@ namespace ResultStudioWPF.Models
 
     public int Index
     {
-      get { return _indexNumber; }
+      get => _indexNumber;
       set { _indexNumber = value; }
     }
 
@@ -25,7 +25,7 @@ namespace ResultStudioWPF.Models
 
     public MeasurementAxisType Axis
     {
-      get { return _axisName; }
+      get => _axisName;
       set
       {
         if (_axisName == value)
@@ -53,7 +53,7 @@ namespace ResultStudioWPF.Models
 
     public double Value
     {
-      get { return _value; }
+      get => _value;
       set
       {
         _value = value;
