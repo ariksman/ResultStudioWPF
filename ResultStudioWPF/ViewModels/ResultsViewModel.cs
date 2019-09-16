@@ -50,7 +50,7 @@ namespace ResultStudioWPF.ViewModels
 
     public PlotModel PlotModelX
     {
-      get { return _plotModelX; }
+      get => _plotModelX;
       set
       {
         _plotModelX = value;
@@ -62,7 +62,7 @@ namespace ResultStudioWPF.ViewModels
 
     public PlotModel PlotModelY
     {
-      get { return _plotModelY; }
+      get => _plotModelY;
       set
       {
         _plotModelY = value;
@@ -74,7 +74,7 @@ namespace ResultStudioWPF.ViewModels
 
     public PlotModel PlotModelZ
     {
-      get { return _plotModelZ; }
+      get => _plotModelZ;
       set
       {
         _plotModelZ = value;
@@ -86,7 +86,7 @@ namespace ResultStudioWPF.ViewModels
 
     public List<DataPoint> ReferenceX
     {
-      get { return _referenceX; }
+      get => _referenceX;
       set
       {
         if (_referenceX == value)
@@ -102,7 +102,7 @@ namespace ResultStudioWPF.ViewModels
 
     public List<DataPoint> ReferenceY
     {
-      get { return _referenceY; }
+      get => _referenceY;
       set
       {
         if (_referenceY == value)
@@ -118,7 +118,7 @@ namespace ResultStudioWPF.ViewModels
 
     public List<DataPoint> ReferenceZ
     {
-      get { return _referenceZ; }
+      get => _referenceZ;
       set
       {
         if (_referenceZ == value)
@@ -134,7 +134,7 @@ namespace ResultStudioWPF.ViewModels
 
     public List<DataPoint> MeasurementsX
     {
-      get { return _measurementsX; }
+      get => _measurementsX;
       set
       {
         if (_measurementsX == value)
@@ -150,7 +150,7 @@ namespace ResultStudioWPF.ViewModels
 
     public List<DataPoint> MeasurementsY
     {
-      get { return _measurementsY; }
+      get => _measurementsY;
       set
       {
         if (_measurementsY == value)
@@ -166,7 +166,7 @@ namespace ResultStudioWPF.ViewModels
 
     public List<DataPoint> MeasurementsZ
     {
-      get { return _measurementsZ; }
+      get => _measurementsZ;
       set
       {
         if (_measurementsZ == value)
