@@ -22,7 +22,7 @@ namespace ResultStudioWPF.ViewModels
 {
   public class DataSetViewModel : ViewModelBase, ISharedSettingsContext
   {
-    public ICollectionView SubframeDataSetCollectionView { get; private set; }
+    public ICollectionView SubFrameDataSetCollectionView { get; private set; }
 
     private readonly IMessageDialogService _messageDialogService;
     private readonly IMapper _mapper;
@@ -50,7 +50,7 @@ namespace ResultStudioWPF.ViewModels
       }
       else
       {
-        SubframeDataSetCollectionView = CollectionViewSource.GetDefaultView(_dataSet);
+        SubFrameDataSetCollectionView = CollectionViewSource.GetDefaultView(_dataSet);
         ProgressBarIsIndetermined = false;
       }
     }
