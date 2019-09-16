@@ -26,6 +26,14 @@ namespace ResultStudioWPF.ViewModels
       }
     }
 
+    /// <summary>
+    /// Updates all bindings within the program
+    /// </summary>
+    protected void UpdateAllBindings()
+    {
+      var eventHandler = PropertyChanged;
+      eventHandler?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
+    }
     #endregion
 
     #region Notify data error

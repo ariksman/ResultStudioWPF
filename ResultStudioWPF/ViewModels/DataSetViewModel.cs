@@ -151,8 +151,6 @@ namespace ResultStudioWPF.ViewModels
     {
       foreach (var measurementPoint in DataSet)
       {
-        //TODO: Change this into a real way to raiseproperty changed without actually changing the value
-
         measurementPoint.RefreshAllProperties();
         measurementPoint.CheckAllTolerances();
       }
@@ -197,7 +195,7 @@ namespace ResultStudioWPF.ViewModels
 
     public MeasurementPointViewModel MeasurementPoint
     {
-      get { return _measurementPoint; }
+      get => _measurementPoint;
       set { _measurementPoint = value; }
     }
 
@@ -206,7 +204,7 @@ namespace ResultStudioWPF.ViewModels
 
     public bool ProgressBarIsIndetermined
     {
-      get { return _progressBarIsIndetermined; }
+      get => _progressBarIsIndetermined;
 
       set
       {
@@ -224,7 +222,7 @@ namespace ResultStudioWPF.ViewModels
 
     public int ProgressBarValue
     {
-      get { return _progressBarValue; }
+      get => _progressBarValue;
 
       set
       {
@@ -242,7 +240,7 @@ namespace ResultStudioWPF.ViewModels
 
     public string FilePath
     {
-      get { return _filePath; }
+      get => _filePath;
 
       set
       {
@@ -260,7 +258,7 @@ namespace ResultStudioWPF.ViewModels
 
     public double XAxisTolerance
     {
-      get { return _xAxisTolerance; }
+      get => _xAxisTolerance;
 
       set
       {
@@ -291,7 +289,7 @@ namespace ResultStudioWPF.ViewModels
 
     public double YAxisTolerance
     {
-      get { return _yAxisTolerance; }
+      get => _yAxisTolerance;
 
       set
       {
@@ -311,7 +309,7 @@ namespace ResultStudioWPF.ViewModels
 
     public double ZAxisTolerance
     {
-      get { return _zAxisTolerance; }
+      get => _zAxisTolerance;
 
       set
       {
@@ -331,7 +329,7 @@ namespace ResultStudioWPF.ViewModels
 
     public double XAxisReference
     {
-      get { return _xAxisReference; }
+      get => _xAxisReference;
 
       set
       {
@@ -350,7 +348,7 @@ namespace ResultStudioWPF.ViewModels
 
     public double YAxisReference
     {
-      get { return _yAxisReference; }
+      get => _yAxisReference;
 
       set
       {
@@ -369,7 +367,7 @@ namespace ResultStudioWPF.ViewModels
 
     public double ZAxisReference
     {
-      get { return _zAxisReference; }
+      get => _zAxisReference;
 
       set
       {
@@ -388,7 +386,7 @@ namespace ResultStudioWPF.ViewModels
 
     public double XVariance
     {
-      get { return _xVariance; }
+      get => _xVariance;
 
       set
       {
@@ -407,7 +405,7 @@ namespace ResultStudioWPF.ViewModels
 
     public double YVariance
     {
-      get { return _yVariance; }
+      get => _yVariance;
 
       set
       {
@@ -426,7 +424,7 @@ namespace ResultStudioWPF.ViewModels
 
     public double ZVariance
     {
-      get { return _zVariance; }
+      get => _zVariance;
 
       set
       {
@@ -445,7 +443,7 @@ namespace ResultStudioWPF.ViewModels
 
     public int ErrorCount
     {
-      get { return _errorCount; }
+      get => _errorCount;
 
       set
       {

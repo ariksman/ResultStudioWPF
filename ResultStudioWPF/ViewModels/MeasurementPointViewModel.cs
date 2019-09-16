@@ -68,8 +68,9 @@ namespace ResultStudioWPF.ViewModels
 
     public void RefreshAllProperties()
     {
-      foreach (var prop in GetType().GetProperties())
-        NotifyPropertyChanged(null, prop.Name);
+      //foreach (var prop in GetType().GetProperties())
+      //  NotifyPropertyChanged(null, prop.Name);
+        UpdateAllBindings();
     }
 
     public void CheckAllTolerances()
