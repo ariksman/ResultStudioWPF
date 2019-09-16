@@ -19,7 +19,7 @@ namespace ResultStudioWPF.UnitTests
     private Mock<IQueryDispatcher> _queryDispatcherMock;
     private Mock<IMapper> _mapperMock;
     private Mock<IMessageDialogService> _messageDialogMock;
-    private SettingsViewModel _viewModel;
+    private DataSetViewModel _viewModel;
 
     [SetUp]
     public void SetUp()
@@ -43,7 +43,7 @@ namespace ResultStudioWPF.UnitTests
       _mapperMock = new Mock<IMapper>();
       _messageDialogMock = new Mock<IMessageDialogService>();
 
-      _viewModel = new SettingsViewModel(
+      _viewModel = new DataSetViewModel(
         _messageDialogMock.Object,
         _mapperMock.Object,
         _commandDispatcherMock.Object,
