@@ -47,7 +47,7 @@
         </Grid.Resources>
         
         <DataGrid 
-            x:Name="SubframeDataGrid"
+            x:Name="SubFrameDataGrid"
             Margin="0,20,0,20"
             IsReadOnly="True"
             AutoGenerateColumns="False"
@@ -75,7 +75,6 @@
                                     ElementStyle="{StaticResource CellErrorStyle}"
                                     Header="Value"
                                     Width="2*">
-                    
                 </DataGridTextColumn>
                                         
                     <!--<DataGridTextColumn.ElementStyle>
