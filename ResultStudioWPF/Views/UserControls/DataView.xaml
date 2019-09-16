@@ -47,7 +47,7 @@
         </Grid.Resources>
         
         <DataGrid 
-            x:Name="subframeDataGrid"
+            x:Name="SubframeDataGrid"
             Margin="0,20,0,20"
             IsReadOnly="True"
             AutoGenerateColumns="False"
@@ -92,7 +92,6 @@
                     </DataGridTextColumn.ElementStyle>-->
             </DataGrid.Columns>
         </DataGrid>
-
     </Grid>
 </UserControl>
 
