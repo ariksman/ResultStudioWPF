@@ -326,32 +326,26 @@ namespace ResultStudioWPF.ViewModels
     {
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.Axis == MeasurementAxisType.X)
-        {
-          _measurementsX.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
-          _referenceX.Add(new DataPoint(measurementPoint.Index,
-            (new ViewModelLocator()).SettingsViewModel.XAxisReference));
-        }
+        if (!Equals(measurementPoint.Axis, MeasurementAxisType.X)) continue;
+        _measurementsX.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
+        _referenceX.Add(new DataPoint(measurementPoint.Index,
+          (new ViewModelLocator()).SettingsViewModel.XAxisReference));
       }
 
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.Axis == MeasurementAxisType.Y)
-        {
-          _measurementsY.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
-          _referenceY.Add(new DataPoint(measurementPoint.Index,
-            (new ViewModelLocator()).SettingsViewModel.YAxisReference));
-        }
+        if (!Equals(measurementPoint.Axis, MeasurementAxisType.Y)) continue;
+        _measurementsY.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
+        _referenceY.Add(new DataPoint(measurementPoint.Index,
+          (new ViewModelLocator()).SettingsViewModel.YAxisReference));
       }
 
       foreach (var measurementPoint in _dataSet)
       {
-        if (measurementPoint.Axis == MeasurementAxisType.Z)
-        {
-          _measurementsZ.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
-          _referenceZ.Add(new DataPoint(measurementPoint.Index,
-            (new ViewModelLocator()).SettingsViewModel.ZAxisReference));
-        }
+        if (!Equals(measurementPoint.Axis, MeasurementAxisType.Z)) continue;
+        _measurementsZ.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
+        _referenceZ.Add(new DataPoint(measurementPoint.Index,
+          (new ViewModelLocator()).SettingsViewModel.ZAxisReference));
       }
     }
 
