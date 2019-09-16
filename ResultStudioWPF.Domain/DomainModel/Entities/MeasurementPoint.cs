@@ -5,7 +5,7 @@ using ResultStudioWPF.Domain.Interfaces;
 
 namespace ResultStudioWPF.Domain.DomainModel.Entities
 {
-  public class MeasurementPoint : Entity, IMeasurementPoint
+  public class MeasurementPoint : Entity
   {
 
     public MeasurementPoint(
@@ -32,10 +32,10 @@ namespace ResultStudioWPF.Domain.DomainModel.Entities
       Reference = reference;
     }
 
-    public int Index { get; set; }
-    public double Value { get; set; }
-    public MeasurementAxisType Axis { get; set; }
-    public Tolerance Tolerance { get; set; }
-    public Reference Reference { get; set; }
+    public int Index { get; }
+    public double Value { get; }
+    public MeasurementAxisType Axis { get; }
+    public Tolerance Tolerance { get; }
+    public Reference Reference { get; }
   }
 }

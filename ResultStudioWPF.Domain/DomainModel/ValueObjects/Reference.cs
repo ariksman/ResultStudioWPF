@@ -5,9 +5,9 @@ namespace ResultStudioWPF.Domain.DomainModel.ValueObjects
 {
   public class Reference : ValueObject
   {
-    public double X { get; set; }
-    public double Y { get; set; }
-    public double Z { get; set; }
+    public double X { get; }
+    public double Y { get; }
+    public double Z { get; }
 
     public Reference(double x, double y, double z)
     {
