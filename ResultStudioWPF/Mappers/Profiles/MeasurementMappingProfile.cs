@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.Interfaces;
-using ResultStudioWPF.Models;
+using ResultStudioWPF.ViewModels;
 
 namespace ResultStudioWPF.Mappers.Profiles
 {

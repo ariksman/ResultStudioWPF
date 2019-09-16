@@ -16,7 +16,6 @@ using ResultStudioWPF.Domain.DomainModel.Entities;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Domain.Interfaces;
 using ResultStudioWPF.Domain.UseCases.DataSet;
-using ResultStudioWPF.Models;
 using ResultStudioWPF.ViewModels.Messages;
 
 namespace ResultStudioWPF.ViewModels

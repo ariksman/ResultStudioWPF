@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ResultStudioWPF.Models
+namespace ResultStudioWPF.ViewModels
 {
   // Guide:  https://www.codeproject.com/Tips/876349/WPF-Validation-using-INotifyDataErrorInfo
 

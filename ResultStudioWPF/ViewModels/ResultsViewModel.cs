@@ -4,7 +4,6 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using ResultStudioWPF.Domain.DomainModel.Enumerations;
-using ResultStudioWPF.Models;
 using ResultStudioWPF.ViewModels.Messages;
 using LinearAxis = OxyPlot.Axes.LinearAxis;
 

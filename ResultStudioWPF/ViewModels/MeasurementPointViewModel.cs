@@ -1,9 +1,8 @@
 ﻿using ResultStudioWPF.Domain.DomainModel.Enumerations;
 using ResultStudioWPF.Domain.DomainModel.ValueObjects;
 using ResultStudioWPF.Domain.Interfaces;
-using ResultStudioWPF.ViewModels;
 
-namespace ResultStudioWPF.Models
+namespace ResultStudioWPF.ViewModels
 {
   public class MeasurementPointViewModel : ModelBase, IMeasurementPoint
   {

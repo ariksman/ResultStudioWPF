@@ -153,8 +153,8 @@
     <Compile Include="Infrastructure\ViewModelServicesModule.cs" />
     <Compile Include="Mappers\AutoMapperConfig.cs" />
     <Compile Include="Mappers\Profiles\MeasurementMappingProfile.cs" />
-    <Compile Include="Models\MeasurementPointViewModel.cs" />
-    <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="ViewModels\MeasurementPointViewModel.cs" />
+    <Compile Include="ViewModels\ModelBase.cs" />
     <Compile Include="ViewModels\Messages\AppMessages.cs" />
     <Compile Include="ViewModels\ResultsViewModel.cs" />
     <Compile Include="ViewModels\Services\FileDialogProvider.cs" />
