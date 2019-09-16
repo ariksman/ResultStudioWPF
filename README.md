@@ -1,5 +1,5 @@
 ## The program - ResultStudio
-Program follows the MVVM design principle and utilizes WPF for the user interface.
+The program follows the MVVM design principle and utilizes WPF for the user interface. Additionally, code is divided into layers and utilizing CQS for use-case implementation.
 
 Main purpouse is to create random measurement data of a subframe point with x,y,z measurements or optionally read this data from a file. Datasets of 20 subframes is used as default. 
 
