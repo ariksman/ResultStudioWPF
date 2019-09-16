@@ -12,15 +12,9 @@ namespace ResultStudioWPF.Domain.DomainModel.Enumerations
     public static MeasurementAxisType Z = new ZAxisType();
     public static MeasurementAxisType UnknownType = new UnknownTypeType();
 
-    public MeasurementAxisType()
-    {
-      
-    }
+    public MeasurementAxisType() {}
 
-    public MeasurementAxisType(int id, string name): base(id, name)
-    {
-      
-    }
+    public MeasurementAxisType(int id, string name): base(id, name) {}
 
     public static MeasurementAxisType GetType(string axis)
     {
