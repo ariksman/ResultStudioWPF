@@ -62,13 +62,13 @@ namespace ResultStudioWPF.ViewModels
 
     public ResultsViewModel ResultsViewModel => ServiceLocator.Current.GetInstance<ResultsViewModel>();
 
-    public SettingsViewModel SettingsViewModel
+    public DataSetViewModel SettingsViewModel
     {
       get
       {
         try
         {
-          return ServiceLocator.Current.GetInstance<SettingsViewModel>();
+          return ServiceLocator.Current.GetInstance<DataSetViewModel>();
         }
         catch (Exception e)
         {
