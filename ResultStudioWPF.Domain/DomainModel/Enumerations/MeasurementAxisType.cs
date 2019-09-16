@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ResultStudioWPF.Common;
 using ResultStudioWPF.Domain.DomainModel.ValueObjects;
 
 namespace ResultStudioWPF.Domain.DomainModel.Enumerations
@@ -51,7 +50,10 @@ namespace ResultStudioWPF.Domain.DomainModel.Enumerations
 
     private class XAxisType : MeasurementAxisType
     {
-
+      public XAxisType() : base(0, "X-axis")
+      {
+        
+      }
       public override double CalculateStandardDeviation(IEnumerable<double> data)
       {
         return StandardDeviation(data);
@@ -68,7 +70,10 @@ namespace ResultStudioWPF.Domain.DomainModel.Enumerations
 
     private class YAxisType : MeasurementAxisType
     {
-
+      public YAxisType() : base(1, "Y-axis")
+      {
+        
+      }
       public override double CalculateStandardDeviation(IEnumerable<double> data)
       {
         return StandardDeviation(data);
@@ -85,7 +90,10 @@ namespace ResultStudioWPF.Domain.DomainModel.Enumerations
 
     private class ZAxisType : MeasurementAxisType
     {
-
+      public ZAxisType() : base(2, "Z-axis")
+      {
+        
+      }
       public override double CalculateStandardDeviation(IEnumerable<double> data)
       {
         return StandardDeviation(data);
