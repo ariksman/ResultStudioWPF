@@ -20,7 +20,7 @@ using ResultStudioWPF.ViewModels.Messages;
 
 namespace ResultStudioWPF.ViewModels
 {
-  public class DataSetViewModel : ViewModelBase
+  public class DataSetViewModel : ViewModelBase, ISharedSettingsContext
   {
     public ICollectionView SubframeDataSetCollectionView { get; private set; }
 

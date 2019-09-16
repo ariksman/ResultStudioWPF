@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using GalaSoft.MvvmLight;
 using System.Collections.Generic;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -11,12 +12,12 @@ namespace ResultStudioWPF.ViewModels
 {
   public class ResultsViewModel : ViewModelBase
   {
-    private readonly DataSetViewModel _dataSetViewModel;
+    private readonly ISharedSettingsContext _settingsContext;
     private IEnumerable<MeasurementPointViewModel> _dataSet;
 
-    public ResultsViewModel(DataSetViewModel dataSetViewModel)
+    public ResultsViewModel(ISharedSettingsContext settingsContext)
     {
-      _dataSetViewModel = dataSetViewModel;
+
       if (IsInDesignMode)
       {
         // Code runs in Blend --> create design time data.
@@ -24,6 +25,7 @@ namespace ResultStudioWPF.ViewModels
       else
       {
         // Code runs "for real"
+        _settingsContext = settingsContext ?? throw new ArgumentNullException(nameof(settingsContext));
 
         // Messages
         AppMessages.PlotDataSet.Register(this, DrawPlotsForDataSet);
@@ -314,7 +316,7 @@ namespace ResultStudioWPF.ViewModels
       ReferenceY.Clear();
       ReferenceZ.Clear();
 
-      _dataSet = _dataSetViewModel.DataSet;
+      _dataSet = _settingsContext.DataSet;
 
       CreateMeasurementDataForPlots();
 
@@ -330,7 +332,7 @@ namespace ResultStudioWPF.ViewModels
         if (!Equals(measurementPoint.Axis, MeasurementAxisType.X)) continue;
         _measurementsX.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
         _referenceX.Add(new DataPoint(measurementPoint.Index,
-          _dataSetViewModel.XAxisReference));
+          _settingsContext.XAxisReference));
       }
 
       foreach (var measurementPoint in _dataSet)
@@ -338,7 +340,7 @@ namespace ResultStudioWPF.ViewModels
         if (!Equals(measurementPoint.Axis, MeasurementAxisType.Y)) continue;
         _measurementsY.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
         _referenceY.Add(new DataPoint(measurementPoint.Index,
-          _dataSetViewModel.YAxisReference));
+          _settingsContext.YAxisReference));
       }
 
       foreach (var measurementPoint in _dataSet)
@@ -346,7 +348,7 @@ namespace ResultStudioWPF.ViewModels
         if (!Equals(measurementPoint.Axis, MeasurementAxisType.Z)) continue;
         _measurementsZ.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
         _referenceZ.Add(new DataPoint(measurementPoint.Index,
-          _dataSetViewModel.ZAxisReference));
+          _settingsContext.ZAxisReference));
       }
     }
 
