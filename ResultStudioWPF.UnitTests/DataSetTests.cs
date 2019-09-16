@@ -5,7 +5,6 @@ using ResultStudioWPF.Domain.DomainModel.Enumerations;
 
 namespace ResultStudioWPF.UnitTests
 {
-  [TestFixture]
   public class DataSetTests
   {
     [Test]

@@ -6,7 +6,6 @@ using NUnit.Framework;
 
 namespace ResultStudioWPF.UnitTests
 {
-    [TestFixture]
     public class DataFileReaderTests
     {
         // Only test public functionality of a class
