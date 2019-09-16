@@ -11,10 +11,12 @@ namespace ResultStudioWPF.ViewModels
 {
   public class ResultsViewModel : ViewModelBase
   {
+    private readonly DataSetViewModel _dataSetViewModel;
     private IEnumerable<MeasurementPointViewModel> _dataSet;
 
-    public ResultsViewModel()
+    public ResultsViewModel(DataSetViewModel dataSetViewModel)
     {
+      _dataSetViewModel = dataSetViewModel;
       if (IsInDesignMode)
       {
         // Code runs in Blend --> create design time data.
@@ -312,7 +314,7 @@ namespace ResultStudioWPF.ViewModels
       ReferenceY.Clear();
       ReferenceZ.Clear();
 
-      _dataSet = obj;
+      _dataSet = _dataSetViewModel.DataSet;
 
       CreateMeasurementDataForPlots();
 
@@ -328,7 +330,7 @@ namespace ResultStudioWPF.ViewModels
         if (!Equals(measurementPoint.Axis, MeasurementAxisType.X)) continue;
         _measurementsX.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
         _referenceX.Add(new DataPoint(measurementPoint.Index,
-          (new ViewModelLocator()).SettingsViewModel.XAxisReference));
+          _dataSetViewModel.XAxisReference));
       }
 
       foreach (var measurementPoint in _dataSet)
@@ -336,7 +338,7 @@ namespace ResultStudioWPF.ViewModels
         if (!Equals(measurementPoint.Axis, MeasurementAxisType.Y)) continue;
         _measurementsY.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
         _referenceY.Add(new DataPoint(measurementPoint.Index,
-          (new ViewModelLocator()).SettingsViewModel.YAxisReference));
+          _dataSetViewModel.YAxisReference));
       }
 
       foreach (var measurementPoint in _dataSet)
@@ -344,7 +346,7 @@ namespace ResultStudioWPF.ViewModels
         if (!Equals(measurementPoint.Axis, MeasurementAxisType.Z)) continue;
         _measurementsZ.Add(new DataPoint(measurementPoint.Index, measurementPoint.Value));
         _referenceZ.Add(new DataPoint(measurementPoint.Index,
-          (new ViewModelLocator()).SettingsViewModel.ZAxisReference));
+          _dataSetViewModel.ZAxisReference));
       }
     }
 
