@@ -91,7 +91,7 @@ namespace ResultStudioWPF.ViewModels
       });
 
       ProgressBarIsIndetermined = false;
-      CheckHowManySubframesIsInvalid();
+      UpdateSubFramesErrorCount();
     }
 
     #endregion
@@ -138,7 +138,7 @@ namespace ResultStudioWPF.ViewModels
 
       ProgressBarIsIndetermined = false;
 
-      CheckHowManySubframesIsInvalid();
+      UpdateSubFramesErrorCount();
     }
 
     #endregion
@@ -155,10 +155,10 @@ namespace ResultStudioWPF.ViewModels
         measurementPoint.CheckAllTolerances();
       }
 
-      CheckHowManySubframesIsInvalid();
+      UpdateSubFramesErrorCount();
     }
 
-    private void CheckHowManySubframesIsInvalid()
+    private void UpdateSubFramesErrorCount()
     {
       ErrorCount = DataSet.Count(item => item.HasErrors);
     }
