@@ -18,7 +18,7 @@ namespace ResultStudioWPF.Infrastructure
       builder.RegisterType<OokiiMessageDialogService>().As<IMessageDialogService>();
       builder.RegisterType<DataCreator>().As<IDataCreator>();
 
-      builder.RegisterType<SettingsViewModel>().AsSelf().SingleInstance();
+      builder.RegisterType<DataSetViewModel>().AsSelf().SingleInstance();
       builder.RegisterType<ResultsViewModel>().AsSelf().SingleInstance();
     }
   }
