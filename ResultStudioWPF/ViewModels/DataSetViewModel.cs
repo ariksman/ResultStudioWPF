@@ -20,7 +20,7 @@ using ResultStudioWPF.ViewModels.Messages;
 
 namespace ResultStudioWPF.ViewModels
 {
-  public class SettingsViewModel : ViewModelBase
+  public class DataSetViewModel : ViewModelBase
   {
     public ICollectionView SubframeDataSetCollectionView { get; private set; }
 
@@ -29,7 +29,7 @@ namespace ResultStudioWPF.ViewModels
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
 
-    public SettingsViewModel(
+    public DataSetViewModel(
       IMessageDialogService messageDialogService,
       IMapper mapper,
       ICommandDispatcher commandDispatcher,

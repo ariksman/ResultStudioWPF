@@ -159,7 +159,7 @@
     <Compile Include="ViewModels\ResultsViewModel.cs" />
     <Compile Include="ViewModels\Services\FileDialogProvider.cs" />
     <Compile Include="ViewModels\Services\OokiiMessageDialogService.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\DataSetViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Converters\MeasurementToBrushConverter.cs" />
     <Compile Include="Views\Converters\IsOddConverter.cs" />
