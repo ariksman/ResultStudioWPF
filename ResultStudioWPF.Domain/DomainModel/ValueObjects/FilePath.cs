@@ -40,17 +40,24 @@ namespace ResultStudioWPF.Domain.DomainModel.ValueObjects
       return Value.GetHashCode();
     }
 
-    // meaning that following is valid: 
-    // FilePath path = GetPath(); 
-    // string pathString = path;
+    /// <summary>
+    /// following is valid: 
+    /// FilePath path = GetPath(); 
+    /// string pathString = path;
+    /// </summary>
+    /// <param name="filePath"></param>
     public static implicit operator string(FilePath filePath)
     {
       return filePath.Value;
     }
 
-    // may fail, meaning that usage can throw exception
-    // string pathString = GetPath();
-    // FilePath path = (FilePath)pathString
+
+    /// <summary>
+    /// may fail, usage can throw exception
+    /// string pathString = GetPath();
+    /// FilePath path = (FilePath)pathString
+    /// </summary>
+    /// <param name="filePath"></param>
     public static explicit operator FilePath(string filePath)
     {
       return Create(filePath).Value;
