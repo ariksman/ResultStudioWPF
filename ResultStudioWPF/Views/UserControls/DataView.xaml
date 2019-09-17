@@ -57,7 +57,7 @@
                 <!-- Row background coloring template -->
                 <Style TargetType="{x:Type DataGridRow}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding MeasurementNumber, Converter={StaticResource IsOddConverter}}" Value="True">
+                        <DataTrigger Binding="{Binding Index, Converter={StaticResource IsOddConverter}}" Value="True">
                             <Setter Property="Background" Value="LightGray"></Setter>
                         </DataTrigger>
                     </Style.Triggers>
