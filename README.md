@@ -1,7 +1,7 @@
 ## The program - ResultStudio
-The program follows the MVVM design principle and utilizes WPF for the user interface. Additionally, code is divided into layers and utilizing CQS for use-case implementation.
+This implementation follows MVVM design principle and utilizes WPF for the user interface. Additionally, the code is divided into layers and utilises CQS for the use-case implementation.
 
-Main purpouse is to create random measurement data of a subframe point with x,y,z measurements or optionally read this data from a file. Datasets of 20 subframes is used as default. 
+Functionalities are the ability to create random measurement data of a subframe point with x,y,z measurements and optionally read data from a file. Datasets of 20 subframes is used as default. 
 
 The variance of datapoint for x,y,z is calculated and data is visualised with the help of WPF datagrid and OxyPlot. For data analysing, user can set tolerances invidually for x,y,z measurements. If measurement value exceeds this limit, the cell containing invalid data is highlighted by red color.
 
