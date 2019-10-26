@@ -15,14 +15,14 @@ namespace ResultStudioWPF.Views.Converters
       var input = values[0] as double? ?? 0;
       var axis = values[1] as MeasurementAxisType ?? MeasurementAxisType.X;
 
-      var toleranceX = new ViewModelLocator().SettingsViewModel.XAxisTolerance;
-      var referenceX = new ViewModelLocator().SettingsViewModel.XAxisReference;
+      var toleranceX = ViewModelLocator.Instance.SettingsViewModel.XAxisTolerance;
+      var referenceX = ViewModelLocator.Instance.SettingsViewModel.XAxisReference;
 
-      var toleranceY = new ViewModelLocator().SettingsViewModel.YAxisTolerance;
-      var referenceY = new ViewModelLocator().SettingsViewModel.YAxisReference;
+      var toleranceY = ViewModelLocator.Instance.SettingsViewModel.YAxisTolerance;
+      var referenceY = ViewModelLocator.Instance.SettingsViewModel.YAxisReference;
 
-      var toleranceZ = new ViewModelLocator().SettingsViewModel.ZAxisTolerance;
-      var referenceZ = new ViewModelLocator().SettingsViewModel.ZAxisReference;
+      var toleranceZ = ViewModelLocator.Instance.SettingsViewModel.ZAxisTolerance;
+      var referenceZ = ViewModelLocator.Instance.SettingsViewModel.ZAxisReference;
 
       if (axis == MeasurementAxisType.X)
         return CheckValueTolerance(MeasurementAxisType.IsValid(input, referenceX, toleranceX));
