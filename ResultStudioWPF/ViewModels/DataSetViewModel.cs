@@ -98,7 +98,7 @@ namespace ResultStudioWPF.ViewModels
 
             AppMessages.PlotDataSet.Send(Model.DataSet);
           })
-          .OnFailure((result) =>
+          .OnFailure(result =>
           {
             _messageDialogService.ShowErrorMessage("SettingsViewModel", "Failed to load file", result);
           });
