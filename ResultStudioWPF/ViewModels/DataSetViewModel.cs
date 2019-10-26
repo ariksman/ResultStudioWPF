@@ -10,6 +10,7 @@ using AutoMapper;
 using CSharpFunctionalExtensions;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using OxyPlot;
 using ResultStudioWPF.Application.CQS;
 using ResultStudioWPF.Application.Interfaces;
 using ResultStudioWPF.Common.CQS;
@@ -90,7 +91,16 @@ namespace ResultStudioWPF.ViewModels
             XVariance = result.CalculateVariance(MeasurementAxisType.X);
             YVariance = result.CalculateVariance(MeasurementAxisType.Y);
             ZVariance = result.CalculateVariance(MeasurementAxisType.Z);
-            DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result.MeasurementPoints);
+            var pointModels = _mapper.Map<List<MeasurementPointModel>>(result.MeasurementPoints);
+            var featureViewModels = pointModels.Select(model => _measurementPointViewModelFunc(model)).ToList();
+
+            DataSet.Clear();
+            foreach (var measurementPointViewModel in featureViewModels)
+            {
+              DataSet.Add(measurementPointViewModel);
+            }
+
+            AppMessages.PlotDataSet.Send(Model.DataSet);
           })
           .OnFailure((result) =>
           {
@@ -122,6 +132,7 @@ namespace ResultStudioWPF.ViewModels
       ProgressBarIsIndetermined = true;
       var progress = new Progress<int>(status => { ProgressBarValue = status; });
 
+
       await Task.Run(() =>
       {
         var query = new GetRandomDataSetQuery(
@@ -140,16 +151,14 @@ namespace ResultStudioWPF.ViewModels
               XVariance = result.CalculateVariance(MeasurementAxisType.X);
               YVariance = result.CalculateVariance(MeasurementAxisType.Y);
               ZVariance = result.CalculateVariance(MeasurementAxisType.Z);
-              var pointModels = _mapper.Map<List<MeasurementPointModel>>(result.MeasurementPoints);
-              var featureViewModels = pointModels.Select(model => _measurementPointViewModelFunc(model)).ToList();
+              var pointModels = _mapper.Map<List<MeasurementPointModel>>(result.MeasurementPoints); // TODO: fix mapping, now partial
+              var pointViewModels = pointModels.Select(model => _measurementPointViewModelFunc(model)).ToList();
 
-              DataSet.Clear();
-              foreach (var measurementPointViewModel in featureViewModels)
-              {
-                DataSet.Add(measurementPointViewModel);
-              }
+              DataSet = new ObservableCollection<MeasurementPointViewModel>(pointViewModels); // TODO: avoid renew
+              AppMessages.PlotDataSet.Send(Model.DataSet);
             });
       });
+
 
       ProgressBarIsIndetermined = false;
 
@@ -191,12 +200,6 @@ namespace ResultStudioWPF.ViewModels
 
         Model.DataSet = value;
         RaisePropertyChanged();
-
-
-        if (Model.DataSet != null && Model.DataSet.Count > 0)
-        {
-          AppMessages.PlotDataSet.Send(Model.DataSet);
-        }
       }
     }
 
