@@ -19,7 +19,6 @@ namespace ResultStudioWPF.UnitTests
     private Mock<IQueryDispatcher> _queryDispatcherMock;
     private Mock<IMapper> _mapperMock;
     private Mock<IMessageDialogService> _messageDialogMock;
-    private DataSetViewModel _viewModel;
 
     [SetUp]
     public void SetUp()
@@ -33,37 +32,49 @@ namespace ResultStudioWPF.UnitTests
       var testString = "testDataString";
       var dataSet = DataSet.Create(testString, new List<MeasurementPoint>());
 
-      var query = new GetDataSetFromFile();
       _queryDispatcherMock = new Mock<IQueryDispatcher>();
       _queryDispatcherMock
-        .Setup(e => e.Dispatch<GetDataSetFromFile, Result<DataSet>>(query))
+        .Setup(e => e.Dispatch<GetDataSetFromFile, Result<DataSet>>(It.IsAny<GetDataSetFromFile>()))
         .Returns(Result.Ok(dataSet.Value));
 
       _commandDispatcherMock = new Mock<ICommandDispatcher>();
       _mapperMock = new Mock<IMapper>();
       _messageDialogMock = new Mock<IMessageDialogService>();
 
-      _viewModel = new DataSetViewModel(
+      var viewModel = new DataSetViewModel(
         _messageDialogMock.Object,
         _mapperMock.Object,
         _commandDispatcherMock.Object,
         _queryDispatcherMock.Object);
 
-      _viewModel.FilePath = string.Empty;
+      viewModel.FilePath = string.Empty;
 
-      _viewModel.ImportDataFromFileCommand.Execute(null);
+      viewModel.ImportDataFromFileCommand.Execute(null);
 
-      Assert.IsTrue(_viewModel.FilePath == testString);
+      Assert.IsTrue(viewModel.FilePath == testString);
     }
 
     [Test]
     public void ImportDataFromFile_ShouldShowErrorMessage_WhenFailToLoadData()
     {
-      _viewModel.FilePath = string.Empty;
+      var error = "Custom error msg";
+      _queryDispatcherMock = new Mock<IQueryDispatcher>();
+      _queryDispatcherMock
+        .Setup(e => e.Dispatch<GetDataSetFromFile, Result<DataSet>>(It.IsAny<GetDataSetFromFile>()))
+        .Returns(Result.Fail<DataSet>(error));
+      _commandDispatcherMock = new Mock<ICommandDispatcher>();
+      _mapperMock = new Mock<IMapper>();
+      _messageDialogMock = new Mock<IMessageDialogService>();
 
-      _viewModel.ImportDataFromFileCommand.Execute(null);
+      var viewModel = new DataSetViewModel(
+        _messageDialogMock.Object,
+        _mapperMock.Object,
+        _commandDispatcherMock.Object,
+        _queryDispatcherMock.Object);
 
-      //Assert.IsNull(_viewModel.SelectedCadModelDto);
+      viewModel.ImportDataFromFileCommand.Execute(null);
+
+      _messageDialogMock.Verify(m => m.ShowErrorMessage("SettingsViewModel", "Failed to load file", error));
     }
   }
 }
