@@ -18,7 +18,6 @@ namespace ResultStudioWPF.ViewModels
   /// </summary>
   public class ViewModelLocator
   {
-
     private static ViewModelLocator _instance;
     private IContainer _container;
 
@@ -83,16 +82,8 @@ namespace ResultStudioWPF.ViewModels
     {
       get
       {
-        try
-        {
-          _dataSetViewModelLifetimeScope = _container.BeginLifetimeScope();
-          return _dataSetViewModelLifetimeScope.Resolve<DataSetViewModel>();
-        }
-        catch (Exception e)
-        {
-          Debugger.Break();
-          throw;
-        }
+        _dataSetViewModelLifetimeScope = _container.BeginLifetimeScope();
+        return _dataSetViewModelLifetimeScope.Resolve<DataSetViewModel>();
       }
     }
 
