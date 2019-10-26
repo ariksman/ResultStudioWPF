@@ -6,8 +6,11 @@ namespace ResultStudioWPF.ViewModels
 {
   public class MeasurementPointViewModel : ModelBase, IMeasurementPoint
   {
-    public MeasurementPointViewModel()
+    private readonly ISharedSettingsContext _settingsContext;
+
+    public MeasurementPointViewModel(ISharedSettingsContext settingsContext)
     {
+      _settingsContext = settingsContext;
     }
 
     #region Public roperties
@@ -90,8 +93,8 @@ namespace ResultStudioWPF.ViewModels
     {
       if (Axis == MeasurementAxisType.X)
       {
-        var xTolerance = new ViewModelLocator().SettingsViewModel.XAxisTolerance;
-        var xReference = new ViewModelLocator().SettingsViewModel.XAxisReference;
+        var xTolerance = _settingsContext.XAxisTolerance;
+        var xReference = _settingsContext.XAxisReference;
 
         if (_value > xReference + xTolerance)
         {
@@ -114,8 +117,8 @@ namespace ResultStudioWPF.ViewModels
 
       if (Axis == MeasurementAxisType.Y)
       {
-        var yTolerance = new ViewModelLocator().SettingsViewModel.YAxisTolerance;
-        var yReference = new ViewModelLocator().SettingsViewModel.YAxisReference;
+        var yTolerance = _settingsContext.YAxisTolerance;
+        var yReference = _settingsContext.YAxisReference;
 
         if (_value > yReference + yTolerance)
         {
@@ -138,8 +141,8 @@ namespace ResultStudioWPF.ViewModels
 
       if (Axis == MeasurementAxisType.Z)
       {
-        var zTolerance = new ViewModelLocator().SettingsViewModel.ZAxisTolerance;
-        var zReference = new ViewModelLocator().SettingsViewModel.ZAxisReference;
+        var zTolerance = _settingsContext.ZAxisTolerance;
+        var zReference = _settingsContext.ZAxisReference;
 
         if (_value > zReference + zTolerance)
         {
