@@ -18,21 +18,31 @@ namespace ResultStudioWPF.ViewModels
   /// </summary>
   public class ViewModelLocator
   {
+
+    private static ViewModelLocator _instance;
+    private IContainer _container;
+
+    private ILifetimeScope _resultsViewModelLifetimeScope;
+    private ILifetimeScope _dataSetViewModelLifetimeScope;
+
     /// <summary>
     /// Initializes a new instance of the ViewModelLocator class and register all classes for DI-container.
     /// Additionally, registers all profiles for Auto mapper.
     /// </summary>
-    static ViewModelLocator()
+    public ViewModelLocator()
     {
       if (!ServiceLocator.IsLocationProviderSet)
       {
+        _instance = this;
         RegisterServices();
       }
     }
 
+    public static ViewModelLocator Instance => _instance ?? (_instance = new ViewModelLocator());
+
     #region autofac registration
 
-    private static void RegisterServices()
+    private void RegisterServices()
     {
       var builder = new ContainerBuilder();
       var assemblies = GetAllProgramAssemblies().ToList();
@@ -41,9 +51,9 @@ namespace ResultStudioWPF.ViewModels
       builder.RegisterModule<ViewModelServicesModule>();
       builder.RegisterModule(new AutoMapperModule(assemblies));
 
-      var container = builder.Build();
+      _container = builder.Build();
 
-      ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));
+      ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(_container));
     }
 
     private static IEnumerable<Assembly> GetAllProgramAssemblies()
@@ -60,7 +70,14 @@ namespace ResultStudioWPF.ViewModels
 
     #region ViewModel properties
 
-    public ResultsViewModel ResultsViewModel => ServiceLocator.Current.GetInstance<ResultsViewModel>();
+    public ResultsViewModel ResultsViewModel
+    {
+      get
+      {
+        _resultsViewModelLifetimeScope = _container.BeginLifetimeScope();
+        return _resultsViewModelLifetimeScope.Resolve<ResultsViewModel>();
+      }
+    }
 
     public DataSetViewModel SettingsViewModel
     {
@@ -68,7 +85,8 @@ namespace ResultStudioWPF.ViewModels
       {
         try
         {
-          return ServiceLocator.Current.GetInstance<DataSetViewModel>();
+          _dataSetViewModelLifetimeScope = _container.BeginLifetimeScope();
+          return _dataSetViewModelLifetimeScope.Resolve<DataSetViewModel>();
         }
         catch (Exception e)
         {
