@@ -35,17 +35,17 @@ namespace ResultStudioWPF
 
     private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
     {
-      throw new NotImplementedException();
+      //throw new NotImplementedException();
     }
 
     private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
-      throw new NotImplementedException();
+      //throw new NotImplementedException();
     }
 
     private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-      throw new NotImplementedException();
+      //throw new NotImplementedException();
     }
   }
 
