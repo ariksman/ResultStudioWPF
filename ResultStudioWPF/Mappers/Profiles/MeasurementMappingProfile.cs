@@ -11,7 +11,9 @@ namespace ResultStudioWPF.Mappers.Profiles
   {
     public MeasurementMappingProfile()
     {
-      CreateMap<MeasurementPointModel, MeasurementPoint>().ReverseMap();
+      CreateMap<MeasurementPointModel, MeasurementPoint>()
+        .ForMember(dest => dest.Axis, opt => opt.MapFrom(src => src.MeasurementAxisType))
+        .ReverseMap();
       CreateMap<IMeasurementPoint, MeasurementPointViewModel>().ReverseMap();
       CreateMap<MeasurementPoint, MeasurementPointViewModel>().ReverseMap();
     }
