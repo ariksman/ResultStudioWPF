@@ -92,13 +92,9 @@ namespace ResultStudioWPF.ViewModels
             YVariance = result.CalculateVariance(MeasurementAxisType.Y);
             ZVariance = result.CalculateVariance(MeasurementAxisType.Z);
             var pointModels = _mapper.Map<List<MeasurementPointModel>>(result.MeasurementPoints);
-            var featureViewModels = pointModels.Select(model => _measurementPointViewModelFunc(model)).ToList();
+            var pointViewModels = pointModels.Select(model => _measurementPointViewModelFunc(model)).ToList();
 
-            DataSet.Clear();
-            foreach (var measurementPointViewModel in featureViewModels)
-            {
-              DataSet.Add(measurementPointViewModel);
-            }
+            DataSet = new ObservableCollection<MeasurementPointViewModel>(pointViewModels);
 
             AppMessages.PlotDataSet.Send(Model.DataSet);
           })
