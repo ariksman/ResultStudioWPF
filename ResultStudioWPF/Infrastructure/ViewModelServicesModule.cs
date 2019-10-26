@@ -22,7 +22,7 @@ namespace ResultStudioWPF.Infrastructure
       builder.RegisterType<DataCreator>().As<IDataCreator>();
 
       builder.RegisterType<DataSetModel>().AsSelf().As<ISharedSettingsContext>().SingleInstance();
-      builder.RegisterType<DataSetViewModel>().AsSelf();
+      builder.RegisterType<DataSetViewModel>().AsSelf().SingleInstance();
       builder.RegisterType<MeasurementPointViewModel>().AsSelf();
       builder.RegisterType<ResultsViewModel>().AsSelf().SingleInstance();
     }
