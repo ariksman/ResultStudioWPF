@@ -6,59 +6,55 @@ namespace ResultStudioWPF.ViewModels
 {
   public class MeasurementPointViewModel : ModelBase, IMeasurementPoint
   {
+    public MeasurementPointModel Model { get; }
     private readonly ISharedSettingsContext _settingsContext;
 
-    public MeasurementPointViewModel(ISharedSettingsContext settingsContext)
+    public MeasurementPointViewModel(MeasurementPointModel model, ISharedSettingsContext settingsContext)
     {
+      Model = model;
       _settingsContext = settingsContext;
     }
 
     #region Public roperties
 
-    private int _indexNumber;
-
     public int Index
     {
-      get => _indexNumber;
-      set { _indexNumber = value; }
+      get => Model.Index;
+      set { Model.Index = value; }
     }
-
-    private MeasurementAxisType _axisName;
 
     public MeasurementAxisType Axis
     {
-      get => _axisName;
+      get => Model.MeasurementAxisType;
       set
       {
-        if (_axisName == value)
+        if (Model.MeasurementAxisType == value)
         {
           return;
         }
 
-        _axisName = value;
+        Model.MeasurementAxisType = value;
       }
     }
 
-    private Tolerance _tolerance;
 
     public Tolerance Tolerance
     {
-      get => _tolerance;
+      get => Model.Tolerance;
       set
       {
-        _tolerance = value;
+        Model.Tolerance = value;
         NotifyPropertyChanged();
       }
     }
 
-    private double _value;
 
     public double Value
     {
-      get => _value;
+      get => Model.Value;
       set
       {
-        _value = value;
+        Model.Value = value;
         CheckValueTolerance(value);
 
         NotifyPropertyChanged();
@@ -96,15 +92,15 @@ namespace ResultStudioWPF.ViewModels
         var xTolerance = _settingsContext.XAxisTolerance;
         var xReference = _settingsContext.XAxisReference;
 
-        if (_value > xReference + xTolerance)
+        if (Model.Value > xReference + xTolerance)
         {
           AddError("Value",
-            "Given measurement value (" + _value + ") is higher than tolerance " + xTolerance + " allows");
+            "Given measurement value (" + Model.Value + ") is higher than tolerance " + xTolerance + " allows");
         }
         else if (value < xReference - xTolerance)
         {
           AddError("Value",
-            "Given measurement value (" + _value + ") is lower than tolerance " + xTolerance +
+            "Given measurement value (" + Model.Value + ") is lower than tolerance " + xTolerance +
             " allows");
         }
         else
@@ -120,15 +116,15 @@ namespace ResultStudioWPF.ViewModels
         var yTolerance = _settingsContext.YAxisTolerance;
         var yReference = _settingsContext.YAxisReference;
 
-        if (_value > yReference + yTolerance)
+        if (Model.Value > yReference + yTolerance)
         {
           AddError("Value",
-            "Given measurement value (" + _value + ") is higher than tolerance " + yTolerance + " allows");
+            "Given measurement value (" + Model.Value + ") is higher than tolerance " + yTolerance + " allows");
         }
         else if (value < yReference - yTolerance)
         {
           AddError("Value",
-            "Given measurement value (" + _value + ") is lower than tolerance " + yTolerance +
+            "Given measurement value (" + Model.Value + ") is lower than tolerance " + yTolerance +
             " allows");
         }
         else
@@ -144,15 +140,15 @@ namespace ResultStudioWPF.ViewModels
         var zTolerance = _settingsContext.ZAxisTolerance;
         var zReference = _settingsContext.ZAxisReference;
 
-        if (_value > zReference + zTolerance)
+        if (Model.Value > zReference + zTolerance)
         {
           AddError("Value",
-            "Given measurement value (" + _value + ") is higher than tolerance " + zTolerance + " allows");
+            "Given measurement value (" + Model.Value + ") is higher than tolerance " + zTolerance + " allows");
         }
         else if (value < zReference - zTolerance)
         {
           AddError("Value",
-            "Given measurement value (" + _value + ") is lower than tolerance " + zTolerance +
+            "Given measurement value (" + Model.Value + ") is lower than tolerance " + zTolerance +
             " allows");
         }
         else

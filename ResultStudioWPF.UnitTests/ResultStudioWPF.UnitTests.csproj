@@ -90,7 +90,7 @@
     <Compile Include="DataFileReaderTests.cs" />
     <Compile Include="DispatcherTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SettingsViewmodelTests.cs" />
+    <Compile Include="DataSetViewmodelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

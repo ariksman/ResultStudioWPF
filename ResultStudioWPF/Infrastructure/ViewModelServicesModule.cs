@@ -13,12 +13,17 @@ namespace ResultStudioWPF.Infrastructure
   {
     protected override void Load(ContainerBuilder builder)
     {
+      builder.RegisterType<MeasurementPointModel>().AsSelf();
+      builder.RegisterType<FileDialogProvider>().As<IFileDialogProvider>();
+
       builder.RegisterType<FileDialogProvider>().As<IFileDialogProvider>();
       builder.RegisterType<DataFileReader>().As<IDataFileReader>();
       builder.RegisterType<OokiiMessageDialogService>().As<IMessageDialogService>();
       builder.RegisterType<DataCreator>().As<IDataCreator>();
 
-      builder.RegisterType<DataSetViewModel>().AsSelf().As<ISharedSettingsContext>().SingleInstance();
+      builder.RegisterType<DataSetModel>().AsSelf().As<ISharedSettingsContext>().SingleInstance();
+      builder.RegisterType<DataSetViewModel>().AsSelf();
+      builder.RegisterType<MeasurementPointViewModel>().AsSelf();
       builder.RegisterType<ResultsViewModel>().AsSelf().SingleInstance();
     }
   }

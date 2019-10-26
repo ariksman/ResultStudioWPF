@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -20,29 +21,35 @@ using ResultStudioWPF.ViewModels.Messages;
 
 namespace ResultStudioWPF.ViewModels
 {
-  public class DataSetViewModel : ViewModelBase, ISharedSettingsContext
+  public class DataSetViewModel : ViewModelBase
   {
+    public DataSetModel Model { get; }
     public ICollectionView SubFrameDataSetCollectionView { get; private set; }
 
     private readonly IMessageDialogService _messageDialogService;
     private readonly IMapper _mapper;
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
+    private readonly Func<MeasurementPointModel, MeasurementPointViewModel> _measurementPointViewModelFunc;
 
     public DataSetViewModel(
+      DataSetModel model,
       IMessageDialogService messageDialogService,
       IMapper mapper,
       ICommandDispatcher commandDispatcher,
-      IQueryDispatcher queryDispatcher)
+      IQueryDispatcher queryDispatcher,
+      Func<MeasurementPointModel, MeasurementPointViewModel> measurementPointViewModelFunc)
     {
+      Model = model;
       _messageDialogService = messageDialogService;
       _mapper = mapper;
       _commandDispatcher = commandDispatcher;
       _queryDispatcher = queryDispatcher;
+      _measurementPointViewModelFunc = measurementPointViewModelFunc;
 
-      _xAxisReference = 2000;
-      _yAxisReference = -500;
-      _zAxisReference = 378;
+      Model.XAxisReference = 2000;
+      Model.YAxisReference = -500;
+      Model.ZAxisReference = 378;
 
       if (IsInDesignMode)
       {
@@ -50,7 +57,7 @@ namespace ResultStudioWPF.ViewModels
       }
       else
       {
-        SubFrameDataSetCollectionView = CollectionViewSource.GetDefaultView(_dataSet);
+        SubFrameDataSetCollectionView = CollectionViewSource.GetDefaultView(Model.DataSet);
         ProgressBarIsIndetermined = false;
         DataSet = new ObservableCollection<MeasurementPointViewModel>();
       }
@@ -118,9 +125,9 @@ namespace ResultStudioWPF.ViewModels
       await Task.Run(() =>
       {
         var query = new GetRandomDataSetQuery(
-          _xAxisReference,
-          _yAxisReference,
-          _zAxisReference,
+          Model.XAxisReference,
+          Model.YAxisReference,
+          Model.ZAxisReference,
           frameCount,
           spread,
           progress);
@@ -133,7 +140,14 @@ namespace ResultStudioWPF.ViewModels
               XVariance = result.CalculateVariance(MeasurementAxisType.X);
               YVariance = result.CalculateVariance(MeasurementAxisType.Y);
               ZVariance = result.CalculateVariance(MeasurementAxisType.Z);
-              DataSet = _mapper.Map<ObservableCollection<MeasurementPointViewModel>>(result.MeasurementPoints); 
+              var pointModels = _mapper.Map<List<MeasurementPointModel>>(result.MeasurementPoints);
+              var featureViewModels = pointModels.Select(model => _measurementPointViewModelFunc(model)).ToList();
+
+              DataSet.Clear();
+              foreach (var measurementPointViewModel in featureViewModels)
+              {
+                DataSet.Add(measurementPointViewModel);
+              }
             });
       });
 
@@ -168,22 +182,20 @@ namespace ResultStudioWPF.ViewModels
 
     #region Public collections
 
-    private ObservableCollection<MeasurementPointViewModel> _dataSet;
-
     public ObservableCollection<MeasurementPointViewModel> DataSet
     {
-      get => _dataSet;
+      get => Model.DataSet;
       set
       {
-        if (_dataSet == value) return;
+        if (Model.DataSet == value) return;
 
-        _dataSet = value;
+        Model.DataSet = value;
         RaisePropertyChanged();
 
 
-        if (_dataSet != null && _dataSet.Count > 0)
+        if (Model.DataSet != null && Model.DataSet.Count > 0)
         {
-          AppMessages.PlotDataSet.Send(_dataSet);
+          AppMessages.PlotDataSet.Send(Model.DataSet);
         }
       }
     }
@@ -192,78 +204,66 @@ namespace ResultStudioWPF.ViewModels
 
     #region Public Properties
 
-    private MeasurementPointViewModel _measurementPoint;
-
-    public MeasurementPointViewModel MeasurementPoint
-    {
-      get => _measurementPoint;
-      set { _measurementPoint = value; }
-    }
-
-
-    private bool _progressBarIsIndetermined;
+    public MeasurementPointViewModel MeasurementPoint { get; set; }
 
     public bool ProgressBarIsIndetermined
     {
-      get => _progressBarIsIndetermined;
+      get => Model.ProgressBarIsIndetermined;
 
       set
       {
-        if (_progressBarIsIndetermined == value)
+        if (Model.ProgressBarIsIndetermined == value)
         {
           return;
         }
 
-        _progressBarIsIndetermined = value;
+        Model.ProgressBarIsIndetermined = value;
         RaisePropertyChanged();
       }
     }
 
-    private int _progressBarValue;
 
     public int ProgressBarValue
     {
-      get => _progressBarValue;
+      get => Model.ProgressBarValue;
 
       set
       {
-        if (_progressBarValue == value)
+        if (Model.ProgressBarValue == value)
         {
           return;
         }
 
-        _progressBarValue = value;
+        Model.ProgressBarValue = value;
         RaisePropertyChanged();
       }
     }
 
-    private string _filePath;
 
     public string FilePath
     {
-      get => _filePath;
+      get => Model.FilePath;
 
       set
       {
-        if (_filePath == value)
+        if (Model.FilePath == value)
         {
           return;
         }
 
-        _filePath = value;
+        Model.FilePath = value;
         RaisePropertyChanged();
       }
     }
 
-    private double _xAxisTolerance;
 
     public double XAxisTolerance
     {
-      get => _xAxisTolerance;
+      get => Model.XAxisTolerance;
 
       set
       {
-        if (_xAxisTolerance == value)
+        if (Model.XAxisTolerance == value)
         {
           return;
         }
@@ -280,180 +280,169 @@ namespace ResultStudioWPF.ViewModels
             return;
         }*/
         //TODO: data validation
-        _xAxisTolerance = value;
+        Model.XAxisTolerance = value;
         RefreshDataGridTolerance();
         RaisePropertyChanged();
       }
     }
 
-    private double _yAxisTolerance;
 
     public double YAxisTolerance
     {
-      get => _yAxisTolerance;
+      get => Model.YAxisTolerance;
 
       set
       {
-        if (_yAxisTolerance == value)
+        if (Model.YAxisTolerance == value)
         {
           return;
         }
 
         //TODO: data validation
-        _yAxisTolerance = value;
+        Model.YAxisTolerance = value;
         RefreshDataGridTolerance();
         RaisePropertyChanged();
       }
     }
 
-    private double _zAxisTolerance;
 
     public double ZAxisTolerance
     {
-      get => _zAxisTolerance;
+      get => Model.ZAxisTolerance;
 
       set
       {
-        if (_zAxisTolerance == value)
+        if (Model.ZAxisTolerance == value)
         {
           return;
         }
 
         //TODO: data validation
-        _zAxisTolerance = value;
+        Model.ZAxisTolerance = value;
         RefreshDataGridTolerance();
         RaisePropertyChanged();
       }
     }
 
-    private double _xAxisReference;
 
     public double XAxisReference
     {
-      get => _xAxisReference;
+      get => Model.XAxisReference;
 
       set
       {
-        if (_xAxisReference == value)
+        if (Model.XAxisReference == value)
         {
           return;
         }
 
         //TODO: data validation
-        _xAxisReference = value;
+        Model.XAxisReference = value;
         RaisePropertyChanged();
       }
     }
-
-    private double _yAxisReference;
 
     public double YAxisReference
     {
-      get => _yAxisReference;
+      get => Model.YAxisReference;
 
       set
       {
-        if (_yAxisReference == value)
+        if (Model.YAxisReference == value)
         {
           return;
         }
 
         //TODO: data validation
-        _yAxisReference = value;
+        Model.YAxisReference = value;
         RaisePropertyChanged();
       }
     }
 
-    private double _zAxisReference;
 
     public double ZAxisReference
     {
-      get => _zAxisReference;
+      get => Model.ZAxisReference;
 
       set
       {
-        if (_zAxisReference == value)
+        if (Model.ZAxisReference == value)
         {
           return;
         }
 
         //TODO: data validation
-        _zAxisReference = value;
+        Model.ZAxisReference = value;
         RaisePropertyChanged();
       }
     }
 
-    private double _xVariance;
 
     public double XVariance
     {
-      get => _xVariance;
+      get => Model.XVariance;
 
       set
       {
-        if (_xVariance == value)
+        if (Model.XVariance == value)
         {
           return;
         }
 
         //TODO: data validation
-        _xVariance = value;
+        Model.XVariance = value;
         RaisePropertyChanged();
       }
     }
-
-    private double _yVariance;
 
     public double YVariance
     {
-      get => _yVariance;
+      get => Model.YVariance;
 
       set
       {
-        if (_yVariance == value)
+        if (Model.YVariance == value)
         {
           return;
         }
 
         //TODO: data validation
-        _yVariance = value;
+        Model.YVariance = value;
         RaisePropertyChanged();
       }
     }
 
-    private double _zVariance;
 
     public double ZVariance
     {
-      get => _zVariance;
+      get => Model.ZVariance;
 
       set
       {
-        if (_zVariance == value)
+        if (Model.ZVariance == value)
         {
           return;
         }
 
         //TODO: data validation
-        _zVariance = value;
+        Model.ZVariance = value;
         RaisePropertyChanged();
       }
     }
 
-    private int _errorCount;
 
     public int ErrorCount
     {
-      get => _errorCount;
+      get => Model.ErrorCount;
 
       set
       {
-        if (_errorCount == value)
+        if (Model.ErrorCount == value)
         {
           return;
         }
 
-        _errorCount = value;
+        Model.ErrorCount = value;
         RaisePropertyChanged();
       }
     }
