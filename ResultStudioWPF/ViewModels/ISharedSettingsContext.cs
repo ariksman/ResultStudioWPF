@@ -9,6 +9,10 @@ namespace ResultStudioWPF.ViewModels
     double YAxisReference { get; }
     double ZAxisReference { get; }
 
+    double XAxisTolerance { get; }
+    double YAxisTolerance { get; }
+    double ZAxisTolerance { get; }
+
     ObservableCollection<MeasurementPointViewModel> DataSet { get; }
   }
 }
