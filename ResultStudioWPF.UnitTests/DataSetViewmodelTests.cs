@@ -96,7 +96,11 @@ namespace ResultStudioWPF.UnitTests
     {
       var data = DataSet.Create("test set",
         new List<MeasurementPoint>()
-          {new MeasurementPoint(1, 1, MeasurementAxisType.X, new Tolerance(1, 2, 3), new Reference(1, 2, 3))});
+        {
+          new MeasurementPoint(1, 1, MeasurementAxisType.X, new Tolerance(1, 2, 3), new Reference(1, 2, 3)),
+          new MeasurementPoint(2, 2, MeasurementAxisType.Y, new Tolerance(1, 2, 3), new Reference(1, 2, 3)),
+          new MeasurementPoint(3, 3, MeasurementAxisType.Z, new Tolerance(1, 2, 3), new Reference(1, 2, 3))
+        });
       
       _dataSetModel = new DataSetModel();
       _queryDispatcherMock = new Mock<IQueryDispatcher>();
@@ -105,8 +109,9 @@ namespace ResultStudioWPF.UnitTests
         .Returns(Result.Ok<DataSet>(data.Value));
       _commandDispatcherMock = new Mock<ICommandDispatcher>();
       _mapperMock = new Mock<IMapper>();
-      //_mapperMock.Setup(m => m.Map<IReadOnlyList<MeasurementPoint>, ObservableCollection<MeasurementPointViewModel>>(data.Value.MeasurementPoints))
-      //  .Returns(() => new ObservableCollection<MeasurementPointViewModel>() { new MeasurementPointViewModel()})
+      _mapperMock
+        .Setup(m => m.Map<List<MeasurementPointModel>>(It.IsAny<IEnumerable<MeasurementPoint>>()))
+        .Returns(() => new List<MeasurementPointModel>() {new MeasurementPointModel()});
       _messageDialogMock = new Mock<IMessageDialogService>();
       _measurementPointViewModelFunc = model => new MeasurementPointViewModel(model, new DataSetModel());
 
@@ -120,7 +125,7 @@ namespace ResultStudioWPF.UnitTests
 
       viewModel.CreateRandomMeasurementDataClickCommand.Execute(null);
 
-      Assert.Contains(data, viewModel.DataSet);
+      Assert.IsNotEmpty(viewModel.DataSet);
     }
   }
 }
