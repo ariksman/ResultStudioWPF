@@ -52,6 +52,7 @@ namespace ResultStudioWPF.ViewModels
       {
         SubFrameDataSetCollectionView = CollectionViewSource.GetDefaultView(_dataSet);
         ProgressBarIsIndetermined = false;
+        DataSet = new ObservableCollection<MeasurementPointViewModel>();
       }
     }
 
