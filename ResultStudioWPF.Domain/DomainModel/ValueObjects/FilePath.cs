@@ -16,7 +16,7 @@ namespace ResultStudioWPF.Domain.DomainModel.ValueObjects
     public static Result<FilePath> Create(Maybe<string> filePathOrNothing)
     {
       return filePathOrNothing.ToResult("File path should not be empty")
-        .OnSuccess(filePath => filePath)
+        .Map(filePath => filePath)
         .Ensure(filePath => File.Exists(filePath), "File does not exists")
         .Ensure(filePath => ContainsOnlyValidCharacters(filePath), "File path contains illegal characters")
         .Map(filePath => new FilePath(filePath));
@@ -25,7 +25,7 @@ namespace ResultStudioWPF.Domain.DomainModel.ValueObjects
     public static Result<FilePath> CreateTest(Maybe<string> filePathOrNothing)
     {
       return filePathOrNothing.ToResult("File path should not be empty")
-        .OnSuccess(filePath => filePath)
+        .Map(filePath => filePath)
         .Ensure(filePath => ContainsOnlyValidCharacters(filePath), "File path contains illegal characters")
         .Map(filePath => new FilePath(filePath));
     }
