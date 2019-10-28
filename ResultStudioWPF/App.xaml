@@ -1,12 +1,23 @@
-﻿<Application x:Class="ResultStudioWPF.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ResultStudioWPF"
-             xmlns:viewModels="clr-namespace:ResultStudioWPF.ViewModels"
-             Startup="Application_Startup">
-    <Application.Resources>
-        <!--  For mvvm light viewModel access  -->
-        <viewModels:ViewModelLocator x:Key="Locator" />
-        <BitmapImage x:Key="ErrorIcon" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="/ResultStudioWPF;component/Images/red_round_error_warning_icon.png" />
-    </Application.Resources>
+﻿<Application
+  x:Class="ResultStudioWPF.App"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:gui="http://reusabletheme.com/2019/ui/wpf"
+  xmlns:local="clr-namespace:ResultStudioWPF"
+  xmlns:viewModels="clr-namespace:ResultStudioWPF.ViewModels"
+  Startup="Application_Startup">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ReusableTheme.UI.WPF;component/Themes/ReusableTheme.UI.WPF.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <!--  For mvvm light viewModel access  -->
+      <viewModels:ViewModelLocator x:Key="Locator" />
+      <BitmapImage
+        x:Key="ErrorIcon"
+        CacheOption="OnLoad"
+        CreateOptions="IgnoreImageCache"
+        UriSource="/ResultStudioWPF;component/Images/red_round_error_warning_icon.png" />
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>
