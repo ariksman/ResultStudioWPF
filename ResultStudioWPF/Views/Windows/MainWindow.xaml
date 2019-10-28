@@ -3,6 +3,7 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:gui="http://reusabletheme.com/2019/ui/wpf"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:userControls="clr-namespace:ResultStudioWPF.Views.UserControls"
   Title="Results view"
@@ -11,9 +12,10 @@
   MinWidth="1280"
   MinHeight="800"
   DataContext="{Binding Source={StaticResource Locator}, Path=SettingsViewModel}"
-  mc:Ignorable="d">
-  <Grid Name="MainGrid">
+  mc:Ignorable="d"
+  Style="{DynamicResource MainWindowStyle}">
 
+  <Grid Name="MainGrid">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
       <RowDefinition Height="*" />
