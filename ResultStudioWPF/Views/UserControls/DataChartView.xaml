@@ -1,23 +1,34 @@
-﻿<UserControl x:Class="ResultStudioWPF.Views.UserControls.DataChartView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:oxy="http://oxyplot.org/wpf"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{Binding  Source={StaticResource Locator}, Path=ResultsViewModel}">
-    <Grid Margin="0,0,10,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <oxy:PlotView x:Name="XaxisPlot" Grid.Row="0" Model="{Binding PlotModelX}">
-            </oxy:PlotView>
-        <oxy:PlotView x:Name="YaxisPlot" Grid.Row="1" Model="{Binding PlotModelY}">
-            </oxy:PlotView>
-        <oxy:PlotView x:Name="ZaxisPlot" Grid.Row="2" Model="{Binding PlotModelZ}">
-            </oxy:PlotView>
-    </Grid>
+﻿<UserControl
+  x:Class="ResultStudioWPF.Views.UserControls.DataChartView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:oxy="http://oxyplot.org/wpf"
+  d:DesignHeight="300"
+  d:DesignWidth="300"
+  DataContext="{Binding Source={StaticResource Locator}, Path=ResultsViewModel}"
+  mc:Ignorable="d">
+  <Grid Margin="0,0,10,0">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <oxy:PlotView
+      x:Name="XaxisPlot"
+      Grid.Row="0"
+      Background="Transparent"
+      Model="{Binding PlotModelX}" />
+    <oxy:PlotView
+      x:Name="YaxisPlot"
+      Grid.Row="1"
+      Background="Transparent"
+      Model="{Binding PlotModelY}" />
+    <oxy:PlotView
+      x:Name="ZaxisPlot"
+      Grid.Row="2"
+      Background="Transparent"
+      Model="{Binding PlotModelZ}" />
+  </Grid>
 </UserControl>
