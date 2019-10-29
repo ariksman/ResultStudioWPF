@@ -10,7 +10,7 @@
   Width="1280"
   Height="800"
   MinWidth="1280"
-  MinHeight="800"
+  MinHeight="900"
   DataContext="{Binding Source={StaticResource Locator}, Path=SettingsViewModel}"
   mc:Ignorable="d"
   Style="{DynamicResource MainWindowStyle}">
@@ -29,7 +29,7 @@
         Width="*" />
       <ColumnDefinition
         Name="Column2"
-        Width="*" />
+        Width="1.5*" />
       <ColumnDefinition
         Name="Column3"
         Width="*" />
