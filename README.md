@@ -1,4 +1,6 @@
 ## The program - ResultStudio
+[![CodeFactor](https://www.codefactor.io/repository/github/ariksman/resultstudiowpf/badge)](https://www.codefactor.io/repository/github/ariksman/resultstudiowpf)
+
 This implementation follows MVVM design principle and utilizes WPF for the user interface. Additionally, the code is divided into layers and utilises CQS for the use-case implementation.
 
 Functionalities are the ability to create random measurement data of a subframe point with x,y,z measurements and optionally read data from a file. Datasets of 20 subframes is used as default. 
